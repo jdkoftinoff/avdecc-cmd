@@ -22,7 +22,7 @@ endif()
 
 set(LIBS ${LIBS} ${CHECK_LIBRARIES} ${PROJECT})
 
-include_directories( include )
+include_directories( include ${ADDITIONAL_INCLUDE_DIRECTORIES} )
 
 if(TESTS MATCHES "ON")
    message(STATUS "Extended test code functions are enabled")
@@ -34,13 +34,6 @@ else()
 endif()
 
 add_library (${PROJECT} ${PROJECT_SRC} ${PROJECT_INCLUDES})
-
-INSTALL(TARGETS ${PROJECT} DESTINATION "lib")
-
-INSTALL(FILES
-   ${PROJECT_INCLUDES}
-   DESTINATION include
-)
 
 link_directories( ${PROJECT_BINARY_DIR} )
 
@@ -81,4 +74,15 @@ if(TESTS MATCHES "ON")
       add_test(NAME ${testname} COMMAND ${testname} )
    endforeach(item)
 endif()
+
+INSTALL(TARGETS ${PROJECT} DESTINATION "lib" EXPORT ${PROJECT}-exports.cmake )
+
+EXPORT(TARGETS ${PROJECT} FILE ${PROJECT}-exports.cmake )
+
+INSTALL(FILES
+   ${PROJECT_INCLUDES}
+   DESTINATION include
+)
+
+install(EXPORT ${PROJECT}-exports.cmake DESTINATION "lib"  )
 
