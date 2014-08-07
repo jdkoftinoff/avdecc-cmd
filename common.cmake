@@ -8,7 +8,7 @@ option(EXAMPLES "Enable building of example programs" ON)
 option(TOOLS "Enable building of tools" ON)
 option(TOOLS_DEV "Enable building of tools-dev" ON)
 
-if(CMAKE_BUILD_TOOL MATCHES "(msdev|devenv|nmake)")
+if(CMAKE_BUILD_TOOL MATCHES "(msdev|devenv|nmake|MSBuild)")
     add_definitions("/W2")
 else()
     add_definitions("-Wall -Wextra")
