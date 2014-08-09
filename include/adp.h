@@ -45,9 +45,7 @@ extern "C" {
  * @param target_entity Pointer to ascii string of the target entity id to use, or 0 for none
  * @return 0 success
  */
-int adp_form_msg( struct jdksavdecc_frame *frame,
-                  const char *message_type,
-                  const char *target_entity );
+int adp_form_msg( struct jdksavdecc_frame *frame, const char *message_type, const char *target_entity );
 
 /**
  * @brief adp_check
@@ -59,9 +57,7 @@ int adp_form_msg( struct jdksavdecc_frame *frame,
  * @param target_entity The target entity_id to expect, or 0 for any
  * @return 0 on success
  */
-int adp_check( const struct jdksavdecc_frame *frame,
-               struct jdksavdecc_adpdu *adp,
-               const char *target_entity );
+int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *adp, const char *target_entity );
 
 /**
  * @brief adp_print
