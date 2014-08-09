@@ -49,6 +49,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <string.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <sys/select.h>
 #include <linux/sockios.h>
 #include <linux/if_packet.h>
 #include <linux/if_ether.h>
@@ -64,7 +65,51 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 extern "C" {
 #endif
 
+struct raw_context;
+
+extern int arg_verbose;
+extern int arg_time_in_ms_to_wait;
+extern const char *arg_network_port;
+extern const char *arg_protocol;
+extern const char *arg_message_type;
+extern const char *arg_sequence_id;
+extern const char *arg_entity_id;
+extern const char *arg_talker_entity_id;
+extern const char *arg_talker_unique_id;
+extern const char *arg_listener_entity_id;
+extern const char *arg_listener_unique_id;
+extern const char *arg_connection_count;
+extern const char *arg_target_entity_id;
+extern const char *arg_command;
+extern const char *arg_descriptor_type;
+extern const char *arg_descriptor_index;
+extern const char *arg_payload;
+
+/**
+ * @brief avdecc_cmd_print_frame_header
+ *
+ * Pretty-print the DA,SA,Ethertype, and Payload length of an ethernet frame
+ *
+ * @param self The jdksavdecc_printer to print to
+ * @param frame The frame to print
+ */
 void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struct jdksavdecc_frame *frame );
+
+/**
+ * @brief avdecc_cmd_process_incoming_raw
+ *
+ * Process incoming AVTPDU's from net for up to max_time_in_ms milliseconds.
+ * For each AVTPDU received, call process with the network and the frame that was received.
+ * If process returns non-zero, avdecc_cmd_process_incoming_raw returns immediately.
+ * Always puts the network port socket into non-blocking mode.
+ *
+ * @param net The network port to use
+ * @param max_time_in_ms Max time to wait
+ * @param process function pointer to function taking (struct raw_context *, const struct jdksavdecc_frame*) and returning int
+ */
+void avdecc_cmd_process_incoming_raw( struct raw_context *net,
+                                      int max_time_in_ms,
+                                      int ( *process )( struct raw_context *net, const struct jdksavdecc_frame *frame ) );
 
 #ifdef __cplusplus
 }

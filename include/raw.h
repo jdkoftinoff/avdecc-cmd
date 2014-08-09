@@ -70,7 +70,7 @@ int raw_socket( struct raw_context *self, uint16_t ethertype, const char *interf
 
 void raw_close( struct raw_context *self );
 
-ssize_t raw_send( struct raw_context *self, const uint8_t dest_mac[6], const void *payload, ssize_t payload_len );
+ssize_t raw_send( struct raw_context *self, const uint8_t dest_mac[6], const void *arg_payload, ssize_t payload_len );
 
 ssize_t raw_recv(
     struct raw_context *self, uint8_t src_mac[6], uint8_t dest_mac[6], void *payload_buf, ssize_t payload_buf_max_size );

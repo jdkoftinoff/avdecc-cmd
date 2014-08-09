@@ -26,7 +26,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include "avdecc-cmd.h"
-
+#include "raw.h"
 #include "jdksavdecc_adp.h"
 #include "jdksavdecc_adp_print.h"
 
@@ -45,7 +45,7 @@ extern "C" {
  * @param target_entity Pointer to ascii string of the target entity id to use, or 0 for none
  * @return 0 success
  */
-int adp_form_msg( struct jdksavdecc_frame *frame, const char *message_type, const char *target_entity );
+int adp_form_msg( struct jdksavdecc_frame *frame, const char *arg_message_type, const char *target_entity );
 
 /**
  * @brief adp_check
@@ -53,11 +53,11 @@ int adp_form_msg( struct jdksavdecc_frame *frame, const char *message_type, cons
  * Validate an ethernet frame to see if it contains an ADP message, potentially from the target entity
  *
  * @param frame The ethernet frame to validate
- * @param adp The ADPDU structure that will be filled in if the frame is matching
+ * @param adpdu The ADPDU structure that will be filled in if the frame is matching
  * @param target_entity The target entity_id to expect, or 0 for any
  * @return 0 on success
  */
-int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *adp, const char *target_entity );
+int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *adpdu, const char *target_entity );
 
 /**
  * @brief adp_print
@@ -66,9 +66,24 @@ int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *ad
  *
  * @param s The output stream to print the ascii to
  * @param frame The ethernet frame which contains an ADP message
- * @param adp The parsed ADP message
+ * @param adpdu The parsed ADP message
  */
-void adp_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_adpdu *adp );
+void adp_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_adpdu *adpdu );
+
+/**
+ * @brief handle ADP command line request
+ *
+ * command line arguments form:
+ *
+ * @param net raw network port to use
+ * @param frame Ethernet Frame to use to send
+ * @param verbose 1 for verbose information about operations done
+ * @param time_ms_to_wait time in milliseconds to wait for responses, or 0 for none
+ * @param argc count of arguments including "adp"
+ * @param argv array of arguments starting at "adp"
+ * @return 0 on success
+ */
+int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv );
 
 #ifdef __cplusplus
 }

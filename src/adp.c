@@ -32,29 +32,29 @@ int adp_form_msg( struct jdksavdecc_frame *frame, const char *message_type, cons
     int r = -1;
     if ( message_type )
     {
-        struct jdksavdecc_adpdu adp;
-        bzero( &adp, sizeof( adp ) );
+        struct jdksavdecc_adpdu adpdu;
+        bzero( &adpdu, sizeof( adpdu ) );
         uint16_t message_type_code;
         if ( jdksavdecc_get_uint16_value_for_name( jdksavdecc_adpdu_print_message_type, message_type, &message_type_code ) )
         {
-            adp.header.cd = 1;
-            adp.header.subtype = JDKSAVDECC_SUBTYPE_ADP;
-            adp.header.version = 0;
-            adp.header.valid_time = 0;
-            adp.header.sv = 0;
-            adp.header.control_data_length = JDKSAVDECC_ADPDU_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN;
-            adp.header.message_type = message_type_code;
+            adpdu.header.cd = 1;
+            adpdu.header.subtype = JDKSAVDECC_SUBTYPE_ADP;
+            adpdu.header.version = 0;
+            adpdu.header.valid_time = 0;
+            adpdu.header.sv = 0;
+            adpdu.header.control_data_length = JDKSAVDECC_ADPDU_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN;
+            adpdu.header.message_type = message_type_code;
 
             if ( target_entity )
             {
-                if ( !jdksavdecc_eui64_init_from_cstr( &adp.header.entity_id, target_entity ) )
+                if ( !jdksavdecc_eui64_init_from_cstr( &adpdu.header.entity_id, target_entity ) )
                 {
                     fprintf( stderr, "ADP: invalid entity_id: '%s'\n", target_entity );
                     return r;
                 }
             }
 
-            frame->length = jdksavdecc_adpdu_write( &adp, frame->payload, 0, sizeof( frame->payload ) );
+            frame->length = jdksavdecc_adpdu_write( &adpdu, frame->payload, 0, sizeof( frame->payload ) );
             frame->dest_address = jdksavdecc_multicast_adp_acmp;
             frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
             r = 0;
@@ -67,7 +67,7 @@ int adp_form_msg( struct jdksavdecc_frame *frame, const char *message_type, cons
     return r;
 }
 
-int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *adp, const char *target_entity )
+int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *adpdu, const char *target_entity )
 {
     int r = -1;
 
@@ -86,12 +86,12 @@ int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *ad
             }
         }
 
-        bzero( adp, sizeof( *adp ) );
-        if ( jdksavdecc_adpdu_read( adp, frame->payload, 0, frame->length ) > 0 )
+        bzero( adpdu, sizeof( *adpdu ) );
+        if ( jdksavdecc_adpdu_read( adpdu, frame->payload, 0, frame->length ) > 0 )
         {
             if ( target_entity )
             {
-                if ( memcmp( adp->header.entity_id.value, target_entity_id.value, 6 ) == 0 )
+                if ( memcmp( adpdu->header.entity_id.value, target_entity_id.value, 6 ) == 0 )
                 {
                     r = 0;
                 }
@@ -105,13 +105,87 @@ int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *ad
     return r;
 }
 
-void adp_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_adpdu *adp )
+void adp_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_adpdu *adpdu )
 {
     struct jdksavdecc_printer p;
     char buf[10240];
     jdksavdecc_printer_init( &p, buf, sizeof( buf ) );
 
     avdecc_cmd_print_frame_header( &p, frame );
-    jdksavdecc_adpdu_print( &p, adp );
+    jdksavdecc_adpdu_print( &p, adpdu );
     fprintf( s, "%s", buf );
+}
+
+int adp_process( struct raw_context *net, const struct jdksavdecc_frame *frame )
+{
+    struct jdksavdecc_adpdu adpdu;
+    ssize_t len;
+
+    (void)net;
+    bzero( &adpdu, sizeof( adpdu ) );
+    len = jdksavdecc_adpdu_read( &adpdu, frame->payload, 0, frame->length );
+    if ( len > 0 )
+    {
+        fprintf( stdout, "Received ADPDU:\n" );
+        adp_print( stdout, frame, &adpdu );
+        fprintf( stdout, "\n" );
+    }
+    return 0;
+}
+
+int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv )
+{
+    int r = 1;
+    if ( argc > 4 )
+    {
+        arg_entity_id = argv[4];
+        if ( *arg_entity_id == 0 )
+        {
+            arg_entity_id = 0;
+        }
+    }
+
+    if ( arg_message_type )
+    {
+        if ( adp_form_msg( frame, arg_message_type, arg_entity_id ) == 0 )
+        {
+            if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
+            {
+                struct jdksavdecc_adpdu adpdu;
+                bzero( &adpdu, sizeof( adpdu ) );
+                if ( jdksavdecc_adpdu_read( &adpdu, frame->payload, 0, frame->length ) > 0 )
+                {
+                    fprintf( stdout, "Sent:\n" );
+                    adp_print( stdout, frame, &adpdu );
+
+                    fprintf( stdout, "\nPacket payload data:\n" );
+                    {
+                        int i;
+                        for ( i = 0; i < frame->length; ++i )
+                        {
+                            fprintf( stdout, "%02x ", frame->payload[i] );
+                        }
+                        fprintf( stdout, "\n" );
+                    }
+                    r = 0;
+                }
+                avdecc_cmd_process_incoming_raw( net, arg_time_in_ms_to_wait, adp_process );
+            }
+        }
+        else
+        {
+            fprintf( stderr, "avdecc: unable to form adp message\n" );
+        }
+    }
+    else
+    {
+        struct jdksavdecc_uint16_name *name = jdksavdecc_adpdu_print_message_type;
+        fprintf( stdout, "ADP message type options:\n" );
+        while ( name->name )
+        {
+            fprintf( stdout, "\t%s (0x%x)\n", name->name, name->value );
+            name++;
+        }
+    }
+    return r;
 }

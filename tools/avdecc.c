@@ -29,78 +29,6 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "adp.h"
 #include "acmp.h"
 
-const char *network_port = "eth0";
-const char *protocol = "adp";
-const char *message_type = 0;
-const char *sequence_id = 0;
-const char *entity_id = 0;
-const char *talker_entity_id = 0;
-const char *talker_unique_id = 0;
-const char *listener_entity_id = 0;
-const char *listener_unique_id = 0;
-const char *connection_count = 0;
-const char *target_entity_id = 0;
-const char *command = 0;
-const char *descriptor_type = 0;
-const char *descriptor_index = 0;
-const char *payload = 0;
-
-int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv )
-{
-    int r = 1;
-    if ( argc > 4 )
-    {
-        entity_id = argv[4];
-        if ( *entity_id == 0 )
-        {
-            entity_id = 0;
-        }
-    }
-
-    if ( message_type )
-    {
-        if ( adp_form_msg( frame, message_type, entity_id ) == 0 )
-        {
-            if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
-            {
-                struct jdksavdecc_adpdu adp;
-                bzero( &adp, sizeof( adp ) );
-                if ( jdksavdecc_adpdu_read( &adp, frame->payload, 0, frame->length ) > 0 )
-                {
-                    fprintf( stdout, "Sent:\n" );
-                    adp_print( stdout, frame, &adp );
-
-                    fprintf( stdout, "\nPacket payload data:\n" );
-                    {
-                        int i;
-                        for ( i = 0; i < frame->length; ++i )
-                        {
-                            fprintf( stdout, "%02x ", frame->payload[i] );
-                        }
-                        fprintf( stdout, "\n" );
-                    }
-                    r = 0;
-                }
-            }
-        }
-        else
-        {
-            fprintf( stderr, "avdecc: unable to form adp message\n" );
-        }
-    }
-    else
-    {
-        struct jdksavdecc_uint16_name *name = jdksavdecc_adpdu_print_message_type;
-        fprintf( stdout, "ADP message type options:\n" );
-        while ( name->name )
-        {
-            fprintf( stdout, "\t%s (0x%x)\n", name->name, name->value );
-            name++;
-        }
-    }
-    return r;
-}
-
 int main( int argc, char **argv )
 {
     int r = 1;
@@ -108,54 +36,68 @@ int main( int argc, char **argv )
     {
         fprintf( stderr,
                  "avdecc usage:\n"
-                 "\tavdecc [network_port] [protocol] ...\n"
-                 "\tavdecc [network_port] adp message_type (entity_id)\n"
-                 "\tavdecc [network_port] acmp message_type sequence_id talker_entity_id talker_unique_id listener_entity_id "
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] [protocol] ...\n"
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] adp message_type (entity_id)\n"
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] acmp message_type sequence_id talker_entity_id "
+                 "talker_unique_id "
+                 "listener_entity_id "
                  "listener_unique_id\n"
-                 "\tavdecc [network_port] acmp message_type sequence_id talker_entity_id talker_unique_id listener_entity_id "
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] acmp message_type sequence_id talker_entity_id "
+                 "talker_unique_id "
+                 "listener_entity_id "
                  "listener_unique_id connection_count\n"
-                 "\tavdecc [network_port] aem message_type command sequence_id destination_mac target_entity_id "
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] aem message_type command sequence_id destination_mac "
+                 "target_entity_id "
                  "descriptor_type descriptor_index\n"
-                 "\tavdecc [network_port] aem message_type command sequence_id destination_mac target_entity_id "
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] aem message_type command sequence_id destination_mac "
+                 "target_entity_id "
                  "descriptor_type descriptor_index "
                  "payload...\n" );
         return 1;
     }
     if ( argc > 1 )
     {
-        network_port = argv[1];
+        arg_verbose = atoi( argv[1] );
     }
     if ( argc > 2 )
     {
-        protocol = argv[2];
+        arg_time_in_ms_to_wait = atoi( argv[2] );
     }
     if ( argc > 3 )
     {
-        message_type = argv[3];
+        arg_network_port = argv[3];
+    }
+    if ( argc > 4 )
+    {
+        arg_protocol = argv[4];
+    }
+    if ( argc > 5 )
+    {
+        arg_message_type = argv[5];
     }
     {
         struct raw_context net;
-        int fd = raw_socket( &net, JDKSAVDECC_AVTP_ETHERTYPE, network_port, jdksavdecc_multicast_adp_acmp.value );
+        int fd = raw_socket( &net, JDKSAVDECC_AVTP_ETHERTYPE, arg_network_port, jdksavdecc_multicast_adp_acmp.value );
         if ( fd >= 0 )
         {
             struct jdksavdecc_frame frame;
             jdksavdecc_frame_init( &frame );
             memcpy( frame.src_address.value, net.m_my_mac, 6 );
-            if ( strcmp( protocol, "adp" ) == 0 )
+            if ( strcmp( arg_protocol, "adp" ) == 0 )
             {
-                r = adp( &net, &frame, argc, argv );
+                r = adp( &net, &frame, argc - 2, &argv[2] );
             }
-            else if ( strcmp( protocol, "acmp" ) == 0 )
+            else if ( strcmp( arg_protocol, "acmp" ) == 0 )
             {
             }
-            else if ( strcmp( protocol, "aem" ) == 0 )
+            else if ( strcmp( arg_protocol, "aem" ) == 0 )
             {
             }
             raw_close( &net );
         }
         else
         {
-            fprintf( stderr, "avdecc: unable to open port '%s'\n", network_port );
+            fprintf( stderr, "avdecc: unable to open port '%s'\n", arg_network_port );
         }
     }
     return r;
