@@ -8,6 +8,8 @@ PROJECT_COPYRIGHT=Copyright 2014 J.D. Koftinoff Software, Ltd.
 PROJECT_DESCRIPTION=avdecc-cmd
 PROJECT_WEBSITE=https://avb.statusbar.com/
 PROJECT_IDENTIFIER=com.statusbar.avb.avdecc-cmd
-TOP_LIB_DIRS+=.
+TOP_LIB_DIRS+=. ../jdksavdecc-c
+
 CONFIG_TOOLS+=
 PKGCONFIG_PACKAGES+=
+
