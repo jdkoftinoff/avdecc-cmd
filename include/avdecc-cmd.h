@@ -25,13 +25,37 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
+#if defined( __linux__ )
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/select.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <arpa/inet.h>
+#include <sys/poll.h>
+#include <errno.h>
+#include <strings.h>
+#include <net/if.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stdint.h>
+#include <inttypes.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <linux/sockios.h>
+#include <linux/if_packet.h>
+#include <linux/if_ether.h>
+#else
+#error avdecc-cmd is only defined for linux
+#endif
+
 #include "jdksavdecc.h"
-
-
-#include "raw.h"
-
-#include "acmp.h"
-#include "adp.h"
-#include "set-control.h"
-#include "get-control.h"
-
+#include "jdksavdecc_util.h"
+#include "jdksavdecc_frame.h"
