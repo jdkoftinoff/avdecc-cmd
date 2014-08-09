@@ -110,19 +110,8 @@ void adp_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdks
     struct jdksavdecc_printer p;
     char buf[10240];
     jdksavdecc_printer_init( &p, buf, sizeof( buf ) );
-    jdksavdecc_printer_print_label( &p, "DA" );
-    jdksavdecc_printer_print_eui48( &p, frame->dest_address );
-    jdksavdecc_printer_print_eol( &p );
-    jdksavdecc_printer_print_label( &p, "SA" );
-    jdksavdecc_printer_print_eui48( &p, frame->src_address );
-    jdksavdecc_printer_print_eol( &p );
-    jdksavdecc_printer_print_label( &p, "EtherType" );
-    jdksavdecc_printer_print_uint16( &p, frame->ethertype );
-    jdksavdecc_printer_print_eol( &p );
-    jdksavdecc_printer_print_label( &p, "Payload Length" );
-    jdksavdecc_printer_print_uint16( &p, frame->length );
-    jdksavdecc_printer_print_eol( &p );
 
+    avdecc_cmd_print_frame_header( &p, frame );
     jdksavdecc_adpdu_print( &p, adp );
     fprintf( s, "%s", buf );
 }

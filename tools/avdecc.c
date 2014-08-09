@@ -32,13 +32,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 const char *network_port = "eth0";
 const char *protocol = "adp";
 const char *message_type = 0;
+const char *sequence_id = 0;
 const char *entity_id = 0;
 const char *talker_entity_id = 0;
 const char *talker_unique_id = 0;
 const char *listener_entity_id = 0;
 const char *listener_unique_id = 0;
 const char *connection_count = 0;
-const char *command_type = 0;
+const char *target_entity_id = 0;
+const char *command = 0;
 const char *descriptor_type = 0;
 const char *descriptor_index = 0;
 const char *payload = 0;
@@ -108,12 +110,14 @@ int main( int argc, char **argv )
                  "avdecc usage:\n"
                  "\tavdecc [network_port] [protocol] ...\n"
                  "\tavdecc [network_port] adp message_type (entity_id)\n"
-                 "\tavdecc [network_port] acmp message_type talker_entity_id talker_unique_id listener_entity_id "
+                 "\tavdecc [network_port] acmp message_type sequence_id talker_entity_id talker_unique_id listener_entity_id "
                  "listener_unique_id\n"
-                 "\tavdecc [network_port] acmp message_type talker_entity_id talker_unique_id listener_entity_id "
+                 "\tavdecc [network_port] acmp message_type sequence_id talker_entity_id talker_unique_id listener_entity_id "
                  "listener_unique_id connection_count\n"
-                 "\tavdecc [network_port] aem message_type target_entity_id command_type descriptor_type descriptor_index\n"
-                 "\tavdecc [network_port] aem message_type target_entity_id command_type descriptor_type descriptor_index "
+                 "\tavdecc [network_port] aem message_type command sequence_id destination_mac target_entity_id "
+                 "descriptor_type descriptor_index\n"
+                 "\tavdecc [network_port] aem message_type command sequence_id destination_mac target_entity_id "
+                 "descriptor_type descriptor_index "
                  "payload...\n" );
         return 1;
     }

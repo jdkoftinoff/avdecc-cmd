@@ -1,4 +1,3 @@
-#pragma once
 /*
 Copyright (c) 2014, J.D. Koftinoff Software, Ltd.
 All rights reserved.
@@ -25,47 +24,20 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#if defined( __linux__ )
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <signal.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <netinet/tcp.h>
-#include <arpa/inet.h>
-#include <sys/poll.h>
-#include <errno.h>
-#include <strings.h>
-#include <net/if.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <stdint.h>
-#include <inttypes.h>
-#include <string.h>
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <linux/sockios.h>
-#include <linux/if_packet.h>
-#include <linux/if_ether.h>
-#else
-#error avdecc-cmd is only defined for linux
-#endif
+#include "avdecc-cmd.h"
 
-#include "jdksavdecc.h"
-#include "jdksavdecc_util.h"
-#include "jdksavdecc_frame.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struct jdksavdecc_frame *frame );
-
-#ifdef __cplusplus
+void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struct jdksavdecc_frame *frame )
+{
+    jdksavdecc_printer_print_label( self, "DA" );
+    jdksavdecc_printer_print_eui48( self, frame->dest_address );
+    jdksavdecc_printer_print_eol( self );
+    jdksavdecc_printer_print_label( self, "SA" );
+    jdksavdecc_printer_print_eui48( self, frame->src_address );
+    jdksavdecc_printer_print_eol( self );
+    jdksavdecc_printer_print_label( self, "EtherType" );
+    jdksavdecc_printer_print_uint16( self, frame->ethertype );
+    jdksavdecc_printer_print_eol( self );
+    jdksavdecc_printer_print_label( self, "Payload Length" );
+    jdksavdecc_printer_print_uint16( self, frame->length );
+    jdksavdecc_printer_print_eol( self );
 }
-#endif
