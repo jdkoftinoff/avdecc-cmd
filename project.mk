@@ -13,3 +13,4 @@ TOP_LIB_DIRS+=. ../jdksavdecc-c
 CONFIG_TOOLS+=
 PKGCONFIG_PACKAGES+=
 
+LDLIBS_MACOSX+=-lpcap

@@ -128,10 +128,11 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
 #endif
     uint8_t command_payload[640];
     int command_payload_len = 0;
+    int arg = 3;
 
-    if ( argc > 4 )
+    if ( argc > ++arg )
     {
-        arg_command = argv[4];
+        arg_command = argv[arg];
     }
 
     if ( !jdksavdecc_get_uint16_value_for_name( jdksavdecc_aem_print_command, arg_command, &command_code ) )
@@ -155,19 +156,9 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
         }
     }
 
-    if ( argc > 5 )
+    if ( argc > ++arg )
     {
-        arg_sequence_id = strtol( argv[5], 0, 0 );
-        sequence_id = arg_sequence_id;
-    }
-    else
-    {
-        sequence_id = 0;
-    }
-
-    if ( argc > 6 )
-    {
-        arg_destination_mac = argv[6];
+        arg_destination_mac = argv[arg];
         if ( *arg_destination_mac == 0 )
         {
             arg_destination_mac = 0;
@@ -179,9 +170,9 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
         jdksavdecc_eui48_init_from_cstr( &destination_mac, arg_destination_mac );
     }
 
-    if ( argc > 7 )
+    if ( argc > ++arg )
     {
-        arg_target_entity_id = argv[7];
+        arg_target_entity_id = argv[arg];
         if ( *arg_target_entity_id == 0 )
         {
             arg_target_entity_id = 0;
@@ -193,11 +184,21 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
         jdksavdecc_eui64_init_from_cstr( &target_entity_id, arg_target_entity_id );
     }
 
-    if ( argc > 8 )
+    if ( argc > ++arg )
+    {
+        arg_sequence_id = argv[arg];
+        sequence_id = (uint16_t)strtol( arg_sequence_id, 0, 0 );
+    }
+    else
+    {
+        sequence_id = 0;
+    }
+
+    if ( argc > ++arg )
     {
         /* Parse payload */
-        int len = strlen( argv[8] );
-        const char *p = argv[8];
+        int len = strlen( argv[arg] );
+        const char *p = argv[arg];
         int i;
         command_payload_len = len / 2;
         if ( (size_t)command_payload_len > sizeof( command_payload ) )
