@@ -24,7 +24,6 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "avdecc-cmd.h"
 #include "aecp.h"
 
 int aecp_aem_form_msg( struct jdksavdecc_frame *frame,

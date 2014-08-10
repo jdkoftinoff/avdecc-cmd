@@ -25,10 +25,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "avdecc-cmd.h"
-#include "raw.h"
 #include "jdksavdecc_adp.h"
-#include "jdksavdecc_adp_print.h"
 
 #ifdef __cplusplus
 extern "C" {

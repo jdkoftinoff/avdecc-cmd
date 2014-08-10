@@ -28,81 +28,48 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "acmp.h"
 
 int acmp_form_msg( struct jdksavdecc_frame *frame,
-                   const char *message_type,
-                   const char *sequence_id,
-                   const char *talker_entity_id,
-                   const char *talker_unique_id,
-                   const char *listener_entity_id,
-                   const char *listener_unique_id )
+                   struct jdksavdecc_acmpdu *acmpdu,
+                   uint16_t message_type,
+                   uint16_t sequence_id,
+                   struct jdksavdecc_eui64 talker_entity_id,
+                   uint16_t talker_unique_id,
+                   struct jdksavdecc_eui64 listener_entity_id,
+                   uint16_t listener_unique_id,
+                   uint16_t connection_count )
 {
     int r = -1;
-    if ( message_type )
-    {
-        struct jdksavdecc_acmpdu acmpdu;
-        bzero( &acmpdu, sizeof( acmpdu ) );
-        uint16_t message_type_code;
-        if ( jdksavdecc_get_uint16_value_for_name( jdksavdecc_acmpdu_print_message_type, message_type, &message_type_code ) )
-        {
-            acmpdu.header.cd = 1;
-            acmpdu.header.subtype = JDKSAVDECC_SUBTYPE_ACMP;
-            acmpdu.header.version = 0;
-            acmpdu.header.status = 0;
-            acmpdu.header.sv = 0;
-            acmpdu.header.control_data_length = JDKSAVDECC_ACMPDU_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN;
-            acmpdu.header.message_type = message_type_code;
 
-            acmpdu.controller_entity_id.value[0] = frame->src_address.value[0];
-            acmpdu.controller_entity_id.value[1] = frame->src_address.value[1];
-            acmpdu.controller_entity_id.value[2] = frame->src_address.value[2];
-            acmpdu.controller_entity_id.value[3] = 0xff;
-            acmpdu.controller_entity_id.value[4] = 0xfe;
-            acmpdu.controller_entity_id.value[5] = frame->src_address.value[3];
-            acmpdu.controller_entity_id.value[6] = frame->src_address.value[4];
-            acmpdu.controller_entity_id.value[7] = frame->src_address.value[5];
+    acmpdu->header.cd = 1;
+    acmpdu->header.subtype = JDKSAVDECC_SUBTYPE_ACMP;
+    acmpdu->header.version = 0;
+    acmpdu->header.status = 0;
+    acmpdu->header.sv = 0;
+    acmpdu->header.control_data_length = JDKSAVDECC_ACMPDU_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN;
+    acmpdu->header.message_type = message_type;
 
-            if ( sequence_id )
-            {
-                acmpdu.sequence_id = atoi( sequence_id );
-            }
+    acmpdu->controller_entity_id.value[0] = frame->src_address.value[0];
+    acmpdu->controller_entity_id.value[1] = frame->src_address.value[1];
+    acmpdu->controller_entity_id.value[2] = frame->src_address.value[2];
+    acmpdu->controller_entity_id.value[3] = 0xff;
+    acmpdu->controller_entity_id.value[4] = 0xfe;
+    acmpdu->controller_entity_id.value[5] = frame->src_address.value[3];
+    acmpdu->controller_entity_id.value[6] = frame->src_address.value[4];
+    acmpdu->controller_entity_id.value[7] = frame->src_address.value[5];
 
-            if ( talker_entity_id )
-            {
-                if ( !jdksavdecc_eui64_init_from_cstr( &acmpdu.talker_entity_id, talker_entity_id ) )
-                {
-                    fprintf( stderr, "acmp: invalid talker_entity_id: '%s'\n", talker_entity_id );
-                    return r;
-                }
-            }
+    acmpdu->sequence_id = sequence_id;
 
-            if ( talker_unique_id )
-            {
-                acmpdu.talker_unique_id = atoi( talker_unique_id );
-            }
+    acmpdu->talker_entity_id = talker_entity_id;
 
-            if ( listener_entity_id )
-            {
-                if ( !jdksavdecc_eui64_init_from_cstr( &acmpdu.listener_entity_id, listener_entity_id ) )
-                {
-                    fprintf( stderr, "acmp: invalid listener_entity_id: '%s'\n", listener_entity_id );
-                    return r;
-                }
-            }
+    acmpdu->talker_unique_id = talker_unique_id;
+    acmpdu->listener_entity_id = listener_entity_id;
+    acmpdu->listener_unique_id = listener_unique_id;
+    acmpdu->connection_count = connection_count;
 
-            if ( listener_unique_id )
-            {
-                acmpdu.listener_unique_id = atoi( listener_unique_id );
-            }
+    frame->length = jdksavdecc_acmpdu_write( &acmpdu, frame->payload, 0, sizeof( frame->payload ) );
+    frame->dest_address = jdksavdecc_multicast_adp_acmp;
+    frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
+    r = 0;
 
-            frame->length = jdksavdecc_acmpdu_write( &acmpdu, frame->payload, 0, sizeof( frame->payload ) );
-            frame->dest_address = jdksavdecc_multicast_adp_acmp;
-            frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
-            r = 0;
-        }
-        else
-        {
-            fprintf( stderr, "acmp: invalid message_type: '%s'\n", message_type );
-        }
-    }
     return r;
 }
 

@@ -26,9 +26,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "avdecc-cmd.h"
 #include "raw.h"
-#include "adp.h"
-#include "acmp.h"
-#include "aecp.h"
+#include "adp-cmd.h"
+#include "acmp-cmd.h"
+#include "aecp-cmd.h"
 
 int main( int argc, char **argv )
 {

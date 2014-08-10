@@ -25,10 +25,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#include "avdecc-cmd.h"
-#include "raw.h"
 #include "jdksavdecc_acmp.h"
-#include "jdksavdecc_acmp_print.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,22 +38,25 @@ extern "C" {
  * possibly directed to the specified target_entity (as ascii)
  *
  * @param frame Pointer to the ethernet frame that will be filled in except for SA
- * @param message_type Pointer to ascii string for the message type
- * @param sequence_id Pointer to ascii string for sequence id
- * @param talker_entity_id Pointer to ascii string for talker's entity id
- * @param talker_unique_id Pointer to ascii string for talker's unique id
- * @param listener_entity_id Pointer to ascii string for listener's entity id
- * @param listener_unique_id Pointer to ascii string for listener's unique id
+ * @param acmpdu Pointer to the ACMPDU data structure that will be filled in with the high level representation
+ * @param message_type the message type
+ * @param sequence_id sequence id
+ * @param talker_entity_id talker's entity id
+ * @param talker_unique_id talker's unique id
+ * @param listener_entity_id listener's entity id
+ * @param listener_unique_id listener's unique id
  * @param target_entity Pointer to ascii string of the target entity id to use, or 0 for none
  * @return 0 success
  */
 int acmp_form_msg( struct jdksavdecc_frame *frame,
-                   const char *arg_message_type,
-                   const char *sequence_id,
-                   const char *talker_entity_id,
-                   const char *talker_unique_id,
-                   const char *listener_entity_id,
-                   const char *listener_unique_id );
+                   struct jdksavdecc_acmpdu *acmpdu,
+                   uint16_t message_type,
+                   uint16_t sequence_id,
+                   struct jdksavdecc_eui64 talker_entity_id,
+                   uint16_t talker_unique_id,
+                   struct jdksavdecc_eui64 listener_entity_id,
+                   uint16_t listener_unique_id,
+                   uint16_t connection_count );
 
 /**
  * @brief acmp_check_listener
