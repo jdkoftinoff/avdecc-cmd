@@ -49,6 +49,7 @@ extern "C" {
  * @return 0 success
  */
 int aecp_aem_form_msg( struct jdksavdecc_frame *frame,
+                       struct jdksavdecc_aecpdu_aem *aemdu,
                        uint16_t message_type_code,
                        uint16_t command_code,
                        uint16_t sequence_id,

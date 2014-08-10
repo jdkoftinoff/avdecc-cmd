@@ -54,6 +54,7 @@ int aecp_aem_process( const void *request_, struct raw_context *net, const struc
 int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv )
 {
     int r = 1;
+    struct jdksavdecc_aecpdu_aem aemdu;
     uint16_t command_code;
     uint16_t sequence_id;
     struct jdksavdecc_eui48 destination_mac;
@@ -65,6 +66,8 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
     uint8_t command_payload[640];
     int command_payload_len = 0;
     int arg = 3;
+
+    bzero( &aemdu, sizeof( aemdu ) );
 
     if ( argc > ++arg )
     {
@@ -195,6 +198,7 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
 #endif
 
     if ( aecp_aem_form_msg( frame,
+                            &aemdu,
                             message_type,
                             command_code,
                             sequence_id,
@@ -205,24 +209,19 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
     {
         if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
         {
-            struct jdksavdecc_aecpdu_aem aemdu;
-            bzero( &aemdu, sizeof( aemdu ) );
-            if ( jdksavdecc_aecpdu_aem_read( &aemdu, frame->payload, 0, frame->length ) > 0 )
+            if ( arg_verbose > 0 )
             {
-                if ( arg_verbose > 0 )
-                {
-                    fprintf( stdout, "Sent:\n" );
-                    aecp_aem_print( stdout, frame, &aemdu );
+                fprintf( stdout, "Sent:\n" );
+                aecp_aem_print( stdout, frame, &aemdu );
 
-                    if ( arg_verbose > 1 )
-                    {
-                        avdecc_cmd_print_frame_payload( stdout, frame );
-                    }
+                if ( arg_verbose > 1 )
+                {
+                    avdecc_cmd_print_frame_payload( stdout, frame );
                 }
-                r = 0;
             }
-            avdecc_cmd_process_incoming_raw( &aemdu, net, arg_time_in_ms_to_wait, aecp_aem_process );
+            r = 0;
         }
+        avdecc_cmd_process_incoming_raw( &aemdu, net, arg_time_in_ms_to_wait, aecp_aem_process );
     }
     else
     {
