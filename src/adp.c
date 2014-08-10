@@ -145,17 +145,15 @@ int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char
                 bzero( &adpdu, sizeof( adpdu ) );
                 if ( jdksavdecc_adpdu_read( &adpdu, frame->payload, 0, frame->length ) > 0 )
                 {
-                    fprintf( stdout, "Sent:\n" );
-                    adp_print( stdout, frame, &adpdu );
-
-                    fprintf( stdout, "\nPacket payload data:\n" );
+                    if ( arg_verbose > 0 )
                     {
-                        int i;
-                        for ( i = 0; i < frame->length; ++i )
+                        fprintf( stdout, "Sent:\n" );
+                        adp_print( stdout, frame, &adpdu );
+
+                        if ( arg_verbose > 1 )
                         {
-                            fprintf( stdout, "%02x ", frame->payload[i] );
+                            avdecc_cmd_print_frame_payload( stdout, frame );
                         }
-                        fprintf( stdout, "\n" );
                     }
                     r = 0;
                 }

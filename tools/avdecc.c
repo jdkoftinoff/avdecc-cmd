@@ -28,34 +28,28 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "raw.h"
 #include "adp.h"
 #include "acmp.h"
-#include "aem.h"
+#include "aecp.h"
 
 int main( int argc, char **argv )
 {
     int r = 1;
-    if ( argc == 1 )
+    if ( argc < 5 )
     {
         fprintf( stderr,
                  "avdecc usage:\n"
-                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] [protocol] ...\n"
-                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] adp message_type (entity_id)\n"
-                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] acmp message_type sequence_id talker_entity_id "
-                 "talker_unique_id "
-                 "listener_entity_id "
-                 "listener_unique_id\n"
-                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] acmp message_type sequence_id talker_entity_id "
-                 "talker_unique_id "
-                 "listener_entity_id "
-                 "listener_unique_id connection_count\n"
-                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] aem message_type command sequence_id destination_mac "
-                 "target_entity_id "
-                 "descriptor_type descriptor_index\n"
-                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] aem message_type command sequence_id destination_mac "
-                 "target_entity_id "
-                 "descriptor_type descriptor_index "
-                 "payload...\n" );
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] [protocol] ...\n\n"
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] adp [message_type] (entity_id)\n\n"
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] acmp [message_type] [sequence_id] [talker_entity_id]\n"
+                 "\t\t[talker_unique_id] [listener_entity_id] [listener_unique_id]\n\n"
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] acmp [message_type] [sequence_id] [talker_entity_id]\n"
+                 "\t\t[talker_unique_id] [listener_entity_id] [listener_unique_id] [connection_count]\n\n"
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] aecp AEM_COMMAND [command] [sequence_id] \n"
+                 "\t\t[destination_mac] [target_entity_id] [descriptor_type] [descriptor_index]\n\n"
+                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] aecp AEM_COMMAND command sequence_id \n"
+                 "\t\t[destination_mac] [target_entity_id] [descriptor_type] [descriptor_index] [payload...]\n\n" );
         return 1;
     }
+
     if ( argc > 1 )
     {
         arg_verbose = atoi( argv[1] );
@@ -84,17 +78,17 @@ int main( int argc, char **argv )
             struct jdksavdecc_frame frame;
             jdksavdecc_frame_init( &frame );
             memcpy( frame.src_address.value, net.m_my_mac, 6 );
-            if ( strcmp( arg_protocol, "adp" ) == 0 )
+            if ( strcasecmp( arg_protocol, "adp" ) == 0 )
             {
                 r = adp( &net, &frame, argc - 2, &argv[2] );
             }
-            else if ( strcmp( arg_protocol, "acmp" ) == 0 )
+            else if ( strcasecmp( arg_protocol, "acmp" ) == 0 )
             {
                 r = acmp( &net, &frame, argc - 2, &argv[2] );
             }
-            else if ( strcmp( arg_protocol, "aem" ) == 0 )
+            else if ( strcasecmp( arg_protocol, "aecp" ) == 0 )
             {
-                r = aem( &net, &frame, argc - 2, &argv[2] );
+                r = aecp( &net, &frame, argc - 2, &argv[2] );
             }
             raw_close( &net );
         }

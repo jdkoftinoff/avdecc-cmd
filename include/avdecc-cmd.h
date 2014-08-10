@@ -96,6 +96,16 @@ extern const char *arg_payload;
 void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struct jdksavdecc_frame *frame );
 
 /**
+ * @brief avdecc_cmd_print_frame_payload
+ *
+ * Print ascii bytes of payload of ethernet frame to FILE
+ *
+ * @param f FILE to print hex bytes to
+ * @param frame pointer to ethernet frame
+ */
+void avdecc_cmd_print_frame_payload( FILE *f, const struct jdksavdecc_frame *frame );
+
+/**
  * @brief avdecc_cmd_process_incoming_raw
  *
  * Process incoming AVTPDU's from net for up to max_time_in_ms milliseconds.

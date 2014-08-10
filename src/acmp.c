@@ -244,17 +244,14 @@ int acmp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, cha
                 bzero( &acmpdu, sizeof( acmpdu ) );
                 if ( jdksavdecc_acmpdu_read( &acmpdu, frame->payload, 0, frame->length ) > 0 )
                 {
-                    fprintf( stdout, "Sent:\n" );
-                    acmp_print( stdout, frame, &acmpdu );
-
-                    fprintf( stdout, "\nPacket payload data:\n" );
+                    if ( arg_verbose > 0 )
                     {
-                        int i;
-                        for ( i = 0; i < frame->length; ++i )
+                        fprintf( stdout, "Sent:\n" );
+                        acmp_print( stdout, frame, &acmpdu );
+                        if ( arg_verbose > 1 )
                         {
-                            fprintf( stdout, "%02x ", frame->payload[i] );
+                            avdecc_cmd_print_frame_payload( stdout, frame );
                         }
-                        fprintf( stdout, "\n" );
                     }
                     r = 0;
                 }

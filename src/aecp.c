@@ -25,67 +25,62 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include "avdecc-cmd.h"
-#include "aem.h"
+#include "aecp.h"
 #include "jdksavdecc_aecp_print.h"
 #include "jdksavdecc_aem_print.h"
 
-int aem_form_msg( struct jdksavdecc_frame *frame, const char *message_type, const char *sequence_id )
+int aecp_aem_form_msg( struct jdksavdecc_frame *frame, uint16_t message_type_code, const char *sequence_id )
 {
     int r = -1;
-    if ( message_type )
+    struct jdksavdecc_aecpdu_aem aemdu;
+    bzero( &aemdu, sizeof( aemdu ) );
+    aemdu.aecpdu_header.header.cd = 1;
+    aemdu.aecpdu_header.header.subtype = JDKSAVDECC_SUBTYPE_AECP;
+    aemdu.aecpdu_header.header.version = 0;
+    aemdu.aecpdu_header.header.status = 0;
+    aemdu.aecpdu_header.header.sv = 0;
+    aemdu.aecpdu_header.header.control_data_length = JDKSAVDECC_AECPDU_AEM_LEN
+                                                     - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN; // TODO: Add payload
+    aemdu.aecpdu_header.header.message_type = message_type_code;
+
+    aemdu.aecpdu_header.controller_entity_id.value[0] = frame->src_address.value[0];
+    aemdu.aecpdu_header.controller_entity_id.value[1] = frame->src_address.value[1];
+    aemdu.aecpdu_header.controller_entity_id.value[2] = frame->src_address.value[2];
+    aemdu.aecpdu_header.controller_entity_id.value[3] = 0xff;
+    aemdu.aecpdu_header.controller_entity_id.value[4] = 0xfe;
+    aemdu.aecpdu_header.controller_entity_id.value[5] = frame->src_address.value[5];
+    aemdu.aecpdu_header.controller_entity_id.value[6] = frame->src_address.value[6];
+    aemdu.aecpdu_header.controller_entity_id.value[7] = frame->src_address.value[7];
+
+    if ( sequence_id )
     {
-        struct jdksavdecc_aecpdu_aem aemdu;
-        bzero( &aemdu, sizeof( aemdu ) );
-        uint16_t message_type_code;
-        if ( jdksavdecc_get_uint16_value_for_name( jdksavdecc_aecp_print_message_type, message_type, &message_type_code ) )
-        {
-            aemdu.aecpdu_header.header.cd = 1;
-            aemdu.aecpdu_header.header.subtype = JDKSAVDECC_SUBTYPE_AECP;
-            aemdu.aecpdu_header.header.version = 0;
-            aemdu.aecpdu_header.header.status = 0;
-            aemdu.aecpdu_header.header.sv = 0;
-            aemdu.aecpdu_header.header.control_data_length = JDKSAVDECC_AECPDU_AEM_LEN
-                                                             - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN; // TODO: Add payload
-            aemdu.aecpdu_header.header.message_type = message_type_code;
-
-            aemdu.aecpdu_header.controller_entity_id.value[0] = frame->src_address.value[0];
-            aemdu.aecpdu_header.controller_entity_id.value[1] = frame->src_address.value[1];
-            aemdu.aecpdu_header.controller_entity_id.value[2] = frame->src_address.value[2];
-            aemdu.aecpdu_header.controller_entity_id.value[3] = 0xff;
-            aemdu.aecpdu_header.controller_entity_id.value[4] = 0xfe;
-            aemdu.aecpdu_header.controller_entity_id.value[5] = frame->src_address.value[5];
-            aemdu.aecpdu_header.controller_entity_id.value[6] = frame->src_address.value[6];
-            aemdu.aecpdu_header.controller_entity_id.value[7] = frame->src_address.value[7];
-
-            if ( sequence_id )
-            {
-                aemdu.aecpdu_header.sequence_id = atoi( sequence_id );
-            }
-
-            aemdu.command_type = 0; // TODO: Fill in Command Type
-
-            frame->length = jdksavdecc_aecpdu_aem_write( &aemdu, frame->payload, 0, sizeof( frame->payload ) );
-            frame->dest_address = jdksavdecc_multicast_adp_acmp;
-            frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
-            r = 0;
-        }
-        else
-        {
-            fprintf( stderr, "ADP: invalid message_type: '%s'\n", message_type );
-        }
+        aemdu.aecpdu_header.sequence_id = atoi( sequence_id );
     }
+
+    aemdu.command_type = 0; // TODO: Fill in Command Type
+
+    frame->length = jdksavdecc_aecpdu_aem_write( &aemdu, frame->payload, 0, sizeof( frame->payload ) );
+    frame->dest_address = jdksavdecc_multicast_adp_acmp;
+    frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
+    r = 0;
     return r;
 }
 
-int aem_check( const struct jdksavdecc_frame *frame,
-               struct jdksavdecc_aecpdu_aem *aemdu,
-               const struct jdksavdecc_eui64 *controller_entity_id,
-               uint16_t sequence_id )
+int aecp_aem_check( const struct jdksavdecc_frame *frame,
+                    struct jdksavdecc_aecpdu_aem *aem,
+                    const struct jdksavdecc_eui64 *controller_entity_id,
+                    uint16_t sequence_id )
 {
+    // TODO:
+    (void)frame;
+    (void)aem;
+    (void)controller_entity_id;
+    (void)sequence_id;
+
     return 0;
 }
 
-void aem_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_aecpdu_aem *aemdu )
+void aecp_aem_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_aecpdu_aem *aemdu )
 {
     struct jdksavdecc_printer p;
     char buf[10240];
@@ -96,12 +91,17 @@ void aem_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdks
     fprintf( s, "%s", buf );
 }
 
-int aem_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame )
+int aecp_aem_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame )
 {
+    // TODO:
+    struct jdksavdecc_aecpdu_aem *request = (struct jdksavdecc_aecpdu_aem *)request_;
+    (void)net;
+    (void)frame;
+    (void)request;
     return 0;
 }
 
-int aem( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv )
+int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv )
 {
     int r = 1;
     if ( argc > 4 )
@@ -113,42 +113,142 @@ int aem( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char
         }
     }
 
-    if ( arg_message_type )
+    if ( aecp_aem_form_msg( frame, message_type, arg_sequence_id ) == 0 )
     {
-        if ( aem_form_msg( frame, arg_message_type, arg_sequence_id ) == 0 )
+        if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
         {
-            if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
+            struct jdksavdecc_aecpdu_aem aemdu;
+            bzero( &aemdu, sizeof( aemdu ) );
+            if ( jdksavdecc_aecpdu_aem_read( &aemdu, frame->payload, 0, frame->length ) > 0 )
             {
-                struct jdksavdecc_aecpdu_aem aemdu;
-                bzero( &aemdu, sizeof( aemdu ) );
-                if ( jdksavdecc_aecpdu_aem_read( &aemdu, frame->payload, 0, frame->length ) > 0 )
+                if ( arg_verbose > 0 )
                 {
                     fprintf( stdout, "Sent:\n" );
-                    aem_print( stdout, frame, &aemdu );
+                    aecp_aem_print( stdout, frame, &aemdu );
 
-                    fprintf( stdout, "\nPacket payload data:\n" );
+                    if ( arg_verbose > 1 )
                     {
-                        int i;
-                        for ( i = 0; i < frame->length; ++i )
-                        {
-                            fprintf( stdout, "%02x ", frame->payload[i] );
-                        }
-                        fprintf( stdout, "\n" );
+                        avdecc_cmd_print_frame_payload( stdout, frame );
                     }
-                    r = 0;
                 }
-                avdecc_cmd_process_incoming_raw( &aemdu, net, arg_time_in_ms_to_wait, aem_process );
+                r = 0;
             }
-        }
-        else
-        {
-            fprintf( stderr, "avdecc: unable to form aem message\n" );
+            avdecc_cmd_process_incoming_raw( &aemdu, net, arg_time_in_ms_to_wait, aecp_aem_process );
         }
     }
     else
     {
+        fprintf( stderr, "avdecc: unable to form aem message\n" );
+    }
+
+    return r;
+}
+
+int aecp_aa( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv )
+{
+    (void)net;
+    (void)frame;
+    (void)message_type;
+    (void)argc;
+    (void)argv;
+    fprintf( stderr, "TODO: aecp aa\n" );
+    return 1;
+}
+
+int aecp_avc( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv )
+{
+    (void)net;
+    (void)frame;
+    (void)message_type;
+    (void)argc;
+    (void)argv;
+    fprintf( stderr, "TODO: aecp avc\n" );
+    return 1;
+}
+
+int aecp_hdcp_apm( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv )
+{
+    (void)net;
+    (void)frame;
+    (void)message_type;
+    (void)argc;
+    (void)argv;
+    fprintf( stderr, "TODO: aecp hdcp apm\n" );
+    return 1;
+}
+
+int aecp_vendor( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv )
+{
+    (void)net;
+    (void)frame;
+    (void)message_type;
+    (void)argc;
+    (void)argv;
+    fprintf( stderr, "TODO: aecp vendor\n" );
+    return 1;
+}
+
+int aecp_extended( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv )
+{
+    (void)net;
+    (void)frame;
+    (void)message_type;
+    (void)argc;
+    (void)argv;
+    fprintf( stderr, "TODO: aecp extended\n" );
+    return 1;
+}
+
+int aecp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv )
+{
+    int r = 1;
+    int parsed = 0;
+
+    if ( arg_message_type )
+    {
+        uint16_t message_type_code = 0;
+        if ( jdksavdecc_get_uint16_value_for_name( jdksavdecc_aecp_print_message_type, arg_message_type, &message_type_code ) )
+        {
+            switch ( message_type_code )
+            {
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_ADDRESS_ACCESS_COMMAND:
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_ADDRESS_ACCESS_RESPONSE:
+                parsed = 1;
+                r = aecp_aa( net, frame, message_type_code, argc, argv );
+                break;
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_COMMAND:
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_RESPONSE:
+                parsed = 1;
+                r = aecp_aem( net, frame, message_type_code, argc, argv );
+                break;
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_AVC_COMMAND:
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_AVC_RESPONSE:
+                parsed = 1;
+                r = aecp_avc( net, frame, message_type_code, argc, argv );
+                break;
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_HDCP_APM_COMMAND:
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_HDCP_APM_RESPONSE:
+                parsed = 1;
+                r = aecp_hdcp_apm( net, frame, message_type_code, argc, argv );
+                break;
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_VENDOR_UNIQUE_COMMAND:
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_VENDOR_UNIQUE_RESPONSE:
+                parsed = 1;
+                r = aecp_vendor( net, frame, message_type_code, argc, argv );
+                break;
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_EXTENDED_COMMAND:
+            case JDKSAVDECC_AECP_MESSAGE_TYPE_EXTENDED_RESPONSE:
+                parsed = 1;
+                r = aecp_extended( net, frame, message_type_code, argc, argv );
+                break;
+            }
+        }
+    }
+
+    if ( !parsed )
+    {
         struct jdksavdecc_uint16_name *name = jdksavdecc_aecp_print_message_type;
-        fprintf( stdout, "aem message type options:\n" );
+        fprintf( stdout, "aecpdu message type options:\n" );
         while ( name->name )
         {
             fprintf( stdout, "\t%s (0x%x)\n", name->name, name->value );

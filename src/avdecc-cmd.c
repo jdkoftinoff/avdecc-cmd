@@ -28,9 +28,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "raw.h"
 
 int arg_verbose = 1;
-int arg_time_in_ms_to_wait = 5000;
-const char *arg_network_port = "eth0";
-const char *arg_protocol = "adp";
+int arg_time_in_ms_to_wait = 1000;
+const char *arg_network_port = 0;
+const char *arg_protocol = 0;
 const char *arg_message_type = 0;
 const char *arg_sequence_id = 0;
 const char *arg_entity_id = 0;
@@ -59,6 +59,19 @@ void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struc
     jdksavdecc_printer_print_label( self, "Payload Length" );
     jdksavdecc_printer_print_uint16( self, frame->length );
     jdksavdecc_printer_print_eol( self );
+}
+
+void avdecc_cmd_print_frame_payload( FILE *f, const struct jdksavdecc_frame *frame )
+{
+    fprintf( stdout, "\nPacket payload data:\n" );
+    {
+        int i;
+        for ( i = 0; i < frame->length; ++i )
+        {
+            fprintf( stdout, "%02x ", frame->payload[i] );
+        }
+        fprintf( stdout, "\n" );
+    }
 }
 
 void avdecc_cmd_process_incoming_raw( const void *request_,

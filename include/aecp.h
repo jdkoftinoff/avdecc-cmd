@@ -27,7 +27,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "avdecc-cmd.h"
 #include "raw.h"
+#include "jdksavdecc_aecp.h"
+#include "jdksavdecc_aecp_aa.h"
+#include "jdksavdecc_aecp_aem.h"
+#include "jdksavdecc_aecp_vendor.h"
+#include "jdksavdecc_aecp_hdcp_apm.h"
+#include "jdksavdecc_aecp_print.h"
 #include "jdksavdecc_aem_command.h"
+#include "jdksavdecc_aem_descriptor.h"
 #include "jdksavdecc_aem_print.h"
 
 #ifdef __cplusplus
@@ -35,9 +42,9 @@ extern "C" {
 #endif
 
 /**
- * @brief aem_form_msg
+ * @brief aecp_aem_form_msg
  *
- * Create an jdksavdecc_aecpdu_aem message ethernet frame with the specified message_type,
+ * Create an jdksavdecc_aecpdu_aecpdu message ethernet frame with the specified message_type,
  * possibly directed to the specified target_entity (as ascii)
  *
  * @param frame Pointer to the ethernet frame that will be filled in except for SA
@@ -45,57 +52,139 @@ extern "C" {
  * @param sequence_id Pointer to ascii string for sequence id
  * @return 0 success
  */
-int aem_form_msg( struct jdksavdecc_frame *frame, const char *message_type, const char *sequence_id );
+int aecp_aem_form_msg( struct jdksavdecc_frame *frame, uint16_t message_type_code, const char *sequence_id );
 
 /**
- * @brief aem_check
+ * @brief aecp_aem_check
  *
- * Validate an ethernet frame to see if it contains an aem message, potentially from the target entity
+ * Validate an ethernet frame to see if it contains an aecpdu message, potentially from the target entity
  *
  * @param frame The ethernet frame to validate
- * @param aemdu The aemDU structure that will be filled in if the frame is matching
+ * @param aecpdudu The aecpduDU structure that will be filled in if the frame is matching
  * @param target_entity_id The target entity_id to expect, or 0 for any
  * @return 0 on success
  */
-int aem_check( const struct jdksavdecc_frame *frame,
-               struct jdksavdecc_aecpdu_aem *aemdu,
-               const struct jdksavdecc_eui64 *controller_entity_id,
-               uint16_t sequence_id );
+int aecp_aem_check( const struct jdksavdecc_frame *frame,
+                    struct jdksavdecc_aecpdu_aem *aem,
+                    const struct jdksavdecc_eui64 *controller_entity_id,
+                    uint16_t sequence_id );
 
 /**
- * @brief aem_print
+ * @brief aecp_aem_print
  *
- * Print the details of the aem message in the ethernet frame
+ * Print the details of the aecpdu message in the ethernet frame
  *
  * @param s The output stream to print the ascii to
- * @param frame The ethernet frame which contains an aem message
- * @param aemdu The parsed aem message
+ * @param frame The ethernet frame which contains an aecpdu message
+ * @param aecpdudu The parsed aecpdu message
  */
-void aem_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_aecpdu_aem *aemdu );
+void aecp_aem_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_aecpdu_aem *aecpdudu );
 
 /**
- * @brief aem_process
+ * @brief aecpdu_process
  * @param request_
  * @param net
  * @param frame
  * @return
  */
-int aem_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame );
+int aecp_aem_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame );
 
 /**
- * @brief handle aem command line request
+ * @brief handle aecp command line request
  *
  * command line arguments form:
  *
  * @param net raw network port to use
  * @param frame Ethernet Frame to use to send
- * @param verbose 1 for verbose information about operations done
- * @param time_ms_to_wait time in milliseconds to wait for responses, or 0 for none
- * @param argc count of arguments including "aem"
- * @param argv array of arguments starting at "aem"
+ * @param argc count of arguments including "aecp"
+ * @param argv array of arguments starting at "aecp"
  * @return 0 on success
  */
-int aem( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv );
+int aecp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv );
+
+/**
+ * @brief handle aecp_aem command line request
+ *
+ * command line arguments form:
+ *
+ * @param net raw network port to use
+ * @param frame Ethernet Frame to use to send
+ * @param aecp message_type code
+ * @param argc count of arguments including "aecp"
+ * @param argv array of arguments starting at "aecp"
+ * @return 0 on success
+ */
+int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv );
+
+/**
+ * @brief handle aecp_aa command line request
+ *
+ * command line arguments form:
+ *
+ * @param net raw network port to use
+ * @param frame Ethernet Frame to use to send
+ * @param aecp message_type code
+ * @param argc count of arguments including "aecp"
+ * @param argv array of arguments starting at "aecp"
+ * @return 0 on success
+ */
+int aecp_aa( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv );
+
+/**
+ * @brief handle aecp_avc command line request
+ *
+ * command line arguments form:
+ *
+ * @param net raw network port to use
+ * @param frame Ethernet Frame to use to send
+ * @param aecp message_type code
+ * @param argc count of arguments including "aecp"
+ * @param argv array of arguments starting at "aecp"
+ * @return 0 on success
+ */
+int aecp_avc( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv );
+
+/**
+ * @brief handle aecp_hdcp_apm command line request
+ *
+ * command line arguments form:
+ *
+ * @param net raw network port to use
+ * @param frame Ethernet Frame to use to send
+ * @param aecp message_type code
+ * @param argc count of arguments including "aecp"
+ * @param argv array of arguments starting at "aecp"
+ * @return 0 on success
+ */
+int aecp_hdcp_apm( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv );
+
+/**
+ * @brief handle aecp_vendor command line request
+ *
+ * command line arguments form:
+ *
+ * @param net raw network port to use
+ * @param frame Ethernet Frame to use to send
+ * @param aecp message_type code
+ * @param argc count of arguments including "aecp"
+ * @param argv array of arguments starting at "aecp"
+ * @return 0 on success
+ */
+int aecp_vendor( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv );
+
+/**
+ * @brief handle aecp_extended command line request
+ *
+ * command line arguments form:
+ *
+ * @param net raw network port to use
+ * @param frame Ethernet Frame to use to send
+ * @param aecp message_type code
+ * @param argc count of arguments including "aecp"
+ * @param argv array of arguments starting at "aecp"
+ * @return 0 on success
+ */
+int aecp_extended( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv );
 
 #ifdef __cplusplus
 }
