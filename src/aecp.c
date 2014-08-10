@@ -48,9 +48,9 @@ int aecp_aem_form_msg( struct jdksavdecc_frame *frame, uint16_t message_type_cod
     aemdu.aecpdu_header.controller_entity_id.value[2] = frame->src_address.value[2];
     aemdu.aecpdu_header.controller_entity_id.value[3] = 0xff;
     aemdu.aecpdu_header.controller_entity_id.value[4] = 0xfe;
-    aemdu.aecpdu_header.controller_entity_id.value[5] = frame->src_address.value[5];
-    aemdu.aecpdu_header.controller_entity_id.value[6] = frame->src_address.value[6];
-    aemdu.aecpdu_header.controller_entity_id.value[7] = frame->src_address.value[7];
+    aemdu.aecpdu_header.controller_entity_id.value[5] = frame->src_address.value[3];
+    aemdu.aecpdu_header.controller_entity_id.value[6] = frame->src_address.value[4];
+    aemdu.aecpdu_header.controller_entity_id.value[7] = frame->src_address.value[5];
 
     if ( sequence_id )
     {

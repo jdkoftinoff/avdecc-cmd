@@ -63,14 +63,14 @@ void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struc
 
 void avdecc_cmd_print_frame_payload( FILE *f, const struct jdksavdecc_frame *frame )
 {
-    fprintf( stdout, "\nPacket payload data:\n" );
+    fprintf( f, "\nPacket payload data:\n" );
     {
         int i;
         for ( i = 0; i < frame->length; ++i )
         {
-            fprintf( stdout, "%02x ", frame->payload[i] );
+            fprintf( f, "%02x ", frame->payload[i] );
         }
-        fprintf( stdout, "\n" );
+        fprintf( f, "\n" );
     }
 }
 

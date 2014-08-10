@@ -53,8 +53,41 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <linux/sockios.h>
 #include <linux/if_packet.h>
 #include <linux/if_ether.h>
-#else
-#error avdecc-cmd is only defined for linux
+#elif defined( __APPLE__ )
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/select.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
+#include <arpa/inet.h>
+#include <sys/poll.h>
+#include <errno.h>
+#include <strings.h>
+#include <net/if.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stdint.h>
+#include <inttypes.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <sys/select.h>
+#include <net/if_dl.h>
+#include <pcap.h>
+#elif defined( _WIN32 )
+#include <Windows.h>
+#include <pcap.h>
+#include <iphlpapi.h>
+#include <winsock2.h>
+#pragma comment( lib, "IPHLPAPI.lib" )
+#pragma comment( lib, "wpcap.lib" )
+#pragma comment( lib, "Ws2_32.lib" )
 #endif
 
 #include "jdksavdecc.h"

@@ -56,9 +56,9 @@ int acmp_form_msg( struct jdksavdecc_frame *frame,
             acmpdu.controller_entity_id.value[2] = frame->src_address.value[2];
             acmpdu.controller_entity_id.value[3] = 0xff;
             acmpdu.controller_entity_id.value[4] = 0xfe;
-            acmpdu.controller_entity_id.value[5] = frame->src_address.value[5];
-            acmpdu.controller_entity_id.value[6] = frame->src_address.value[6];
-            acmpdu.controller_entity_id.value[7] = frame->src_address.value[7];
+            acmpdu.controller_entity_id.value[5] = frame->src_address.value[3];
+            acmpdu.controller_entity_id.value[6] = frame->src_address.value[4];
+            acmpdu.controller_entity_id.value[7] = frame->src_address.value[5];
 
             if ( sequence_id )
             {
