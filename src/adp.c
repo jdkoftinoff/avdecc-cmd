@@ -27,43 +27,23 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "avdecc-cmd.h"
 #include "adp.h"
 
-int adp_form_msg( struct jdksavdecc_frame *frame, const char *message_type, const char *target_entity )
+int adp_form_msg( struct jdksavdecc_frame *frame,
+                  struct jdksavdecc_adpdu *adpdu,
+                  uint16_t message_type,
+                  struct jdksavdecc_eui64 target_entity )
 {
     int r = -1;
-    if ( message_type )
-    {
-        struct jdksavdecc_adpdu adpdu;
-        bzero( &adpdu, sizeof( adpdu ) );
-        uint16_t message_type_code;
-        if ( jdksavdecc_get_uint16_value_for_name( jdksavdecc_adpdu_print_message_type, message_type, &message_type_code ) )
-        {
-            adpdu.header.cd = 1;
-            adpdu.header.subtype = JDKSAVDECC_SUBTYPE_ADP;
-            adpdu.header.version = 0;
-            adpdu.header.valid_time = 0;
-            adpdu.header.sv = 0;
-            adpdu.header.control_data_length = JDKSAVDECC_ADPDU_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN;
-            adpdu.header.message_type = message_type_code;
-
-            if ( target_entity )
-            {
-                if ( !jdksavdecc_eui64_init_from_cstr( &adpdu.header.entity_id, target_entity ) )
-                {
-                    fprintf( stderr, "ADP: invalid entity_id: '%s'\n", target_entity );
-                    return r;
-                }
-            }
-
-            frame->length = jdksavdecc_adpdu_write( &adpdu, frame->payload, 0, sizeof( frame->payload ) );
-            frame->dest_address = jdksavdecc_multicast_adp_acmp;
-            frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
-            r = 0;
-        }
-        else
-        {
-            fprintf( stderr, "ADP: invalid message_type: '%s'\n", message_type );
-        }
-    }
+    adpdu->header.cd = 1;
+    adpdu->header.subtype = JDKSAVDECC_SUBTYPE_ADP;
+    adpdu->header.version = 0;
+    adpdu->header.sv = 0;
+    adpdu->header.control_data_length = JDKSAVDECC_ADPDU_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN;
+    adpdu->header.message_type = message_type;
+    adpdu->header.entity_id = target_entity;
+    frame->length = jdksavdecc_adpdu_write( adpdu, frame->payload, 0, sizeof( frame->payload ) );
+    frame->dest_address = jdksavdecc_multicast_adp_acmp;
+    frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
+    r = 0;
     return r;
 }
 

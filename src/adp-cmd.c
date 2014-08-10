@@ -57,6 +57,7 @@ int adp_process( const void *request_, struct raw_context *net, const struct jdk
 int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv )
 {
     int r = 1;
+
     if ( argc > 4 )
     {
         arg_entity_id = argv[4];
@@ -68,13 +69,25 @@ int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char
 
     if ( arg_message_type )
     {
-        if ( adp_form_msg( frame, arg_message_type, arg_entity_id ) == 0 )
+        struct jdksavdecc_eui64 entity_id;
+        struct jdksavdecc_adpdu adpdu;
+        bzero( &entity_id, sizeof( entity_id ) );
+        bzero( &adpdu, sizeof( adpdu ) );
+        uint16_t message_type_code;
+        if ( jdksavdecc_get_uint16_value_for_name( jdksavdecc_adpdu_print_message_type, arg_message_type, &message_type_code ) )
         {
-            if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
+            if ( arg_entity_id )
             {
-                struct jdksavdecc_adpdu adpdu;
-                bzero( &adpdu, sizeof( adpdu ) );
-                if ( jdksavdecc_adpdu_read( &adpdu, frame->payload, 0, frame->length ) > 0 )
+                if ( !jdksavdecc_eui64_init_from_cstr( &entity_id, arg_entity_id ) )
+                {
+                    fprintf( stderr, "ADP: invalid entity_id: '%s'\n", arg_entity_id );
+                    return 1;
+                }
+            }
+
+            if ( adp_form_msg( frame, &adpdu, message_type_code, entity_id ) == 0 )
+            {
+                if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
                 {
                     if ( arg_verbose > 0 )
                     {
@@ -87,13 +100,13 @@ int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char
                         }
                     }
                     r = 0;
+                    avdecc_cmd_process_incoming_raw( &adpdu, net, arg_time_in_ms_to_wait, adp_process );
                 }
-                avdecc_cmd_process_incoming_raw( &adpdu, net, arg_time_in_ms_to_wait, adp_process );
             }
-        }
-        else
-        {
-            fprintf( stderr, "avdecc: unable to form adp message\n" );
+            else
+            {
+                fprintf( stderr, "avdecc: unable to form adp message\n" );
+            }
         }
     }
     else

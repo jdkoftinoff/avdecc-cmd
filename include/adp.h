@@ -38,11 +38,15 @@ extern "C" {
  * possibly directed to the specified target_entity (as ascii)
  *
  * @param frame Pointer to the ethernet frame that will be filled in except for SA
- * @param message_type Pointer to ascii string "ENTITY_DISCOVER"
- * @param target_entity Pointer to ascii string of the target entity id to use, or 0 for none
+ * @param adpdu Pointer to adpdu high level structure that will be filled in
+ * @param message_type ADP Message type code
+ * @param target_entity target entity id value
  * @return 0 success
  */
-int adp_form_msg( struct jdksavdecc_frame *frame, const char *arg_message_type, const char *target_entity );
+int adp_form_msg( struct jdksavdecc_frame *frame,
+                  struct jdksavdecc_adpdu *adpdu,
+                  uint16_t message_type,
+                  struct jdksavdecc_eui64 target_entity );
 
 /**
  * @brief adp_check
