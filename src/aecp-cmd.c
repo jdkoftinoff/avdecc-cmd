@@ -43,11 +43,20 @@ void aecp_aem_print( FILE *s, const struct jdksavdecc_frame *frame, const struct
 
 int aecp_aem_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame )
 {
-    // TODO:
     struct jdksavdecc_aecpdu_aem *request = (struct jdksavdecc_aecpdu_aem *)request_;
+    struct jdksavdecc_aecpdu_aem response;
+    bzero( &response, sizeof( response ) );
     (void)net;
-    (void)frame;
-    (void)request;
+
+    if ( aecp_aem_check( frame,
+                         &response,
+                         request->aecpdu_header.controller_entity_id,
+                         request->aecpdu_header.header.target_entity_id,
+                         request->aecpdu_header.sequence_id ) == 0 )
+    {
+        fprintf( stdout, "Response: \n" );
+        aecp_aem_print( stdout, frame, &response );
+    }
     return 0;
 }
 
