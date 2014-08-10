@@ -89,6 +89,7 @@ int main( int argc, char **argv )
             }
             else if ( strcmp( arg_protocol, "acmp" ) == 0 )
             {
+                r = acmp( &net, &frame, argc - 2, &argv[2] );
             }
             else if ( strcmp( arg_protocol, "aem" ) == 0 )
             {
