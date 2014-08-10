@@ -75,41 +75,6 @@ int acmp_check_listener( const struct jdksavdecc_frame *frame,
                          const struct jdksavdecc_eui64 *listener_entity_id,
                          uint16_t listener_unique_id );
 
-/**
- * @brief acmp_print
- *
- * Print the details of the acmp message in the ethernet frame
- *
- * @param s The output stream to print the ascii to
- * @param frame The ethernet frame which contains an acmp message
- * @param acmpdu The parsed acmp message
- */
-void acmp_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_acmpdu *acmpdu );
-
-/**
- * @brief acmp_process
- * @param request_
- * @param net
- * @param frame
- * @return
- */
-int acmp_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame );
-
-/**
- * @brief handle acmp command line request
- *
- * command line arguments form:
- *
- * @param net raw network port to use
- * @param frame Ethernet Frame to use to send
- * @param verbose 1 for verbose information about operations done
- * @param time_ms_to_wait time in milliseconds to wait for responses, or 0 for none
- * @param argc count of arguments including "acmp"
- * @param argv array of arguments starting at "acmp"
- * @return 0 on success
- */
-int acmp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv );
-
 #ifdef __cplusplus
 }
 #endif

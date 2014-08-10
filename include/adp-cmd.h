@@ -35,31 +35,39 @@ extern "C" {
 #endif
 
 /**
- * @brief adp_form_msg
+ * @brief adp_print
  *
- * Create an ADPDU message ethernet frame with the specified message_type,
- * possibly directed to the specified target_entity (as ascii)
+ * Print the details of the ADP message in the ethernet frame
  *
- * @param frame Pointer to the ethernet frame that will be filled in except for SA
- * @param message_type Pointer to ascii string "ENTITY_DISCOVER"
- * @param target_entity Pointer to ascii string of the target entity id to use, or 0 for none
- * @return 0 success
+ * @param s The output stream to print the ascii to
+ * @param frame The ethernet frame which contains an ADP message
+ * @param adpdu The parsed ADP message
  */
-int adp_form_msg( struct jdksavdecc_frame *frame, const char *arg_message_type, const char *target_entity );
+void adp_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_adpdu *adpdu );
 
 /**
- * @brief adp_check
+ * @brief adp_process
+ * @param request_
+ * @param net
+ * @param frame
+ * @return
+ */
+int adp_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame );
+
+/**
+ * @brief handle ADP command line request
  *
- * Validate an ethernet frame to see if it contains an ADP message, potentially from the target entity
+ * command line arguments form:
  *
- * @param frame The ethernet frame to validate
- * @param adpdu The ADPDU structure that will be filled in if the frame is matching
- * @param target_entity_id The target entity_id to expect, or 0 for any
+ * @param net raw network port to use
+ * @param frame Ethernet Frame to use to send
+ * @param verbose 1 for verbose information about operations done
+ * @param time_ms_to_wait time in milliseconds to wait for responses, or 0 for none
+ * @param argc count of arguments including "adp"
+ * @param argv array of arguments starting at "adp"
  * @return 0 on success
  */
-int adp_check( const struct jdksavdecc_frame *frame,
-               struct jdksavdecc_adpdu *adpdu,
-               const struct jdksavdecc_eui64 *target_entity_id );
+int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv );
 
 #ifdef __cplusplus
 }
