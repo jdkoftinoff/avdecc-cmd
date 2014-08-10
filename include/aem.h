@@ -58,7 +58,7 @@ int aem_form_msg( struct jdksavdecc_frame *frame, const char *message_type, cons
  * @return 0 on success
  */
 int aem_check( const struct jdksavdecc_frame *frame,
-               struct jdksavdecc_aecpdu_aem *aecpdu,
+               struct jdksavdecc_aecpdu_aem *aemdu,
                const struct jdksavdecc_eui64 *controller_entity_id,
                uint16_t sequence_id );
 
