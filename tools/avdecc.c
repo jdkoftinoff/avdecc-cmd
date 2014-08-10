@@ -44,9 +44,7 @@ int main( int argc, char **argv )
                  "\tavdecc [verbosity] [timeout_in_ms] [network_port] acmp [message_type] [sequence_id] [talker_entity_id]\n"
                  "\t\t[talker_unique_id] [listener_entity_id] [listener_unique_id] [connection_count]\n\n"
                  "\tavdecc [verbosity] [timeout_in_ms] [network_port] aecp AEM_COMMAND [command] [sequence_id] \n"
-                 "\t\t[destination_mac] [target_entity_id] [descriptor_type] [descriptor_index]\n\n"
-                 "\tavdecc [verbosity] [timeout_in_ms] [network_port] aecp AEM_COMMAND command sequence_id \n"
-                 "\t\t[destination_mac] [target_entity_id] [descriptor_type] [descriptor_index] [payload...]\n\n" );
+                 "\t\t[destination_mac] [target_entity_id] [payload...]\n\n" );
         return 1;
     }
 

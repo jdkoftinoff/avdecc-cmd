@@ -171,7 +171,7 @@ int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char
         fprintf( stdout, "ADP message type options:\n" );
         while ( name->name )
         {
-            fprintf( stdout, "\t%s (0x%x)\n", name->name, name->value );
+            fprintf( stdout, "\t0x%04x %s\n", name->value, name->name );
             name++;
         }
     }

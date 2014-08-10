@@ -33,6 +33,7 @@ const char *arg_network_port = 0;
 const char *arg_protocol = 0;
 const char *arg_message_type = 0;
 const char *arg_sequence_id = 0;
+const char *arg_destination_mac = 0;
 const char *arg_entity_id = 0;
 const char *arg_talker_entity_id = 0;
 const char *arg_talker_unique_id = 0;

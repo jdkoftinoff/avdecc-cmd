@@ -29,18 +29,28 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "jdksavdecc_aecp_print.h"
 #include "jdksavdecc_aem_print.h"
 
-int aecp_aem_form_msg( struct jdksavdecc_frame *frame, uint16_t message_type_code, const char *sequence_id )
+int aecp_aem_form_msg( struct jdksavdecc_frame *frame,
+                       uint16_t message_type_code,
+                       uint16_t command_code,
+                       uint16_t sequence_id,
+                       struct jdksavdecc_eui48 destination_mac,
+                       struct jdksavdecc_eui64 target_entity_id,
+                       const uint8_t *command_payload,
+                       int command_payload_length )
 {
     int r = -1;
     struct jdksavdecc_aecpdu_aem aemdu;
     bzero( &aemdu, sizeof( aemdu ) );
+    frame->dest_address = destination_mac;
+    frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
+
     aemdu.aecpdu_header.header.cd = 1;
     aemdu.aecpdu_header.header.subtype = JDKSAVDECC_SUBTYPE_AECP;
     aemdu.aecpdu_header.header.version = 0;
     aemdu.aecpdu_header.header.status = 0;
     aemdu.aecpdu_header.header.sv = 0;
-    aemdu.aecpdu_header.header.control_data_length = JDKSAVDECC_AECPDU_AEM_LEN
-                                                     - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN; // TODO: Add payload
+    aemdu.aecpdu_header.header.control_data_length = JDKSAVDECC_AECPDU_AEM_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN
+                                                     + command_payload_length;
     aemdu.aecpdu_header.header.message_type = message_type_code;
 
     aemdu.aecpdu_header.controller_entity_id.value[0] = frame->src_address.value[0];
@@ -52,17 +62,21 @@ int aecp_aem_form_msg( struct jdksavdecc_frame *frame, uint16_t message_type_cod
     aemdu.aecpdu_header.controller_entity_id.value[6] = frame->src_address.value[4];
     aemdu.aecpdu_header.controller_entity_id.value[7] = frame->src_address.value[5];
 
-    if ( sequence_id )
-    {
-        aemdu.aecpdu_header.sequence_id = atoi( sequence_id );
-    }
-
-    aemdu.command_type = 0; // TODO: Fill in Command Type
+    aemdu.command_type = command_code;
+    aemdu.aecpdu_header.sequence_id = sequence_id;
+    aemdu.aecpdu_header.header.target_entity_id = target_entity_id;
 
     frame->length = jdksavdecc_aecpdu_aem_write( &aemdu, frame->payload, 0, sizeof( frame->payload ) );
-    frame->dest_address = jdksavdecc_multicast_adp_acmp;
-    frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
-    r = 0;
+    if ( frame->length + command_payload_length < (int)sizeof( frame->payload ) )
+    {
+        memcpy( frame->payload + frame->length, command_payload, command_payload_length );
+        frame->length += command_payload_length;
+        r = 0;
+    }
+    else
+    {
+        r = 1;
+    }
     return r;
 }
 
@@ -104,16 +118,153 @@ int aecp_aem_process( const void *request_, struct raw_context *net, const struc
 int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t message_type, int argc, char **argv )
 {
     int r = 1;
+    uint16_t command_code;
+    uint16_t sequence_id;
+    struct jdksavdecc_eui48 destination_mac;
+    struct jdksavdecc_eui64 target_entity_id;
+#if 0
+    uint16_t descriptor_type;
+    uint16_t descriptor_index;
+#endif
+    uint8_t command_payload[640];
+    int command_payload_len = 0;
+
     if ( argc > 4 )
     {
-        arg_entity_id = argv[4];
-        if ( *arg_entity_id == 0 )
+        arg_command = argv[4];
+    }
+
+    if ( !jdksavdecc_get_uint16_value_for_name( jdksavdecc_aem_print_command, arg_command, &command_code ) )
+    {
+        errno = 0;
+        char *end = (char *)arg_command;
+        if ( arg_command )
         {
-            arg_entity_id = 0;
+            command_code = strtol( arg_command, &end, 0 );
+        }
+        if ( !arg_command || errno == ERANGE || *end )
+        {
+            struct jdksavdecc_uint16_name *name = jdksavdecc_aem_print_command;
+            fprintf( stderr, "Invalid AECP AEM command. Options are:\n" );
+            while ( name->name )
+            {
+                fprintf( stdout, "\t0x%04x %s\n", name->value, name->name );
+                name++;
+            }
+            return 1;
         }
     }
 
-    if ( aecp_aem_form_msg( frame, message_type, arg_sequence_id ) == 0 )
+    if ( argc > 5 )
+    {
+        arg_sequence_id = strtol( argv[5], 0, 0 );
+        sequence_id = arg_sequence_id;
+    }
+    else
+    {
+        sequence_id = 0;
+    }
+
+    if ( argc > 6 )
+    {
+        arg_destination_mac = argv[6];
+        if ( *arg_destination_mac == 0 )
+        {
+            arg_destination_mac = 0;
+        }
+    }
+
+    if ( arg_destination_mac )
+    {
+        jdksavdecc_eui48_init_from_cstr( &destination_mac, arg_destination_mac );
+    }
+
+    if ( argc > 7 )
+    {
+        arg_target_entity_id = argv[7];
+        if ( *arg_target_entity_id == 0 )
+        {
+            arg_target_entity_id = 0;
+        }
+    }
+
+    if ( arg_target_entity_id )
+    {
+        jdksavdecc_eui64_init_from_cstr( &target_entity_id, arg_target_entity_id );
+    }
+
+    if ( argc > 8 )
+    {
+        /* Parse payload */
+        int len = strlen( argv[8] );
+        const char *p = argv[8];
+        int i;
+        command_payload_len = len / 2;
+        if ( (size_t)command_payload_len > sizeof( command_payload ) )
+        {
+            fprintf( stderr, "Pad payload ascii form length\n" );
+            return 1;
+        }
+        for ( i = 0; i < command_payload_len; ++i )
+        {
+            if ( !jdksavdecc_util_parse_byte( &command_payload[i], p[0], p[1] ) )
+            {
+                fprintf( stderr, "Pad payload octets ascii form\n" );
+                return 1;
+            }
+            p += 2;
+        }
+    }
+
+#if 0
+    // TODO: parse descriptor type only for commands that need it
+    if ( argc > 8 )
+    {
+        arg_descriptor_type = argv[8];
+        if ( *arg_descriptor_type == 0 )
+        {
+            arg_descriptor_type = 0;
+        }
+    }
+
+    if ( !jdksavdecc_get_uint16_value_for_name( jdksavdecc_aem_print_descriptor_type, arg_descriptor_type, &descriptor_type ) )
+    {
+        errno = 0;
+        char *end = (char *)arg_descriptor_type;
+        if ( arg_descriptor_type )
+        {
+            descriptor_type = strtol( arg_descriptor_type, &end, 0 );
+        }
+        if ( !arg_descriptor_type || errno == ERANGE || *end )
+        {
+            struct jdksavdecc_uint16_name *name = jdksavdecc_aem_print_descriptor_type;
+            fprintf( stderr, "Invalid AECP AEM descriptor type. Options are:\n" );
+            while ( name->name )
+            {
+                fprintf( stdout, "\t0x%04x %s\n", name->value, name->name );
+                name++;
+            }
+            return 1;
+        }
+    }
+    if ( argc > 9 )
+    {
+        descriptor_index = strtol( argv[9], 0, 0 );
+    }
+    else
+    {
+        descriptor_index = 0;
+    }
+#endif
+
+    if ( aecp_aem_form_msg( frame,
+                            message_type,
+                            command_code,
+                            sequence_id,
+                            destination_mac,
+                            target_entity_id,
+                            command_payload,
+                            command_payload_len ) == 0 )
     {
         if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
         {
@@ -251,7 +402,7 @@ int aecp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, cha
         fprintf( stdout, "aecpdu message type options:\n" );
         while ( name->name )
         {
-            fprintf( stdout, "\t%s (0x%x)\n", name->name, name->value );
+            fprintf( stdout, "\t0x%04x %s\n", name->value, name->name );
             name++;
         }
     }

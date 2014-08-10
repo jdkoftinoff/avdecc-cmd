@@ -49,10 +49,16 @@ extern "C" {
  *
  * @param frame Pointer to the ethernet frame that will be filled in except for SA
  * @param message_type Pointer to ascii string for the message type
- * @param sequence_id Pointer to ascii string for sequence id
  * @return 0 success
  */
-int aecp_aem_form_msg( struct jdksavdecc_frame *frame, uint16_t message_type_code, const char *sequence_id );
+int aecp_aem_form_msg( struct jdksavdecc_frame *frame,
+                       uint16_t message_type_code,
+                       uint16_t command_code,
+                       uint16_t sequence_id,
+                       struct jdksavdecc_eui48 destination_mac,
+                       struct jdksavdecc_eui64 target_entity_id,
+                       const uint8_t *command_payload,
+                       int command_payload_length );
 
 /**
  * @brief aecp_aem_check

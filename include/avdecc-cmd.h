@@ -106,6 +106,7 @@ extern const char *arg_network_port;
 extern const char *arg_protocol;
 extern const char *arg_message_type;
 extern const char *arg_sequence_id;
+extern const char *arg_destination_mac;
 extern const char *arg_entity_id;
 extern const char *arg_talker_entity_id;
 extern const char *arg_talker_unique_id;
