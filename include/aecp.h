@@ -64,13 +64,16 @@ int aecp_aem_form_msg( struct jdksavdecc_frame *frame,
  * Validate an ethernet frame to see if it contains an aecpdu message, potentially from the target entity
  *
  * @param frame The ethernet frame to validate
- * @param aecpdudu The aecpduDU structure that will be filled in if the frame is matching
+ * @param aecpdudu The aecpdu AEM structure that will be filled in if the frame is matching
+ * @param controller_entity_id The target entity_id to expect
  * @param target_entity_id The target entity_id to expect, or 0 for any
+ @ @param sequence_id The command sequence id to expect
  * @return 0 on success
  */
 int aecp_aem_check( const struct jdksavdecc_frame *frame,
                     struct jdksavdecc_aecpdu_aem *aem,
-                    const struct jdksavdecc_eui64 *controller_entity_id,
+                    const struct jdksavdecc_eui64 controller_entity_id,
+                    const struct jdksavdecc_eui64 target_entity_id,
                     uint16_t sequence_id );
 
 #ifdef __cplusplus

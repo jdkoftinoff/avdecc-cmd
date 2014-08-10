@@ -78,13 +78,15 @@ int aecp_aem_form_msg( struct jdksavdecc_frame *frame,
 
 int aecp_aem_check( const struct jdksavdecc_frame *frame,
                     struct jdksavdecc_aecpdu_aem *aem,
-                    const struct jdksavdecc_eui64 *controller_entity_id,
+                    const struct jdksavdecc_eui64 controller_entity_id,
+                    const struct jdksavdecc_eui64 target_entity_id,
                     uint16_t sequence_id )
 {
     // TODO:
     (void)frame;
     (void)aem;
     (void)controller_entity_id;
+    (void)target_entity_id;
     (void)sequence_id;
 
     return 0;
