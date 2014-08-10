@@ -54,10 +54,12 @@ int adp_form_msg( struct jdksavdecc_frame *frame, const char *arg_message_type, 
  *
  * @param frame The ethernet frame to validate
  * @param adpdu The ADPDU structure that will be filled in if the frame is matching
- * @param target_entity The target entity_id to expect, or 0 for any
+ * @param target_entity_id The target entity_id to expect, or 0 for any
  * @return 0 on success
  */
-int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *adpdu, const char *target_entity );
+int adp_check( const struct jdksavdecc_frame *frame,
+               struct jdksavdecc_adpdu *adpdu,
+               const struct jdksavdecc_eui64 *target_entity_id );
 
 /**
  * @brief adp_print
@@ -69,6 +71,15 @@ int adp_check( const struct jdksavdecc_frame *frame, struct jdksavdecc_adpdu *ad
  * @param adpdu The parsed ADP message
  */
 void adp_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_adpdu *adpdu );
+
+/**
+ * @brief adp_process
+ * @param request_
+ * @param net
+ * @param frame
+ * @return
+ */
+int adp_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame );
 
 /**
  * @brief handle ADP command line request

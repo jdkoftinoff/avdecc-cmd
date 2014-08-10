@@ -103,13 +103,18 @@ void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struc
  * If process returns non-zero, avdecc_cmd_process_incoming_raw returns immediately.
  * Always puts the network port socket into non-blocking mode.
  *
+ * @param request_ const void * to the context dependent request structure to be forwarded to process function.
  * @param net The network port to use
  * @param max_time_in_ms Max time to wait
- * @param process function pointer to function taking (struct raw_context *, const struct jdksavdecc_frame*) and returning int
+ * @param process function pointer to function taking (const void *request, struct raw_context *, const struct
+ *jdksavdecc_frame*) and returning int
  */
-void avdecc_cmd_process_incoming_raw( struct raw_context *net,
+void avdecc_cmd_process_incoming_raw( const void *request_,
+                                      struct raw_context *net,
                                       int max_time_in_ms,
-                                      int ( *process )( struct raw_context *net, const struct jdksavdecc_frame *frame ) );
+                                      int ( *process )( const void *request_,
+                                                        struct raw_context *net,
+                                                        const struct jdksavdecc_frame *frame ) );
 
 #ifdef __cplusplus
 }

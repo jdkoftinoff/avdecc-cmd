@@ -61,9 +61,12 @@ void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struc
     jdksavdecc_printer_print_eol( self );
 }
 
-void avdecc_cmd_process_incoming_raw( struct raw_context *net,
+void avdecc_cmd_process_incoming_raw( const void *request_,
+                                      struct raw_context *net,
                                       int max_time_in_ms,
-                                      int ( *process )( struct raw_context *net, const struct jdksavdecc_frame *frame ) )
+                                      int ( *process )( const void *request_,
+                                                        struct raw_context *net,
+                                                        const struct jdksavdecc_frame *frame ) )
 {
     fd_set rd_fds;
     int nfds;
@@ -117,7 +120,7 @@ void avdecc_cmd_process_incoming_raw( struct raw_context *net,
                     // And ethertype
                     frame.ethertype = net->m_ethertype;
                     // Process it.
-                    if ( process( net, &frame ) != 0 )
+                    if ( process( request_, net, &frame ) != 0 )
                     {
                         // Process function wants us to stop.
                         break;
