@@ -29,22 +29,23 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 int arg_verbose = 1;
 int arg_time_in_ms_to_wait = 1000;
-const char *arg_network_port = 0;
-const char *arg_protocol = 0;
-const char *arg_message_type = 0;
-const char *arg_sequence_id = 0;
-const char *arg_destination_mac = 0;
-const char *arg_entity_id = 0;
-const char *arg_talker_entity_id = 0;
-const char *arg_talker_unique_id = 0;
-const char *arg_listener_entity_id = 0;
-const char *arg_listener_unique_id = 0;
-const char *arg_connection_count = 0;
-const char *arg_target_entity_id = 0;
-const char *arg_command = 0;
-const char *arg_descriptor_type = 0;
-const char *arg_descriptor_index = 0;
-const char *arg_payload = 0;
+
+const char *arg_network_port = "";
+const char *arg_protocol = "";
+const char *arg_message_type = "";
+const char *arg_sequence_id = "";
+const char *arg_destination_mac = "";
+const char *arg_entity_id = "";
+const char *arg_talker_entity_id = "";
+const char *arg_talker_unique_id = "";
+const char *arg_listener_entity_id = "";
+const char *arg_listener_unique_id = "";
+const char *arg_connection_count = "";
+const char *arg_target_entity_id = "";
+const char *arg_command = "";
+const char *arg_descriptor_type = "";
+const char *arg_descriptor_index = "";
+const char *arg_payload = "";
 
 void avdecc_cmd_print_frame_header( struct jdksavdecc_printer *self, const struct jdksavdecc_frame *frame )
 {

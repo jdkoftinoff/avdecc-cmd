@@ -65,7 +65,7 @@ int acmp_form_msg( struct jdksavdecc_frame *frame,
     acmpdu->listener_unique_id = listener_unique_id;
     acmpdu->connection_count = connection_count;
 
-    frame->length = jdksavdecc_acmpdu_write( &acmpdu, frame->payload, 0, sizeof( frame->payload ) );
+    frame->length = jdksavdecc_acmpdu_write( acmpdu, frame->payload, 0, sizeof( frame->payload ) );
     frame->dest_address = jdksavdecc_multicast_adp_acmp;
     frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
     r = 0;

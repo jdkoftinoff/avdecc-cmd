@@ -151,60 +151,19 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
         command_payload_len = len / 2;
         if ( (size_t)command_payload_len > sizeof( command_payload ) )
         {
-            fprintf( stderr, "Pad payload ascii form length\n" );
+            fprintf( stderr, "Bad payload ascii form length\n" );
             return 1;
         }
         for ( i = 0; i < command_payload_len; ++i )
         {
             if ( !jdksavdecc_util_parse_byte( &command_payload[i], p[0], p[1] ) )
             {
-                fprintf( stderr, "Pad payload octets ascii form\n" );
+                fprintf( stderr, "Bad payload octets ascii form\n" );
                 return 1;
             }
             p += 2;
         }
     }
-
-#if 0
-    // TODO: parse descriptor type only for commands that need it
-    if ( argc > 8 )
-    {
-        arg_descriptor_type = argv[8];
-        if ( *arg_descriptor_type == 0 )
-        {
-            arg_descriptor_type = 0;
-        }
-    }
-
-    if ( !jdksavdecc_get_uint16_value_for_name( jdksavdecc_aem_print_descriptor_type, arg_descriptor_type, &descriptor_type ) )
-    {
-        errno = 0;
-        char *end = (char *)arg_descriptor_type;
-        if ( arg_descriptor_type )
-        {
-            descriptor_type = strtol( arg_descriptor_type, &end, 0 );
-        }
-        if ( !arg_descriptor_type || errno == ERANGE || *end )
-        {
-            struct jdksavdecc_uint16_name *name = jdksavdecc_aem_print_descriptor_type;
-            fprintf( stderr, "Invalid AECP AEM descriptor type. Options are:\n" );
-            while ( name->name )
-            {
-                fprintf( stdout, "\t0x%04x %s\n", name->value, name->name );
-                name++;
-            }
-            return 1;
-        }
-    }
-    if ( argc > 9 )
-    {
-        descriptor_index = strtol( argv[9], 0, 0 );
-    }
-    else
-    {
-        descriptor_index = 0;
-    }
-#endif
 
     if ( aecp_aem_form_msg( frame,
                             &aemdu,

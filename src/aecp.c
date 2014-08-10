@@ -76,6 +76,161 @@ int aecp_aem_form_msg( struct jdksavdecc_frame *frame,
     return r;
 }
 
+int aecp_aem_form_read_descriptor_command( struct jdksavdecc_frame *frame,
+                                           struct jdksavdecc_aem_command_read_descriptor *pdu,
+                                           uint16_t sequence_id,
+                                           struct jdksavdecc_eui48 destination_mac,
+                                           struct jdksavdecc_eui64 target_entity_id,
+                                           uint16_t descriptor_type,
+                                           uint16_t descriptor_index )
+{
+    int r = -1;
+    frame->dest_address = destination_mac;
+    frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
+
+    pdu->aem_header.aecpdu_header.header.cd = 1;
+    pdu->aem_header.aecpdu_header.header.subtype = JDKSAVDECC_SUBTYPE_AECP;
+    pdu->aem_header.aecpdu_header.header.version = 0;
+    pdu->aem_header.aecpdu_header.header.status = 0;
+    pdu->aem_header.aecpdu_header.header.sv = 0;
+    pdu->aem_header.aecpdu_header.header.control_data_length = JDKSAVDECC_AEM_COMMAND_READ_DESCRIPTOR_COMMAND_LEN
+                                                               - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN;
+    pdu->aem_header.aecpdu_header.header.message_type = JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_COMMAND;
+
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[0] = frame->src_address.value[0];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[1] = frame->src_address.value[1];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[2] = frame->src_address.value[2];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[3] = 0xff;
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[4] = 0xfe;
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[5] = frame->src_address.value[3];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[6] = frame->src_address.value[4];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[7] = frame->src_address.value[5];
+
+    pdu->aem_header.command_type = JDKSAVDECC_AEM_COMMAND_READ_DESCRIPTOR;
+
+    pdu->aem_header.aecpdu_header.sequence_id = sequence_id;
+    pdu->aem_header.aecpdu_header.header.target_entity_id = target_entity_id;
+
+    pdu->configuration_index = 0;
+    pdu->descriptor_type = descriptor_type;
+    pdu->descriptor_index = descriptor_index;
+
+    frame->length = jdksavdecc_aem_command_read_descriptor_write( pdu, frame->payload, 0, sizeof( frame->payload ) );
+    if ( frame->length > 0 )
+    {
+        r = 0;
+    }
+    else
+    {
+        r = 1;
+    }
+    return r;
+}
+
+int aecp_aem_form_get_control_command( struct jdksavdecc_frame *frame,
+                                       struct jdksavdecc_aem_command_get_control *pdu,
+                                       uint16_t sequence_id,
+                                       struct jdksavdecc_eui48 destination_mac,
+                                       struct jdksavdecc_eui64 target_entity_id,
+                                       uint16_t descriptor_index )
+{
+    int r = -1;
+    frame->dest_address = destination_mac;
+    frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
+
+    pdu->aem_header.aecpdu_header.header.cd = 1;
+    pdu->aem_header.aecpdu_header.header.subtype = JDKSAVDECC_SUBTYPE_AECP;
+    pdu->aem_header.aecpdu_header.header.version = 0;
+    pdu->aem_header.aecpdu_header.header.status = 0;
+    pdu->aem_header.aecpdu_header.header.sv = 0;
+    pdu->aem_header.aecpdu_header.header.control_data_length = JDKSAVDECC_AEM_COMMAND_GET_CONTROL_COMMAND_LEN
+                                                               - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN;
+    pdu->aem_header.aecpdu_header.header.message_type = JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_COMMAND;
+
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[0] = frame->src_address.value[0];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[1] = frame->src_address.value[1];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[2] = frame->src_address.value[2];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[3] = 0xff;
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[4] = 0xfe;
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[5] = frame->src_address.value[3];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[6] = frame->src_address.value[4];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[7] = frame->src_address.value[5];
+
+    pdu->aem_header.command_type = JDKSAVDECC_AEM_COMMAND_GET_CONTROL;
+
+    pdu->aem_header.aecpdu_header.sequence_id = sequence_id;
+    pdu->aem_header.aecpdu_header.header.target_entity_id = target_entity_id;
+
+    pdu->descriptor_type = JDKSAVDECC_DESCRIPTOR_CONTROL;
+    pdu->descriptor_index = descriptor_index;
+
+    frame->length = jdksavdecc_aem_command_get_control_write( pdu, frame->payload, 0, sizeof( frame->payload ) );
+    if ( frame->length > 0 )
+    {
+        r = 0;
+    }
+    else
+    {
+        r = 1;
+    }
+    return r;
+}
+
+int aecp_aem_form_set_control_command( struct jdksavdecc_frame *frame,
+                                       struct jdksavdecc_aem_command_set_control *pdu,
+                                       uint16_t sequence_id,
+                                       struct jdksavdecc_eui48 destination_mac,
+                                       struct jdksavdecc_eui64 target_entity_id,
+                                       uint16_t descriptor_index,
+                                       const uint8_t *control_data_payload,
+                                       int control_data_payload_length )
+{
+    int r = -1;
+    frame->dest_address = destination_mac;
+    frame->ethertype = JDKSAVDECC_AVTP_ETHERTYPE;
+
+    pdu->aem_header.aecpdu_header.header.cd = 1;
+    pdu->aem_header.aecpdu_header.header.subtype = JDKSAVDECC_SUBTYPE_AECP;
+    pdu->aem_header.aecpdu_header.header.version = 0;
+    pdu->aem_header.aecpdu_header.header.status = 0;
+    pdu->aem_header.aecpdu_header.header.sv = 0;
+    pdu->aem_header.aecpdu_header.header.control_data_length
+        = JDKSAVDECC_AEM_COMMAND_SET_CONTROL_COMMAND_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN + control_data_payload_length;
+
+    pdu->aem_header.aecpdu_header.header.message_type = JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_COMMAND;
+
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[0] = frame->src_address.value[0];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[1] = frame->src_address.value[1];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[2] = frame->src_address.value[2];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[3] = 0xff;
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[4] = 0xfe;
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[5] = frame->src_address.value[3];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[6] = frame->src_address.value[4];
+    pdu->aem_header.aecpdu_header.controller_entity_id.value[7] = frame->src_address.value[5];
+
+    pdu->aem_header.command_type = JDKSAVDECC_AEM_COMMAND_SET_CONTROL;
+
+    pdu->aem_header.aecpdu_header.sequence_id = sequence_id;
+    pdu->aem_header.aecpdu_header.header.target_entity_id = target_entity_id;
+
+    pdu->descriptor_type = JDKSAVDECC_DESCRIPTOR_CONTROL;
+    pdu->descriptor_index = descriptor_index;
+
+    frame->length = jdksavdecc_aem_command_set_control_write( pdu, frame->payload, 0, sizeof( frame->payload ) );
+
+    if ( frame->length + control_data_payload_length < (int)sizeof( frame->payload ) )
+    {
+        memcpy( frame->payload + frame->length, control_data_payload, control_data_payload_length );
+        frame->length += control_data_payload_length;
+        r = 0;
+    }
+    else
+    {
+        r = 1;
+    }
+    return r;
+}
+
 int aecp_aem_check( const struct jdksavdecc_frame *frame,
                     struct jdksavdecc_aecpdu_aem *aem,
                     const struct jdksavdecc_eui64 controller_entity_id,
