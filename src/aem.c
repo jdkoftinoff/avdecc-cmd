@@ -23,3 +23,29 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
+
+#include "avdecc-cmd.h"
+#include "aem.h"
+
+int aem_form_msg( struct jdksavdecc_frame *frame, const char *message_type, const char *sequence_id )
+{
+}
+
+int aem_check( const struct jdksavdecc_frame *frame,
+               struct jdksavdecc_aecpdu_aem *aecpdu,
+               const struct jdksavdecc_eui64 *controller_entity_id,
+               uint16_t sequence_id )
+{
+}
+
+void aem_print( FILE *s, const struct jdksavdecc_frame *frame, const struct jdksavdecc_aecpdu_aem *aemdu )
+{
+}
+
+int aem_process( const void *request_, struct raw_context *net, const struct jdksavdecc_frame *frame )
+{
+}
+
+int aem( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv )
+{
+}

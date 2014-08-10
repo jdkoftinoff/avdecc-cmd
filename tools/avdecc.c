@@ -28,6 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "raw.h"
 #include "adp.h"
 #include "acmp.h"
+#include "aem.h"
 
 int main( int argc, char **argv )
 {
@@ -93,6 +94,7 @@ int main( int argc, char **argv )
             }
             else if ( strcmp( arg_protocol, "aem" ) == 0 )
             {
+                r = aem( &net, &frame, argc - 2, &argv[2] );
             }
             raw_close( &net );
         }
