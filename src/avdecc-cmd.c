@@ -96,13 +96,15 @@ void avdecc_cmd_process_incoming_raw( const void *request_,
 
     do
     {
+        struct timeval time_portion = timeout;
+
         // refresh interest in readability of fd
         FD_SET( net->m_fd, &rd_fds );
 
         do
         {
             // wait for it to become readable
-            r = select( nfds, &rd_fds, 0, 0, &timeout );
+            r = select( nfds, &rd_fds, 0, 0, &time_portion );
         } while ( r < 0 && errno == EINTR );
 
         // any error aborts now
