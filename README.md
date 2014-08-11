@@ -87,7 +87,14 @@ Using avdecc-cmd as a library in your program
 
 ### Linux
 
+* Add the directories ``jdksavdecc-c/include`` and ``include`` to your compiler's include path
+* Add all C files from ``jdksavdecc-c/src`` and ``src`` to your project
+
 ### Mac OS X
+
+* Add the directories ``jdksavdecc-c/include`` and ``include`` to your compiler's include path
+* Add all C files from ``jdksavdecc-c/src`` and ``src`` to your project
+* Link libpcap to your project by passing ``-lpcap`` on the linker command line
 
 Usage
 -----
