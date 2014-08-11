@@ -398,6 +398,40 @@ avdecc-get-control usage:
 Example run:
 
 ```
+$ avdecc-get-control 2 250 en5 0 00-1C-AB-00-31-19 00:1C:AB:00:01:00:31:18 0x0004
+Sent:
+                                      DA:00-1C-AB-00-31-19
+                                      SA:A8-20-66-00-E7-52
+                               EtherType:0x22F0
+                          Payload Length:0x001C
+                            message_type:AEM_COMMAND
+                                  status:SUCCESS
+                     control_data_length:0x0010
+                        target_entity_id:00:1C:AB:00:01:00:31:18
+                    controller_entity_id:A8:20:66:FF:FE:00:E7:52
+                             sequence_id:0x0000
+                         u (unsolicited):false
+                            command_type:GET_CONTROL
+                         descriptor_type:CONTROL
+                        descriptor_index:0x0004
+
+Packet payload data: fb 00 00 10 00 1c ab 00 01 00 31 18 a8 20 66 ff fe 00 e7 52 00 00 00 19 00 1a 00 04 
+Response: 
+                                      DA:A8-20-66-00-E7-52
+                                      SA:00-1C-AB-00-31-19
+                               EtherType:0x22F0
+                          Payload Length:0x002E
+                            message_type:AEM_RESPONSE
+                                  status:SUCCESS
+                     control_data_length:0x0012
+                        target_entity_id:00:1C:AB:00:01:00:31:18
+                    controller_entity_id:A8:20:66:FF:FE:00:E7:52
+                             sequence_id:0x0000
+                         u (unsolicited):false
+                            command_type:GET_CONTROL
+                         descriptor_type:CONTROL
+                        descriptor_index:0x0004
+                                 content:00 00 
 
 ```
 
@@ -408,3 +442,44 @@ avdecc-set-control usage:
 	avdecc-set-control [verbosity] [timeout_in_ms] [network_port] [sequence_id] [destination_mac] [target_entity_id] [descriptor_index] [payload...]
 ```
 
+Example run:
+
+```
+$ avdecc-set-control 2 250 en5 0 00-1C-AB-00-31-19 00:1C:AB:00:01:00:31:18 0x0004 0002
+Sent:
+                                      DA:00-1C-AB-00-31-19
+                                      SA:A8-20-66-00-E7-52
+                               EtherType:0x22F0
+                          Payload Length:0x001E
+                            message_type:AEM_COMMAND
+                                  status:SUCCESS
+                     control_data_length:0x0012
+                        target_entity_id:00:1C:AB:00:01:00:31:18
+                    controller_entity_id:A8:20:66:FF:FE:00:E7:52
+                             sequence_id:0x0000
+                         u (unsolicited):false
+                            command_type:SET_CONTROL
+                         descriptor_type:CONTROL
+                        descriptor_index:0x0004
+                                 content:00 02 
+
+
+Packet payload data: fb 00 00 12 00 1c ab 00 01 00 31 18 a8 20 66 ff fe 00 e7 52 00 00 00 18 00 1a 00 04 00 02 
+Response: 
+                                      DA:A8-20-66-00-E7-52
+                                      SA:00-1C-AB-00-31-19
+                               EtherType:0x22F0
+                          Payload Length:0x002E
+                            message_type:AEM_RESPONSE
+                                  status:SUCCESS
+                     control_data_length:0x0012
+                        target_entity_id:00:1C:AB:00:01:00:31:18
+                    controller_entity_id:A8:20:66:FF:FE:00:E7:52
+                             sequence_id:0x0000
+                         u (unsolicited):false
+                            command_type:SET_CONTROL
+                         descriptor_type:CONTROL
+                        descriptor_index:0x0004
+                                 content:00 02 
+
+```
