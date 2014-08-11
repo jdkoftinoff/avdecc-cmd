@@ -57,6 +57,11 @@ int adp_process( const void *request_, struct raw_context *net, const struct jdk
 int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char **argv )
 {
     int r = 1;
+    struct jdksavdecc_eui64 entity_id;
+    struct jdksavdecc_adpdu adpdu;
+    bzero( &entity_id, sizeof( entity_id ) );
+    bzero( &adpdu, sizeof( adpdu ) );
+    uint16_t message_type_code;
 
     if ( argc > 4 )
     {
@@ -67,46 +72,38 @@ int adp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, char
         }
     }
 
-    if ( arg_message_type )
+    if ( jdksavdecc_get_uint16_value_for_name( jdksavdecc_adpdu_print_message_type, arg_message_type, &message_type_code ) )
     {
-        struct jdksavdecc_eui64 entity_id;
-        struct jdksavdecc_adpdu adpdu;
-        bzero( &entity_id, sizeof( entity_id ) );
-        bzero( &adpdu, sizeof( adpdu ) );
-        uint16_t message_type_code;
-        if ( jdksavdecc_get_uint16_value_for_name( jdksavdecc_adpdu_print_message_type, arg_message_type, &message_type_code ) )
+        if ( arg_entity_id )
         {
-            if ( arg_entity_id )
+            if ( !jdksavdecc_eui64_init_from_cstr( &entity_id, arg_entity_id ) )
             {
-                if ( !jdksavdecc_eui64_init_from_cstr( &entity_id, arg_entity_id ) )
-                {
-                    fprintf( stderr, "ADP: invalid entity_id: '%s'\n", arg_entity_id );
-                    return 1;
-                }
+                fprintf( stderr, "ADP: invalid entity_id: '%s'\n", arg_entity_id );
+                return 1;
             }
+        }
 
-            if ( adp_form_msg( frame, &adpdu, message_type_code, entity_id ) == 0 )
+        if ( adp_form_msg( frame, &adpdu, message_type_code, entity_id ) == 0 )
+        {
+            if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
             {
-                if ( raw_send( net, frame->dest_address.value, frame->payload, frame->length ) > 0 )
+                if ( arg_verbose > 0 )
                 {
-                    if ( arg_verbose > 0 )
+                    fprintf( stdout, "Sent:\n" );
+                    adp_print( stdout, frame, &adpdu );
+
+                    if ( arg_verbose > 1 )
                     {
-                        fprintf( stdout, "Sent:\n" );
-                        adp_print( stdout, frame, &adpdu );
-
-                        if ( arg_verbose > 1 )
-                        {
-                            avdecc_cmd_print_frame_payload( stdout, frame );
-                        }
+                        avdecc_cmd_print_frame_payload( stdout, frame );
                     }
-                    r = 0;
-                    avdecc_cmd_process_incoming_raw( &adpdu, net, arg_time_in_ms_to_wait, adp_process );
                 }
+                r = 0;
+                avdecc_cmd_process_incoming_raw( &adpdu, net, arg_time_in_ms_to_wait, adp_process );
             }
-            else
-            {
-                fprintf( stderr, "avdecc: unable to form adp message\n" );
-            }
+        }
+        else
+        {
+            fprintf( stderr, "avdecc: unable to form adp message\n" );
         }
     }
     else

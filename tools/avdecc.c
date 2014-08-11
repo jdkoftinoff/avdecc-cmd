@@ -33,6 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 int main( int argc, char **argv )
 {
     int r = 1;
+    int arg = 0;
     if ( argc < 5 )
     {
         fprintf( stderr,
@@ -49,25 +50,25 @@ int main( int argc, char **argv )
         return 1;
     }
 
-    if ( argc > 1 )
+    if ( argc > ++arg )
     {
-        arg_verbose = atoi( argv[1] );
+        arg_verbose = atoi( argv[arg] );
     }
-    if ( argc > 2 )
+    if ( argc > ++arg )
     {
-        arg_time_in_ms_to_wait = atoi( argv[2] );
+        arg_time_in_ms_to_wait = atoi( argv[arg] );
     }
-    if ( argc > 3 )
+    if ( argc > ++arg )
     {
-        arg_network_port = argv[3];
+        arg_network_port = argv[arg];
     }
-    if ( argc > 4 )
+    if ( argc > ++arg )
     {
-        arg_protocol = argv[4];
+        arg_protocol = argv[arg];
     }
-    if ( argc > 5 )
+    if ( argc > ++arg )
     {
-        arg_message_type = argv[5];
+        arg_message_type = argv[arg];
     }
     {
         struct raw_context net;
