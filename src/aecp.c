@@ -242,17 +242,21 @@ int aecp_aem_check( const struct jdksavdecc_frame *frame,
     if ( pos > 0 )
     {
         struct jdksavdecc_aecpdu_common_control_header *h = &aem->aecpdu_header.header;
-        if ( h->version == 0 && h->subtype == JDKSAVDECC_SUBTYPE_AECP && h->cd == 1
-             && h->message_type == JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_RESPONSE
-             && h->control_data_length >= JDKSAVDECC_AECPDU_AEM_LEN )
+        if ( h->version == 0 && h->subtype == JDKSAVDECC_SUBTYPE_AECP && h->cd == 1 )
         {
-            if ( jdksavdecc_eui64_compare( &aem->aecpdu_header.controller_entity_id, &controller_entity_id ) == 0 )
+            if ( h->message_type == JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_RESPONSE )
             {
-                if ( jdksavdecc_eui64_compare( &aem->aecpdu_header.header.target_entity_id, &target_entity_id ) == 0 )
+                if ( h->control_data_length >= JDKSAVDECC_AECPDU_AEM_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN )
                 {
-                    if ( aem->aecpdu_header.sequence_id == sequence_id )
+                    if ( jdksavdecc_eui64_compare( &aem->aecpdu_header.controller_entity_id, &controller_entity_id ) == 0 )
                     {
-                        r = 0;
+                        if ( jdksavdecc_eui64_compare( &aem->aecpdu_header.header.target_entity_id, &target_entity_id ) == 0 )
+                        {
+                            if ( aem->aecpdu_header.sequence_id == sequence_id )
+                            {
+                                r = 0;
+                            }
+                        }
                     }
                 }
             }
