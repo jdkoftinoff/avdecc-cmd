@@ -68,10 +68,6 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
     uint16_t sequence_id;
     struct jdksavdecc_eui48 destination_mac;
     struct jdksavdecc_eui64 target_entity_id;
-#if 0
-    uint16_t descriptor_type;
-    uint16_t descriptor_index;
-#endif
     uint8_t command_payload[640];
     int command_payload_len = 0;
     int arg = 3;
