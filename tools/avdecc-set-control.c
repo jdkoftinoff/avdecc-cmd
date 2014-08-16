@@ -83,7 +83,7 @@ int main( int argc, char **argv )
         arg_payload = argv[arg];
     }
 
-    sequence_id = strtol( arg_sequence_id, 0, 0 );
+    sequence_id = (uint16_t)strtol( arg_sequence_id, 0, 0 );
 
     if ( arg_destination_mac )
     {
@@ -99,13 +99,13 @@ int main( int argc, char **argv )
         bzero( &target_entity_id, sizeof( target_entity_id ) );
     }
 
-    descriptor_index = strtol( arg_descriptor_index, 0, 0 );
+    descriptor_index = (uint16_t)strtol(arg_descriptor_index, 0, 0);
 
     {
         /* Parse payload */
         size_t len = strlen( arg_payload );
         const char *p = arg_payload;
-        int i;
+        size_t i;
         payload_length = len / 2;
         if ( (size_t)payload_length > sizeof( payload ) )
         {

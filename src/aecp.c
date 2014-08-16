@@ -47,7 +47,7 @@ int aecp_aem_form_msg( struct jdksavdecc_frame *frame,
     aemdu->aecpdu_header.header.sv = 0;
     aemdu->aecpdu_header.header.control_data_length = JDKSAVDECC_AECPDU_AEM_LEN - JDKSAVDECC_COMMON_CONTROL_HEADER_LEN
                                                       + command_payload_length;
-    aemdu->aecpdu_header.header.message_type = message_type_code;
+    aemdu->aecpdu_header.header.message_type = (uint8_t)message_type_code;
 
     aemdu->aecpdu_header.controller_entity_id.value[0] = frame->src_address.value[0];
     aemdu->aecpdu_header.controller_entity_id.value[1] = frame->src_address.value[1];

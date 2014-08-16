@@ -81,7 +81,7 @@ int main( int argc, char **argv )
         arg_descriptor_index = argv[arg];
     }
 
-    sequence_id = strtol( arg_sequence_id, 0, 0 );
+    sequence_id = (uint16_t)strtol( arg_sequence_id, 0, 0 );
     if ( arg_destination_mac )
     {
         jdksavdecc_eui48_init_from_cstr( &destination_mac, arg_destination_mac );
@@ -96,7 +96,7 @@ int main( int argc, char **argv )
         bzero( &target_entity_id, sizeof( target_entity_id ) );
     }
 
-    descriptor_index = strtol( arg_descriptor_index, 0, 0 );
+    descriptor_index = (uint16_t)strtol(arg_descriptor_index, 0, 0);
 
     if ( !jdksavdecc_get_uint16_value_for_name( jdksavdecc_aem_print_descriptor_type, arg_descriptor_type, &descriptor_type ) )
     {
@@ -104,7 +104,7 @@ int main( int argc, char **argv )
         char *end = (char *)arg_descriptor_type;
         if ( arg_descriptor_type )
         {
-            descriptor_type = strtol( arg_descriptor_type, &end, 0 );
+            descriptor_type = (uint16_t)strtol(arg_descriptor_type, &end, 0);
         }
         if ( !arg_descriptor_type || errno == ERANGE || *end )
         {

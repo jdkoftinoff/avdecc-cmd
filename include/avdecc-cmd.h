@@ -81,13 +81,18 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <net/if_dl.h>
 #include <pcap.h>
 #elif defined( _WIN32 )
+#ifndef _WINSOCKAPI_
+#define _WINSOCKAPI_
+#endif
 #include <Windows.h>
-#include <pcap.h>
 #include <iphlpapi.h>
 #include <winsock2.h>
+#include "jdksavdecc_ms.h"
+#include <pcap.h>
 #pragma comment( lib, "IPHLPAPI.lib" )
 #pragma comment( lib, "wpcap.lib" )
 #pragma comment( lib, "Ws2_32.lib" )
+static inline void bzero(void *buf, size_t sz) { memset(buf, 0, sz); }
 #endif
 
 #include "jdksavdecc.h"

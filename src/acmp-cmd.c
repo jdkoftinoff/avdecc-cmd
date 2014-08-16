@@ -123,7 +123,7 @@ int acmp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, cha
 
     if ( arg_sequence_id )
     {
-        sequence_id = strtol( arg_sequence_id, 0, 0 );
+        sequence_id = (uint16_t)strtol( arg_sequence_id, 0, 0 );
     }
 
     if ( arg_talker_entity_id )
@@ -137,7 +137,7 @@ int acmp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, cha
 
     if ( arg_talker_unique_id )
     {
-        talker_unique_id = strtol( arg_talker_unique_id, 0, 0 );
+        talker_unique_id = (uint16_t)strtol(arg_talker_unique_id, 0, 0);
     }
 
     if ( arg_listener_entity_id )
@@ -151,12 +151,12 @@ int acmp( struct raw_context *net, struct jdksavdecc_frame *frame, int argc, cha
 
     if ( arg_listener_unique_id )
     {
-        listener_unique_id = strtol( arg_listener_unique_id, 0, 0 );
+        listener_unique_id = (uint16_t)strtol(arg_listener_unique_id, 0, 0);
     }
 
     if ( arg_connection_count )
     {
-        connection_count = strtol( arg_connection_count, 0, 0 );
+        connection_count = (uint16_t)strtol(arg_connection_count, 0, 0);
     }
 
     if ( acmp_form_msg( frame,

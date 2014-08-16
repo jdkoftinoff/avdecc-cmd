@@ -437,7 +437,11 @@ int raw_join_multicast( struct raw_context *self, const uint8_t multicast_mac[6]
     char filter[1024];
     /* TODO: add multicast address to pcap filter here if multicast_mac is not null*/
     (void)multicast_mac;
-    sprintf( filter, "ether proto 0x%04x", self->m_ethertype );
+#if defined(_WIN32)
+    _snprintf_s(filter, sizeof(filter), _TRUNCATE,"ether proto 0x%04x", self->m_ethertype);
+#else
+    snprintf( filter, sizeof(filter), "ether proto 0x%04x", self->m_ethertype );
+#endif
 
     if ( pcap_compile( p, &fcode, filter, 1, 0xffffffff ) < 0 )
     {
@@ -472,7 +476,7 @@ void raw_set_socket_nonblocking( int fd )
     fcntl( fd, F_SETFL, val );
 #elif defined( _WIN32 )
     u_long mode = 1;
-    if ( ioctlsocket( fd, FIOBIO, &mode ) != NO_ERROR )
+    if (ioctlsocket(fd, FIONBIO, &mode) != NO_ERROR)
     {
         fprintf( stderr, "fcntl F_SETFL O_NONBLOCK failed\n" );
     }

@@ -85,7 +85,7 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
         char *end = (char *)arg_command;
         if ( arg_command )
         {
-            command_code = strtol( arg_command, &end, 0 );
+            command_code = (uint16_t)strtol( arg_command, &end, 0 );
         }
         if ( !arg_command || errno == ERANGE || *end )
         {
@@ -143,7 +143,7 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
         /* Parse payload */
         size_t len = strlen( argv[arg] );
         const char *p = argv[arg];
-        int i;
+        size_t i;
         command_payload_len = len / 2;
         if ( (size_t)command_payload_len > sizeof( command_payload ) )
         {
