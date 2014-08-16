@@ -1,0 +1,1131 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		BF380A0E199FBFE300D6C745 /* all */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = BF380A0F199FBFE300D6C745 /* Build configuration list for PBXAggregateTarget "all" */;
+			buildPhases = (
+			);
+			dependencies = (
+				BF380A13199FBFEE00D6C745 /* PBXTargetDependency */,
+				BF380A15199FBFEE00D6C745 /* PBXTargetDependency */,
+				BF380A17199FBFEE00D6C745 /* PBXTargetDependency */,
+				BF380A19199FBFEE00D6C745 /* PBXTargetDependency */,
+				BF380A1B199FBFEE00D6C745 /* PBXTargetDependency */,
+				BF380A1D199FBFEE00D6C745 /* PBXTargetDependency */,
+			);
+			name = all;
+			productName = all;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		BF0B2242199FC38F007033F2 /* acmp-cmd.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223A199FC38F007033F2 /* acmp-cmd.h */; };
+		BF0B2243199FC38F007033F2 /* acmp.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223B199FC38F007033F2 /* acmp.h */; };
+		BF0B2244199FC38F007033F2 /* adp-cmd.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223C199FC38F007033F2 /* adp-cmd.h */; };
+		BF0B2245199FC38F007033F2 /* adp.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223D199FC38F007033F2 /* adp.h */; };
+		BF0B2246199FC38F007033F2 /* aecp-cmd.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223E199FC38F007033F2 /* aecp-cmd.h */; };
+		BF0B2247199FC38F007033F2 /* aecp.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223F199FC38F007033F2 /* aecp.h */; };
+		BF0B2248199FC38F007033F2 /* avdecc-cmd.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2240199FC38F007033F2 /* avdecc-cmd.h */; };
+		BF0B2249199FC38F007033F2 /* raw.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2241199FC38F007033F2 /* raw.h */; };
+		BF0B226C199FC3A0007033F2 /* jdksavdecc_acmp_print.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B224A199FC3A0007033F2 /* jdksavdecc_acmp_print.h */; };
+		BF0B226D199FC3A0007033F2 /* jdksavdecc_acmp.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B224B199FC3A0007033F2 /* jdksavdecc_acmp.h */; };
+		BF0B226E199FC3A0007033F2 /* jdksavdecc_adp_print.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B224C199FC3A0007033F2 /* jdksavdecc_adp_print.h */; };
+		BF0B226F199FC3A0007033F2 /* jdksavdecc_adp.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B224D199FC3A0007033F2 /* jdksavdecc_adp.h */; };
+		BF0B2270199FC3A0007033F2 /* jdksavdecc_aecp_aa.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B224E199FC3A0007033F2 /* jdksavdecc_aecp_aa.h */; };
+		BF0B2271199FC3A0007033F2 /* jdksavdecc_aecp_aem.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B224F199FC3A0007033F2 /* jdksavdecc_aecp_aem.h */; };
+		BF0B2272199FC3A0007033F2 /* jdksavdecc_aecp_avc.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2250199FC3A0007033F2 /* jdksavdecc_aecp_avc.h */; };
+		BF0B2273199FC3A0007033F2 /* jdksavdecc_aecp_hdcp_apm.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2251199FC3A0007033F2 /* jdksavdecc_aecp_hdcp_apm.h */; };
+		BF0B2274199FC3A0007033F2 /* jdksavdecc_aecp_print.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2252199FC3A0007033F2 /* jdksavdecc_aecp_print.h */; };
+		BF0B2275199FC3A0007033F2 /* jdksavdecc_aecp_vendor.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2253199FC3A0007033F2 /* jdksavdecc_aecp_vendor.h */; };
+		BF0B2276199FC3A0007033F2 /* jdksavdecc_aecp.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2254199FC3A0007033F2 /* jdksavdecc_aecp.h */; };
+		BF0B2277199FC3A0007033F2 /* jdksavdecc_aem_command.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2255199FC3A0007033F2 /* jdksavdecc_aem_command.h */; };
+		BF0B2278199FC3A0007033F2 /* jdksavdecc_aem_descriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2256199FC3A0007033F2 /* jdksavdecc_aem_descriptor.h */; };
+		BF0B2279199FC3A0007033F2 /* jdksavdecc_aem_print.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2257199FC3A0007033F2 /* jdksavdecc_aem_print.h */; };
+		BF0B227A199FC3A0007033F2 /* jdksavdecc_app_print.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2258199FC3A0007033F2 /* jdksavdecc_app_print.h */; };
+		BF0B227B199FC3A0007033F2 /* jdksavdecc_app.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2259199FC3A0007033F2 /* jdksavdecc_app.h */; };
+		BF0B227C199FC3A0007033F2 /* jdksavdecc_avr.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B225A199FC3A0007033F2 /* jdksavdecc_avr.h */; };
+		BF0B227D199FC3A0007033F2 /* jdksavdecc_control.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B225B199FC3A0007033F2 /* jdksavdecc_control.h */; };
+		BF0B227E199FC3A0007033F2 /* jdksavdecc_descriptor_storage_gen.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B225C199FC3A0007033F2 /* jdksavdecc_descriptor_storage_gen.h */; };
+		BF0B227F199FC3A0007033F2 /* jdksavdecc_descriptor_storage.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B225D199FC3A0007033F2 /* jdksavdecc_descriptor_storage.h */; };
+		BF0B2280199FC3A0007033F2 /* jdksavdecc_entity_model.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B225E199FC3A0007033F2 /* jdksavdecc_entity_model.h */; };
+		BF0B2281199FC3A0007033F2 /* jdksavdecc_frame.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B225F199FC3A0007033F2 /* jdksavdecc_frame.h */; };
+		BF0B2282199FC3A0007033F2 /* jdksavdecc_jdks.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2260199FC3A0007033F2 /* jdksavdecc_jdks.h */; };
+		BF0B2283199FC3A0007033F2 /* jdksavdecc_maap_print.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2261199FC3A0007033F2 /* jdksavdecc_maap_print.h */; };
+		BF0B2284199FC3A0007033F2 /* jdksavdecc_maap.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2262199FC3A0007033F2 /* jdksavdecc_maap.h */; };
+		BF0B2285199FC3A0007033F2 /* jdksavdecc_ms.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2263199FC3A0007033F2 /* jdksavdecc_ms.h */; };
+		BF0B2286199FC3A0007033F2 /* jdksavdecc_msinttypes.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2264199FC3A0007033F2 /* jdksavdecc_msinttypes.h */; };
+		BF0B2287199FC3A0007033F2 /* jdksavdecc_msstdint.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2265199FC3A0007033F2 /* jdksavdecc_msstdint.h */; };
+		BF0B2288199FC3A0007033F2 /* jdksavdecc_pdu_print.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2266199FC3A0007033F2 /* jdksavdecc_pdu_print.h */; };
+		BF0B2289199FC3A0007033F2 /* jdksavdecc_pdu.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2267199FC3A0007033F2 /* jdksavdecc_pdu.h */; };
+		BF0B228A199FC3A0007033F2 /* jdksavdecc_print.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2268199FC3A0007033F2 /* jdksavdecc_print.h */; };
+		BF0B228B199FC3A0007033F2 /* jdksavdecc_util.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B2269199FC3A0007033F2 /* jdksavdecc_util.h */; };
+		BF0B228C199FC3A0007033F2 /* jdksavdecc_world.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B226A199FC3A0007033F2 /* jdksavdecc_world.h */; };
+		BF0B228D199FC3A0007033F2 /* jdksavdecc.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B226B199FC3A0007033F2 /* jdksavdecc.h */; };
+		BF0B22C9199FC467007033F2 /* jdksavdecc_acmp_print.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B229E199FC3C1007033F2 /* jdksavdecc_acmp_print.c */; };
+		BF0B22CA199FC467007033F2 /* jdksavdecc_adp_print.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B229F199FC3C1007033F2 /* jdksavdecc_adp_print.c */; };
+		BF0B22CB199FC467007033F2 /* jdksavdecc_aecp_print.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A0199FC3C1007033F2 /* jdksavdecc_aecp_print.c */; };
+		BF0B22CC199FC467007033F2 /* jdksavdecc_aem_descriptor.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A1199FC3C1007033F2 /* jdksavdecc_aem_descriptor.c */; };
+		BF0B22CD199FC467007033F2 /* jdksavdecc_aem_print.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A2199FC3C1007033F2 /* jdksavdecc_aem_print.c */; };
+		BF0B22CE199FC467007033F2 /* jdksavdecc_app_print.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A3199FC3C1007033F2 /* jdksavdecc_app_print.c */; };
+		BF0B22CF199FC467007033F2 /* jdksavdecc_app.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A4199FC3C1007033F2 /* jdksavdecc_app.c */; };
+		BF0B22D0199FC467007033F2 /* jdksavdecc_control.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A5199FC3C1007033F2 /* jdksavdecc_control.c */; };
+		BF0B22D1199FC467007033F2 /* jdksavdecc_descriptor_storage_gen.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A6199FC3C1007033F2 /* jdksavdecc_descriptor_storage_gen.c */; };
+		BF0B22D2199FC467007033F2 /* jdksavdecc_descriptor_storage.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A7199FC3C1007033F2 /* jdksavdecc_descriptor_storage.c */; };
+		BF0B22D3199FC467007033F2 /* jdksavdecc_entity_model.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A8199FC3C1007033F2 /* jdksavdecc_entity_model.c */; };
+		BF0B22D4199FC467007033F2 /* jdksavdecc_frame.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22A9199FC3C1007033F2 /* jdksavdecc_frame.c */; };
+		BF0B22D5199FC467007033F2 /* jdksavdecc_jdks.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22AA199FC3C1007033F2 /* jdksavdecc_jdks.c */; };
+		BF0B22D6199FC467007033F2 /* jdksavdecc_maap_print.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22AB199FC3C1007033F2 /* jdksavdecc_maap_print.c */; };
+		BF0B22D7199FC467007033F2 /* jdksavdecc_maap.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22AC199FC3C1007033F2 /* jdksavdecc_maap.c */; };
+		BF0B22D8199FC467007033F2 /* jdksavdecc_pdu_print.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22AD199FC3C1007033F2 /* jdksavdecc_pdu_print.c */; };
+		BF0B22D9199FC467007033F2 /* jdksavdecc_pdu.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22AE199FC3C1007033F2 /* jdksavdecc_pdu.c */; };
+		BF0B22DA199FC467007033F2 /* jdksavdecc_print.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22AF199FC3C1007033F2 /* jdksavdecc_print.c */; };
+		BF0B22DB199FC467007033F2 /* jdksavdecc_util.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22B0199FC3C1007033F2 /* jdksavdecc_util.c */; };
+		BF0B22DC199FC467007033F2 /* jdksavdecc.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22B1199FC3C1007033F2 /* jdksavdecc.c */; };
+		BF0B22DD199FC467007033F2 /* acmp-cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B228E199FC3B3007033F2 /* acmp-cmd.c */; };
+		BF0B22DE199FC467007033F2 /* acmp.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B228F199FC3B3007033F2 /* acmp.c */; };
+		BF0B22DF199FC467007033F2 /* adp-cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B2290199FC3B3007033F2 /* adp-cmd.c */; };
+		BF0B22E0199FC467007033F2 /* adp.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B2291199FC3B3007033F2 /* adp.c */; };
+		BF0B22E1199FC467007033F2 /* aecp-cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B2292199FC3B3007033F2 /* aecp-cmd.c */; };
+		BF0B22E2199FC467007033F2 /* aecp.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B2293199FC3B3007033F2 /* aecp.c */; };
+		BF0B22E3199FC467007033F2 /* avdecc-cmd.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B2294199FC3B3007033F2 /* avdecc-cmd.c */; };
+		BF0B22E4199FC467007033F2 /* raw.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B2295199FC3B3007033F2 /* raw.c */; };
+		BF0B22EE199FC4F3007033F2 /* avdecc-discover.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22E9199FC4F0007033F2 /* avdecc-discover.c */; };
+		BF0B22EF199FC4F9007033F2 /* avdecc-get-control.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22EA199FC4F0007033F2 /* avdecc-get-control.c */; };
+		BF0B22F0199FC4FC007033F2 /* avdecc-set-control.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22EC199FC4F0007033F2 /* avdecc-set-control.c */; };
+		BF0B22F1199FC50A007033F2 /* avdecc-read-descriptor.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22EB199FC4F0007033F2 /* avdecc-read-descriptor.c */; };
+		BF0B22F2199FC515007033F2 /* avdecc.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22ED199FC4F0007033F2 /* avdecc.c */; };
+		BF3809F7199FBEA700D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
+		BF3809FB199FBEC000D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
+		BF3809FF199FBED100D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
+		BF380A03199FBEE900D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
+		BF380A07199FBF0D00D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
+		BF380A09199FBF5500D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
+		BF380A0A199FBF5B00D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
+		BF380A0B199FBF6200D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
+		BF380A0C199FBF6700D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
+		BF380A0D199FBF6C00D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BF3809F5199FBE9E00D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF38091B199FBCEC00D6C745;
+			remoteInfo = "avdecc-cmd-lib";
+		};
+		BF3809F8199FBEB000D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF38091B199FBCEC00D6C745;
+			remoteInfo = "avdecc-cmd-lib";
+		};
+		BF3809FC199FBEC700D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF38091B199FBCEC00D6C745;
+			remoteInfo = "avdecc-cmd-lib";
+		};
+		BF380A00199FBEDB00D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF38091B199FBCEC00D6C745;
+			remoteInfo = "avdecc-cmd-lib";
+		};
+		BF380A04199FBF0200D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF38091B199FBCEC00D6C745;
+			remoteInfo = "avdecc-cmd-lib";
+		};
+		BF380A12199FBFEE00D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF38091B199FBCEC00D6C745;
+			remoteInfo = "avdecc-cmd-lib";
+		};
+		BF380A14199FBFEE00D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3809C0199FBDCB00D6C745;
+			remoteInfo = "avdecc-discover";
+		};
+		BF380A16199FBFEE00D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3809CB199FBDD700D6C745;
+			remoteInfo = "avdecc-get-control";
+		};
+		BF380A18199FBFEE00D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3809EC199FBE6C00D6C745;
+			remoteInfo = "avdecc-set-control";
+		};
+		BF380A1A199FBFEE00D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3809D6199FBDE500D6C745;
+			remoteInfo = "avdecc-read-descriptor";
+		};
+		BF380A1C199FBFEE00D6C745 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BF3809E1199FBE3900D6C745;
+			remoteInfo = avdecc;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BF3809BF199FBDCB00D6C745 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BF3809CA199FBDD700D6C745 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BF3809D5199FBDE500D6C745 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BF3809E0199FBE3900D6C745 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BF3809EB199FBE6C00D6C745 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BF0B223A199FC38F007033F2 /* acmp-cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "acmp-cmd.h"; path = "../include/acmp-cmd.h"; sourceTree = "<group>"; };
+		BF0B223B199FC38F007033F2 /* acmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = acmp.h; path = ../include/acmp.h; sourceTree = "<group>"; };
+		BF0B223C199FC38F007033F2 /* adp-cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "adp-cmd.h"; path = "../include/adp-cmd.h"; sourceTree = "<group>"; };
+		BF0B223D199FC38F007033F2 /* adp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = adp.h; path = ../include/adp.h; sourceTree = "<group>"; };
+		BF0B223E199FC38F007033F2 /* aecp-cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "aecp-cmd.h"; path = "../include/aecp-cmd.h"; sourceTree = "<group>"; };
+		BF0B223F199FC38F007033F2 /* aecp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = aecp.h; path = ../include/aecp.h; sourceTree = "<group>"; };
+		BF0B2240199FC38F007033F2 /* avdecc-cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "avdecc-cmd.h"; path = "../include/avdecc-cmd.h"; sourceTree = "<group>"; };
+		BF0B2241199FC38F007033F2 /* raw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = raw.h; path = ../include/raw.h; sourceTree = "<group>"; };
+		BF0B224A199FC3A0007033F2 /* jdksavdecc_acmp_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_acmp_print.h; path = "../jdksavdecc-c/include/jdksavdecc_acmp_print.h"; sourceTree = "<group>"; };
+		BF0B224B199FC3A0007033F2 /* jdksavdecc_acmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_acmp.h; path = "../jdksavdecc-c/include/jdksavdecc_acmp.h"; sourceTree = "<group>"; };
+		BF0B224C199FC3A0007033F2 /* jdksavdecc_adp_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_adp_print.h; path = "../jdksavdecc-c/include/jdksavdecc_adp_print.h"; sourceTree = "<group>"; };
+		BF0B224D199FC3A0007033F2 /* jdksavdecc_adp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_adp.h; path = "../jdksavdecc-c/include/jdksavdecc_adp.h"; sourceTree = "<group>"; };
+		BF0B224E199FC3A0007033F2 /* jdksavdecc_aecp_aa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aecp_aa.h; path = "../jdksavdecc-c/include/jdksavdecc_aecp_aa.h"; sourceTree = "<group>"; };
+		BF0B224F199FC3A0007033F2 /* jdksavdecc_aecp_aem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aecp_aem.h; path = "../jdksavdecc-c/include/jdksavdecc_aecp_aem.h"; sourceTree = "<group>"; };
+		BF0B2250199FC3A0007033F2 /* jdksavdecc_aecp_avc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aecp_avc.h; path = "../jdksavdecc-c/include/jdksavdecc_aecp_avc.h"; sourceTree = "<group>"; };
+		BF0B2251199FC3A0007033F2 /* jdksavdecc_aecp_hdcp_apm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aecp_hdcp_apm.h; path = "../jdksavdecc-c/include/jdksavdecc_aecp_hdcp_apm.h"; sourceTree = "<group>"; };
+		BF0B2252199FC3A0007033F2 /* jdksavdecc_aecp_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aecp_print.h; path = "../jdksavdecc-c/include/jdksavdecc_aecp_print.h"; sourceTree = "<group>"; };
+		BF0B2253199FC3A0007033F2 /* jdksavdecc_aecp_vendor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aecp_vendor.h; path = "../jdksavdecc-c/include/jdksavdecc_aecp_vendor.h"; sourceTree = "<group>"; };
+		BF0B2254199FC3A0007033F2 /* jdksavdecc_aecp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aecp.h; path = "../jdksavdecc-c/include/jdksavdecc_aecp.h"; sourceTree = "<group>"; };
+		BF0B2255199FC3A0007033F2 /* jdksavdecc_aem_command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aem_command.h; path = "../jdksavdecc-c/include/jdksavdecc_aem_command.h"; sourceTree = "<group>"; };
+		BF0B2256199FC3A0007033F2 /* jdksavdecc_aem_descriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aem_descriptor.h; path = "../jdksavdecc-c/include/jdksavdecc_aem_descriptor.h"; sourceTree = "<group>"; };
+		BF0B2257199FC3A0007033F2 /* jdksavdecc_aem_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_aem_print.h; path = "../jdksavdecc-c/include/jdksavdecc_aem_print.h"; sourceTree = "<group>"; };
+		BF0B2258199FC3A0007033F2 /* jdksavdecc_app_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_app_print.h; path = "../jdksavdecc-c/include/jdksavdecc_app_print.h"; sourceTree = "<group>"; };
+		BF0B2259199FC3A0007033F2 /* jdksavdecc_app.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_app.h; path = "../jdksavdecc-c/include/jdksavdecc_app.h"; sourceTree = "<group>"; };
+		BF0B225A199FC3A0007033F2 /* jdksavdecc_avr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_avr.h; path = "../jdksavdecc-c/include/jdksavdecc_avr.h"; sourceTree = "<group>"; };
+		BF0B225B199FC3A0007033F2 /* jdksavdecc_control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_control.h; path = "../jdksavdecc-c/include/jdksavdecc_control.h"; sourceTree = "<group>"; };
+		BF0B225C199FC3A0007033F2 /* jdksavdecc_descriptor_storage_gen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_descriptor_storage_gen.h; path = "../jdksavdecc-c/include/jdksavdecc_descriptor_storage_gen.h"; sourceTree = "<group>"; };
+		BF0B225D199FC3A0007033F2 /* jdksavdecc_descriptor_storage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_descriptor_storage.h; path = "../jdksavdecc-c/include/jdksavdecc_descriptor_storage.h"; sourceTree = "<group>"; };
+		BF0B225E199FC3A0007033F2 /* jdksavdecc_entity_model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_entity_model.h; path = "../jdksavdecc-c/include/jdksavdecc_entity_model.h"; sourceTree = "<group>"; };
+		BF0B225F199FC3A0007033F2 /* jdksavdecc_frame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_frame.h; path = "../jdksavdecc-c/include/jdksavdecc_frame.h"; sourceTree = "<group>"; };
+		BF0B2260199FC3A0007033F2 /* jdksavdecc_jdks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_jdks.h; path = "../jdksavdecc-c/include/jdksavdecc_jdks.h"; sourceTree = "<group>"; };
+		BF0B2261199FC3A0007033F2 /* jdksavdecc_maap_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_maap_print.h; path = "../jdksavdecc-c/include/jdksavdecc_maap_print.h"; sourceTree = "<group>"; };
+		BF0B2262199FC3A0007033F2 /* jdksavdecc_maap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_maap.h; path = "../jdksavdecc-c/include/jdksavdecc_maap.h"; sourceTree = "<group>"; };
+		BF0B2263199FC3A0007033F2 /* jdksavdecc_ms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_ms.h; path = "../jdksavdecc-c/include/jdksavdecc_ms.h"; sourceTree = "<group>"; };
+		BF0B2264199FC3A0007033F2 /* jdksavdecc_msinttypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_msinttypes.h; path = "../jdksavdecc-c/include/jdksavdecc_msinttypes.h"; sourceTree = "<group>"; };
+		BF0B2265199FC3A0007033F2 /* jdksavdecc_msstdint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_msstdint.h; path = "../jdksavdecc-c/include/jdksavdecc_msstdint.h"; sourceTree = "<group>"; };
+		BF0B2266199FC3A0007033F2 /* jdksavdecc_pdu_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_pdu_print.h; path = "../jdksavdecc-c/include/jdksavdecc_pdu_print.h"; sourceTree = "<group>"; };
+		BF0B2267199FC3A0007033F2 /* jdksavdecc_pdu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_pdu.h; path = "../jdksavdecc-c/include/jdksavdecc_pdu.h"; sourceTree = "<group>"; };
+		BF0B2268199FC3A0007033F2 /* jdksavdecc_print.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_print.h; path = "../jdksavdecc-c/include/jdksavdecc_print.h"; sourceTree = "<group>"; };
+		BF0B2269199FC3A0007033F2 /* jdksavdecc_util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_util.h; path = "../jdksavdecc-c/include/jdksavdecc_util.h"; sourceTree = "<group>"; };
+		BF0B226A199FC3A0007033F2 /* jdksavdecc_world.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc_world.h; path = "../jdksavdecc-c/include/jdksavdecc_world.h"; sourceTree = "<group>"; };
+		BF0B226B199FC3A0007033F2 /* jdksavdecc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = jdksavdecc.h; path = "../jdksavdecc-c/include/jdksavdecc.h"; sourceTree = "<group>"; };
+		BF0B228E199FC3B3007033F2 /* acmp-cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "acmp-cmd.c"; path = "../src/acmp-cmd.c"; sourceTree = "<group>"; };
+		BF0B228F199FC3B3007033F2 /* acmp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = acmp.c; path = ../src/acmp.c; sourceTree = "<group>"; };
+		BF0B2290199FC3B3007033F2 /* adp-cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "adp-cmd.c"; path = "../src/adp-cmd.c"; sourceTree = "<group>"; };
+		BF0B2291199FC3B3007033F2 /* adp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = adp.c; path = ../src/adp.c; sourceTree = "<group>"; };
+		BF0B2292199FC3B3007033F2 /* aecp-cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "aecp-cmd.c"; path = "../src/aecp-cmd.c"; sourceTree = "<group>"; };
+		BF0B2293199FC3B3007033F2 /* aecp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = aecp.c; path = ../src/aecp.c; sourceTree = "<group>"; };
+		BF0B2294199FC3B3007033F2 /* avdecc-cmd.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = "avdecc-cmd.c"; path = "../src/avdecc-cmd.c"; sourceTree = "<group>"; };
+		BF0B2295199FC3B3007033F2 /* raw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = raw.c; path = ../src/raw.c; sourceTree = "<group>"; };
+		BF0B229E199FC3C1007033F2 /* jdksavdecc_acmp_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_acmp_print.c; path = "../jdksavdecc-c/src/jdksavdecc_acmp_print.c"; sourceTree = "<group>"; };
+		BF0B229F199FC3C1007033F2 /* jdksavdecc_adp_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_adp_print.c; path = "../jdksavdecc-c/src/jdksavdecc_adp_print.c"; sourceTree = "<group>"; };
+		BF0B22A0199FC3C1007033F2 /* jdksavdecc_aecp_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_aecp_print.c; path = "../jdksavdecc-c/src/jdksavdecc_aecp_print.c"; sourceTree = "<group>"; };
+		BF0B22A1199FC3C1007033F2 /* jdksavdecc_aem_descriptor.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_aem_descriptor.c; path = "../jdksavdecc-c/src/jdksavdecc_aem_descriptor.c"; sourceTree = "<group>"; };
+		BF0B22A2199FC3C1007033F2 /* jdksavdecc_aem_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_aem_print.c; path = "../jdksavdecc-c/src/jdksavdecc_aem_print.c"; sourceTree = "<group>"; };
+		BF0B22A3199FC3C1007033F2 /* jdksavdecc_app_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_app_print.c; path = "../jdksavdecc-c/src/jdksavdecc_app_print.c"; sourceTree = "<group>"; };
+		BF0B22A4199FC3C1007033F2 /* jdksavdecc_app.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_app.c; path = "../jdksavdecc-c/src/jdksavdecc_app.c"; sourceTree = "<group>"; };
+		BF0B22A5199FC3C1007033F2 /* jdksavdecc_control.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_control.c; path = "../jdksavdecc-c/src/jdksavdecc_control.c"; sourceTree = "<group>"; };
+		BF0B22A6199FC3C1007033F2 /* jdksavdecc_descriptor_storage_gen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_descriptor_storage_gen.c; path = "../jdksavdecc-c/src/jdksavdecc_descriptor_storage_gen.c"; sourceTree = "<group>"; };
+		BF0B22A7199FC3C1007033F2 /* jdksavdecc_descriptor_storage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_descriptor_storage.c; path = "../jdksavdecc-c/src/jdksavdecc_descriptor_storage.c"; sourceTree = "<group>"; };
+		BF0B22A8199FC3C1007033F2 /* jdksavdecc_entity_model.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_entity_model.c; path = "../jdksavdecc-c/src/jdksavdecc_entity_model.c"; sourceTree = "<group>"; };
+		BF0B22A9199FC3C1007033F2 /* jdksavdecc_frame.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_frame.c; path = "../jdksavdecc-c/src/jdksavdecc_frame.c"; sourceTree = "<group>"; };
+		BF0B22AA199FC3C1007033F2 /* jdksavdecc_jdks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_jdks.c; path = "../jdksavdecc-c/src/jdksavdecc_jdks.c"; sourceTree = "<group>"; };
+		BF0B22AB199FC3C1007033F2 /* jdksavdecc_maap_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_maap_print.c; path = "../jdksavdecc-c/src/jdksavdecc_maap_print.c"; sourceTree = "<group>"; };
+		BF0B22AC199FC3C1007033F2 /* jdksavdecc_maap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_maap.c; path = "../jdksavdecc-c/src/jdksavdecc_maap.c"; sourceTree = "<group>"; };
+		BF0B22AD199FC3C1007033F2 /* jdksavdecc_pdu_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_pdu_print.c; path = "../jdksavdecc-c/src/jdksavdecc_pdu_print.c"; sourceTree = "<group>"; };
+		BF0B22AE199FC3C1007033F2 /* jdksavdecc_pdu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_pdu.c; path = "../jdksavdecc-c/src/jdksavdecc_pdu.c"; sourceTree = "<group>"; };
+		BF0B22AF199FC3C1007033F2 /* jdksavdecc_print.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_print.c; path = "../jdksavdecc-c/src/jdksavdecc_print.c"; sourceTree = "<group>"; };
+		BF0B22B0199FC3C1007033F2 /* jdksavdecc_util.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc_util.c; path = "../jdksavdecc-c/src/jdksavdecc_util.c"; sourceTree = "<group>"; };
+		BF0B22B1199FC3C1007033F2 /* jdksavdecc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jdksavdecc.c; path = "../jdksavdecc-c/src/jdksavdecc.c"; sourceTree = "<group>"; };
+		BF0B22E9199FC4F0007033F2 /* avdecc-discover.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "avdecc-discover.c"; path = "../tools/avdecc-discover.c"; sourceTree = "<group>"; };
+		BF0B22EA199FC4F0007033F2 /* avdecc-get-control.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "avdecc-get-control.c"; path = "../tools/avdecc-get-control.c"; sourceTree = "<group>"; };
+		BF0B22EB199FC4F0007033F2 /* avdecc-read-descriptor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "avdecc-read-descriptor.c"; path = "../tools/avdecc-read-descriptor.c"; sourceTree = "<group>"; };
+		BF0B22EC199FC4F0007033F2 /* avdecc-set-control.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "avdecc-set-control.c"; path = "../tools/avdecc-set-control.c"; sourceTree = "<group>"; };
+		BF0B22ED199FC4F0007033F2 /* avdecc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = avdecc.c; path = ../tools/avdecc.c; sourceTree = "<group>"; };
+		BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libavdecc-cmd.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3809C1199FBDCB00D6C745 /* avdecc-discover */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-discover"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3809CC199FBDD700D6C745 /* avdecc-get-control */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-get-control"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3809D7199FBDE500D6C745 /* avdecc-read-descriptor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-read-descriptor"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3809E2199FBE3900D6C745 /* avdecc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = avdecc; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF3809ED199FBE6C00D6C745 /* avdecc-set-control */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-set-control"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF380A08199FBF5500D6C745 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF380919199FBCEC00D6C745 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809BE199FBDCB00D6C745 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF380A0D199FBF6C00D6C745 /* libpcap.dylib in Frameworks */,
+				BF3809F7199FBEA700D6C745 /* libavdecc-cmd.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809C9199FBDD700D6C745 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF380A0C199FBF6700D6C745 /* libpcap.dylib in Frameworks */,
+				BF3809FB199FBEC000D6C745 /* libavdecc-cmd.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809D4199FBDE500D6C745 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF380A0A199FBF5B00D6C745 /* libpcap.dylib in Frameworks */,
+				BF3809FF199FBED100D6C745 /* libavdecc-cmd.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809DF199FBE3900D6C745 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF380A09199FBF5500D6C745 /* libpcap.dylib in Frameworks */,
+				BF380A07199FBF0D00D6C745 /* libavdecc-cmd.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809EA199FBE6C00D6C745 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF380A0B199FBF6200D6C745 /* libpcap.dylib in Frameworks */,
+				BF380A03199FBEE900D6C745 /* libavdecc-cmd.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF0B22E8199FC4DA007033F2 /* tools */ = {
+			isa = PBXGroup;
+			children = (
+				BF0B22E9199FC4F0007033F2 /* avdecc-discover.c */,
+				BF0B22EA199FC4F0007033F2 /* avdecc-get-control.c */,
+				BF0B22EB199FC4F0007033F2 /* avdecc-read-descriptor.c */,
+				BF0B22EC199FC4F0007033F2 /* avdecc-set-control.c */,
+				BF0B22ED199FC4F0007033F2 /* avdecc.c */,
+			);
+			name = tools;
+			sourceTree = "<group>";
+		};
+		BF380913199FBCEC00D6C745 = {
+			isa = PBXGroup;
+			children = (
+				BF0B22E8199FC4DA007033F2 /* tools */,
+				BF380A08199FBF5500D6C745 /* libpcap.dylib */,
+				BF380923199FBD1700D6C745 /* include */,
+				BF380924199FBD1E00D6C745 /* src */,
+				BF38091D199FBCEC00D6C745 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF38091D199FBCEC00D6C745 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */,
+				BF3809C1199FBDCB00D6C745 /* avdecc-discover */,
+				BF3809CC199FBDD700D6C745 /* avdecc-get-control */,
+				BF3809D7199FBDE500D6C745 /* avdecc-read-descriptor */,
+				BF3809E2199FBE3900D6C745 /* avdecc */,
+				BF3809ED199FBE6C00D6C745 /* avdecc-set-control */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF380923199FBD1700D6C745 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				BF0B224A199FC3A0007033F2 /* jdksavdecc_acmp_print.h */,
+				BF0B224B199FC3A0007033F2 /* jdksavdecc_acmp.h */,
+				BF0B224C199FC3A0007033F2 /* jdksavdecc_adp_print.h */,
+				BF0B224D199FC3A0007033F2 /* jdksavdecc_adp.h */,
+				BF0B224E199FC3A0007033F2 /* jdksavdecc_aecp_aa.h */,
+				BF0B224F199FC3A0007033F2 /* jdksavdecc_aecp_aem.h */,
+				BF0B2250199FC3A0007033F2 /* jdksavdecc_aecp_avc.h */,
+				BF0B2251199FC3A0007033F2 /* jdksavdecc_aecp_hdcp_apm.h */,
+				BF0B2252199FC3A0007033F2 /* jdksavdecc_aecp_print.h */,
+				BF0B2253199FC3A0007033F2 /* jdksavdecc_aecp_vendor.h */,
+				BF0B2254199FC3A0007033F2 /* jdksavdecc_aecp.h */,
+				BF0B2255199FC3A0007033F2 /* jdksavdecc_aem_command.h */,
+				BF0B2256199FC3A0007033F2 /* jdksavdecc_aem_descriptor.h */,
+				BF0B2257199FC3A0007033F2 /* jdksavdecc_aem_print.h */,
+				BF0B2258199FC3A0007033F2 /* jdksavdecc_app_print.h */,
+				BF0B2259199FC3A0007033F2 /* jdksavdecc_app.h */,
+				BF0B225A199FC3A0007033F2 /* jdksavdecc_avr.h */,
+				BF0B225B199FC3A0007033F2 /* jdksavdecc_control.h */,
+				BF0B225C199FC3A0007033F2 /* jdksavdecc_descriptor_storage_gen.h */,
+				BF0B225D199FC3A0007033F2 /* jdksavdecc_descriptor_storage.h */,
+				BF0B225E199FC3A0007033F2 /* jdksavdecc_entity_model.h */,
+				BF0B225F199FC3A0007033F2 /* jdksavdecc_frame.h */,
+				BF0B2260199FC3A0007033F2 /* jdksavdecc_jdks.h */,
+				BF0B2261199FC3A0007033F2 /* jdksavdecc_maap_print.h */,
+				BF0B2262199FC3A0007033F2 /* jdksavdecc_maap.h */,
+				BF0B2263199FC3A0007033F2 /* jdksavdecc_ms.h */,
+				BF0B2264199FC3A0007033F2 /* jdksavdecc_msinttypes.h */,
+				BF0B2265199FC3A0007033F2 /* jdksavdecc_msstdint.h */,
+				BF0B2266199FC3A0007033F2 /* jdksavdecc_pdu_print.h */,
+				BF0B2267199FC3A0007033F2 /* jdksavdecc_pdu.h */,
+				BF0B2268199FC3A0007033F2 /* jdksavdecc_print.h */,
+				BF0B2269199FC3A0007033F2 /* jdksavdecc_util.h */,
+				BF0B226A199FC3A0007033F2 /* jdksavdecc_world.h */,
+				BF0B226B199FC3A0007033F2 /* jdksavdecc.h */,
+				BF0B223A199FC38F007033F2 /* acmp-cmd.h */,
+				BF0B223B199FC38F007033F2 /* acmp.h */,
+				BF0B223C199FC38F007033F2 /* adp-cmd.h */,
+				BF0B223D199FC38F007033F2 /* adp.h */,
+				BF0B223E199FC38F007033F2 /* aecp-cmd.h */,
+				BF0B223F199FC38F007033F2 /* aecp.h */,
+				BF0B2240199FC38F007033F2 /* avdecc-cmd.h */,
+				BF0B2241199FC38F007033F2 /* raw.h */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		BF380924199FBD1E00D6C745 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				BF0B229E199FC3C1007033F2 /* jdksavdecc_acmp_print.c */,
+				BF0B229F199FC3C1007033F2 /* jdksavdecc_adp_print.c */,
+				BF0B22A0199FC3C1007033F2 /* jdksavdecc_aecp_print.c */,
+				BF0B22A1199FC3C1007033F2 /* jdksavdecc_aem_descriptor.c */,
+				BF0B22A2199FC3C1007033F2 /* jdksavdecc_aem_print.c */,
+				BF0B22A3199FC3C1007033F2 /* jdksavdecc_app_print.c */,
+				BF0B22A4199FC3C1007033F2 /* jdksavdecc_app.c */,
+				BF0B22A5199FC3C1007033F2 /* jdksavdecc_control.c */,
+				BF0B22A6199FC3C1007033F2 /* jdksavdecc_descriptor_storage_gen.c */,
+				BF0B22A7199FC3C1007033F2 /* jdksavdecc_descriptor_storage.c */,
+				BF0B22A8199FC3C1007033F2 /* jdksavdecc_entity_model.c */,
+				BF0B22A9199FC3C1007033F2 /* jdksavdecc_frame.c */,
+				BF0B22AA199FC3C1007033F2 /* jdksavdecc_jdks.c */,
+				BF0B22AB199FC3C1007033F2 /* jdksavdecc_maap_print.c */,
+				BF0B22AC199FC3C1007033F2 /* jdksavdecc_maap.c */,
+				BF0B22AD199FC3C1007033F2 /* jdksavdecc_pdu_print.c */,
+				BF0B22AE199FC3C1007033F2 /* jdksavdecc_pdu.c */,
+				BF0B22AF199FC3C1007033F2 /* jdksavdecc_print.c */,
+				BF0B22B0199FC3C1007033F2 /* jdksavdecc_util.c */,
+				BF0B22B1199FC3C1007033F2 /* jdksavdecc.c */,
+				BF0B228E199FC3B3007033F2 /* acmp-cmd.c */,
+				BF0B228F199FC3B3007033F2 /* acmp.c */,
+				BF0B2290199FC3B3007033F2 /* adp-cmd.c */,
+				BF0B2291199FC3B3007033F2 /* adp.c */,
+				BF0B2292199FC3B3007033F2 /* aecp-cmd.c */,
+				BF0B2293199FC3B3007033F2 /* aecp.c */,
+				BF0B2294199FC3B3007033F2 /* avdecc-cmd.c */,
+				BF0B2295199FC3B3007033F2 /* raw.c */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		BF38091A199FBCEC00D6C745 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF0B2248199FC38F007033F2 /* avdecc-cmd.h in Headers */,
+				BF0B2286199FC3A0007033F2 /* jdksavdecc_msinttypes.h in Headers */,
+				BF0B227F199FC3A0007033F2 /* jdksavdecc_descriptor_storage.h in Headers */,
+				BF0B2245199FC38F007033F2 /* adp.h in Headers */,
+				BF0B226C199FC3A0007033F2 /* jdksavdecc_acmp_print.h in Headers */,
+				BF0B2242199FC38F007033F2 /* acmp-cmd.h in Headers */,
+				BF0B228B199FC3A0007033F2 /* jdksavdecc_util.h in Headers */,
+				BF0B226F199FC3A0007033F2 /* jdksavdecc_adp.h in Headers */,
+				BF0B227E199FC3A0007033F2 /* jdksavdecc_descriptor_storage_gen.h in Headers */,
+				BF0B2273199FC3A0007033F2 /* jdksavdecc_aecp_hdcp_apm.h in Headers */,
+				BF0B227D199FC3A0007033F2 /* jdksavdecc_control.h in Headers */,
+				BF0B2288199FC3A0007033F2 /* jdksavdecc_pdu_print.h in Headers */,
+				BF0B2283199FC3A0007033F2 /* jdksavdecc_maap_print.h in Headers */,
+				BF0B2276199FC3A0007033F2 /* jdksavdecc_aecp.h in Headers */,
+				BF0B2243199FC38F007033F2 /* acmp.h in Headers */,
+				BF0B2277199FC3A0007033F2 /* jdksavdecc_aem_command.h in Headers */,
+				BF0B2270199FC3A0007033F2 /* jdksavdecc_aecp_aa.h in Headers */,
+				BF0B2285199FC3A0007033F2 /* jdksavdecc_ms.h in Headers */,
+				BF0B2247199FC38F007033F2 /* aecp.h in Headers */,
+				BF0B2249199FC38F007033F2 /* raw.h in Headers */,
+				BF0B2244199FC38F007033F2 /* adp-cmd.h in Headers */,
+				BF0B2289199FC3A0007033F2 /* jdksavdecc_pdu.h in Headers */,
+				BF0B2282199FC3A0007033F2 /* jdksavdecc_jdks.h in Headers */,
+				BF0B2284199FC3A0007033F2 /* jdksavdecc_maap.h in Headers */,
+				BF0B2272199FC3A0007033F2 /* jdksavdecc_aecp_avc.h in Headers */,
+				BF0B2278199FC3A0007033F2 /* jdksavdecc_aem_descriptor.h in Headers */,
+				BF0B226E199FC3A0007033F2 /* jdksavdecc_adp_print.h in Headers */,
+				BF0B227B199FC3A0007033F2 /* jdksavdecc_app.h in Headers */,
+				BF0B2274199FC3A0007033F2 /* jdksavdecc_aecp_print.h in Headers */,
+				BF0B2280199FC3A0007033F2 /* jdksavdecc_entity_model.h in Headers */,
+				BF0B228C199FC3A0007033F2 /* jdksavdecc_world.h in Headers */,
+				BF0B2246199FC38F007033F2 /* aecp-cmd.h in Headers */,
+				BF0B228A199FC3A0007033F2 /* jdksavdecc_print.h in Headers */,
+				BF0B226D199FC3A0007033F2 /* jdksavdecc_acmp.h in Headers */,
+				BF0B227A199FC3A0007033F2 /* jdksavdecc_app_print.h in Headers */,
+				BF0B227C199FC3A0007033F2 /* jdksavdecc_avr.h in Headers */,
+				BF0B228D199FC3A0007033F2 /* jdksavdecc.h in Headers */,
+				BF0B2271199FC3A0007033F2 /* jdksavdecc_aecp_aem.h in Headers */,
+				BF0B2279199FC3A0007033F2 /* jdksavdecc_aem_print.h in Headers */,
+				BF0B2281199FC3A0007033F2 /* jdksavdecc_frame.h in Headers */,
+				BF0B2287199FC3A0007033F2 /* jdksavdecc_msstdint.h in Headers */,
+				BF0B2275199FC3A0007033F2 /* jdksavdecc_aecp_vendor.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BF38091B199FBCEC00D6C745 /* avdecc-cmd */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF380920199FBCEC00D6C745 /* Build configuration list for PBXNativeTarget "avdecc-cmd" */;
+			buildPhases = (
+				BF380918199FBCEC00D6C745 /* Sources */,
+				BF380919199FBCEC00D6C745 /* Frameworks */,
+				BF38091A199FBCEC00D6C745 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "avdecc-cmd";
+			productName = "avdecc-cmd-lib";
+			productReference = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		BF3809C0199FBDCB00D6C745 /* avdecc-discover */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3809C5199FBDCB00D6C745 /* Build configuration list for PBXNativeTarget "avdecc-discover" */;
+			buildPhases = (
+				BF3809BD199FBDCB00D6C745 /* Sources */,
+				BF3809BE199FBDCB00D6C745 /* Frameworks */,
+				BF3809BF199FBDCB00D6C745 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF3809F6199FBE9E00D6C745 /* PBXTargetDependency */,
+			);
+			name = "avdecc-discover";
+			productName = "avdecc-discover";
+			productReference = BF3809C1199FBDCB00D6C745 /* avdecc-discover */;
+			productType = "com.apple.product-type.tool";
+		};
+		BF3809CB199FBDD700D6C745 /* avdecc-get-control */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3809D0199FBDD700D6C745 /* Build configuration list for PBXNativeTarget "avdecc-get-control" */;
+			buildPhases = (
+				BF3809C8199FBDD700D6C745 /* Sources */,
+				BF3809C9199FBDD700D6C745 /* Frameworks */,
+				BF3809CA199FBDD700D6C745 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF3809F9199FBEB000D6C745 /* PBXTargetDependency */,
+			);
+			name = "avdecc-get-control";
+			productName = "avdecc-get-control";
+			productReference = BF3809CC199FBDD700D6C745 /* avdecc-get-control */;
+			productType = "com.apple.product-type.tool";
+		};
+		BF3809D6199FBDE500D6C745 /* avdecc-read-descriptor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3809DB199FBDE500D6C745 /* Build configuration list for PBXNativeTarget "avdecc-read-descriptor" */;
+			buildPhases = (
+				BF3809D3199FBDE500D6C745 /* Sources */,
+				BF3809D4199FBDE500D6C745 /* Frameworks */,
+				BF3809D5199FBDE500D6C745 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF3809FD199FBEC700D6C745 /* PBXTargetDependency */,
+			);
+			name = "avdecc-read-descriptor";
+			productName = "avdecc-read-descriptor";
+			productReference = BF3809D7199FBDE500D6C745 /* avdecc-read-descriptor */;
+			productType = "com.apple.product-type.tool";
+		};
+		BF3809E1199FBE3900D6C745 /* avdecc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3809E6199FBE3900D6C745 /* Build configuration list for PBXNativeTarget "avdecc" */;
+			buildPhases = (
+				BF3809DE199FBE3900D6C745 /* Sources */,
+				BF3809DF199FBE3900D6C745 /* Frameworks */,
+				BF3809E0199FBE3900D6C745 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF380A05199FBF0200D6C745 /* PBXTargetDependency */,
+			);
+			name = avdecc;
+			productName = avdecc;
+			productReference = BF3809E2199FBE3900D6C745 /* avdecc */;
+			productType = "com.apple.product-type.tool";
+		};
+		BF3809EC199FBE6C00D6C745 /* avdecc-set-control */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF3809F1199FBE6C00D6C745 /* Build configuration list for PBXNativeTarget "avdecc-set-control" */;
+			buildPhases = (
+				BF3809E9199FBE6C00D6C745 /* Sources */,
+				BF3809EA199FBE6C00D6C745 /* Frameworks */,
+				BF3809EB199FBE6C00D6C745 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BF380A01199FBEDB00D6C745 /* PBXTargetDependency */,
+			);
+			name = "avdecc-set-control";
+			productName = "avdecc-set-control";
+			productReference = BF3809ED199FBE6C00D6C745 /* avdecc-set-control */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF380914199FBCEC00D6C745 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Jeff Koftinoff";
+				TargetAttributes = {
+					BF38091B199FBCEC00D6C745 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					BF3809C0199FBDCB00D6C745 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					BF3809CB199FBDD700D6C745 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					BF3809D6199FBDE500D6C745 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					BF3809E1199FBE3900D6C745 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					BF3809EC199FBE6C00D6C745 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					BF380A0E199FBFE300D6C745 = {
+						CreatedOnToolsVersion = 6.0;
+					};
+				};
+			};
+			buildConfigurationList = BF380917199FBCEC00D6C745 /* Build configuration list for PBXProject "avdecc-cmd" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BF380913199FBCEC00D6C745;
+			productRefGroup = BF38091D199FBCEC00D6C745 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF380A0E199FBFE300D6C745 /* all */,
+				BF38091B199FBCEC00D6C745 /* avdecc-cmd */,
+				BF3809C0199FBDCB00D6C745 /* avdecc-discover */,
+				BF3809CB199FBDD700D6C745 /* avdecc-get-control */,
+				BF3809EC199FBE6C00D6C745 /* avdecc-set-control */,
+				BF3809D6199FBDE500D6C745 /* avdecc-read-descriptor */,
+				BF3809E1199FBE3900D6C745 /* avdecc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF380918199FBCEC00D6C745 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF0B22C9199FC467007033F2 /* jdksavdecc_acmp_print.c in Sources */,
+				BF0B22CA199FC467007033F2 /* jdksavdecc_adp_print.c in Sources */,
+				BF0B22CB199FC467007033F2 /* jdksavdecc_aecp_print.c in Sources */,
+				BF0B22CC199FC467007033F2 /* jdksavdecc_aem_descriptor.c in Sources */,
+				BF0B22CD199FC467007033F2 /* jdksavdecc_aem_print.c in Sources */,
+				BF0B22CE199FC467007033F2 /* jdksavdecc_app_print.c in Sources */,
+				BF0B22CF199FC467007033F2 /* jdksavdecc_app.c in Sources */,
+				BF0B22D0199FC467007033F2 /* jdksavdecc_control.c in Sources */,
+				BF0B22D1199FC467007033F2 /* jdksavdecc_descriptor_storage_gen.c in Sources */,
+				BF0B22D2199FC467007033F2 /* jdksavdecc_descriptor_storage.c in Sources */,
+				BF0B22D3199FC467007033F2 /* jdksavdecc_entity_model.c in Sources */,
+				BF0B22D4199FC467007033F2 /* jdksavdecc_frame.c in Sources */,
+				BF0B22D5199FC467007033F2 /* jdksavdecc_jdks.c in Sources */,
+				BF0B22D6199FC467007033F2 /* jdksavdecc_maap_print.c in Sources */,
+				BF0B22D7199FC467007033F2 /* jdksavdecc_maap.c in Sources */,
+				BF0B22D8199FC467007033F2 /* jdksavdecc_pdu_print.c in Sources */,
+				BF0B22D9199FC467007033F2 /* jdksavdecc_pdu.c in Sources */,
+				BF0B22DA199FC467007033F2 /* jdksavdecc_print.c in Sources */,
+				BF0B22DB199FC467007033F2 /* jdksavdecc_util.c in Sources */,
+				BF0B22DC199FC467007033F2 /* jdksavdecc.c in Sources */,
+				BF0B22DD199FC467007033F2 /* acmp-cmd.c in Sources */,
+				BF0B22DE199FC467007033F2 /* acmp.c in Sources */,
+				BF0B22DF199FC467007033F2 /* adp-cmd.c in Sources */,
+				BF0B22E0199FC467007033F2 /* adp.c in Sources */,
+				BF0B22E1199FC467007033F2 /* aecp-cmd.c in Sources */,
+				BF0B22E2199FC467007033F2 /* aecp.c in Sources */,
+				BF0B22E3199FC467007033F2 /* avdecc-cmd.c in Sources */,
+				BF0B22E4199FC467007033F2 /* raw.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809BD199FBDCB00D6C745 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF0B22EE199FC4F3007033F2 /* avdecc-discover.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809C8199FBDD700D6C745 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF0B22EF199FC4F9007033F2 /* avdecc-get-control.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809D3199FBDE500D6C745 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF0B22F1199FC50A007033F2 /* avdecc-read-descriptor.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809DE199FBE3900D6C745 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF0B22F2199FC515007033F2 /* avdecc.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF3809E9199FBE6C00D6C745 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF0B22F0199FC4FC007033F2 /* avdecc-set-control.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BF3809F6199FBE9E00D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF38091B199FBCEC00D6C745 /* avdecc-cmd */;
+			targetProxy = BF3809F5199FBE9E00D6C745 /* PBXContainerItemProxy */;
+		};
+		BF3809F9199FBEB000D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF38091B199FBCEC00D6C745 /* avdecc-cmd */;
+			targetProxy = BF3809F8199FBEB000D6C745 /* PBXContainerItemProxy */;
+		};
+		BF3809FD199FBEC700D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF38091B199FBCEC00D6C745 /* avdecc-cmd */;
+			targetProxy = BF3809FC199FBEC700D6C745 /* PBXContainerItemProxy */;
+		};
+		BF380A01199FBEDB00D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF38091B199FBCEC00D6C745 /* avdecc-cmd */;
+			targetProxy = BF380A00199FBEDB00D6C745 /* PBXContainerItemProxy */;
+		};
+		BF380A05199FBF0200D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF38091B199FBCEC00D6C745 /* avdecc-cmd */;
+			targetProxy = BF380A04199FBF0200D6C745 /* PBXContainerItemProxy */;
+		};
+		BF380A13199FBFEE00D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF38091B199FBCEC00D6C745 /* avdecc-cmd */;
+			targetProxy = BF380A12199FBFEE00D6C745 /* PBXContainerItemProxy */;
+		};
+		BF380A15199FBFEE00D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3809C0199FBDCB00D6C745 /* avdecc-discover */;
+			targetProxy = BF380A14199FBFEE00D6C745 /* PBXContainerItemProxy */;
+		};
+		BF380A17199FBFEE00D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3809CB199FBDD700D6C745 /* avdecc-get-control */;
+			targetProxy = BF380A16199FBFEE00D6C745 /* PBXContainerItemProxy */;
+		};
+		BF380A19199FBFEE00D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3809EC199FBE6C00D6C745 /* avdecc-set-control */;
+			targetProxy = BF380A18199FBFEE00D6C745 /* PBXContainerItemProxy */;
+		};
+		BF380A1B199FBFEE00D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3809D6199FBDE500D6C745 /* avdecc-read-descriptor */;
+			targetProxy = BF380A1A199FBFEE00D6C745 /* PBXContainerItemProxy */;
+		};
+		BF380A1D199FBFEE00D6C745 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BF3809E1199FBE3900D6C745 /* avdecc */;
+			targetProxy = BF380A1C199FBFEE00D6C745 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BF38091E199FBCEC00D6C745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BF38091F199FBCEC00D6C745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BF380921199FBCEC00D6C745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "avdecc-cmd";
+			};
+			name = Debug;
+		};
+		BF380922199FBCEC00D6C745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				PRODUCT_NAME = "avdecc-cmd";
+			};
+			name = Release;
+		};
+		BF3809C6199FBDCB00D6C745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BF3809C7199FBDCB00D6C745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BF3809D1199FBDD700D6C745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BF3809D2199FBDD700D6C745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BF3809DC199FBDE500D6C745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BF3809DD199FBDE500D6C745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BF3809E7199FBE3900D6C745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BF3809E8199FBE3900D6C745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BF3809F2199FBE6C00D6C745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BF3809F3199FBE6C00D6C745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BF380A10199FBFE300D6C745 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BF380A11199FBFE300D6C745 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF380917199FBCEC00D6C745 /* Build configuration list for PBXProject "avdecc-cmd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF38091E199FBCEC00D6C745 /* Debug */,
+				BF38091F199FBCEC00D6C745 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF380920199FBCEC00D6C745 /* Build configuration list for PBXNativeTarget "avdecc-cmd" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF380921199FBCEC00D6C745 /* Debug */,
+				BF380922199FBCEC00D6C745 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3809C5199FBDCB00D6C745 /* Build configuration list for PBXNativeTarget "avdecc-discover" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3809C6199FBDCB00D6C745 /* Debug */,
+				BF3809C7199FBDCB00D6C745 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3809D0199FBDD700D6C745 /* Build configuration list for PBXNativeTarget "avdecc-get-control" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3809D1199FBDD700D6C745 /* Debug */,
+				BF3809D2199FBDD700D6C745 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3809DB199FBDE500D6C745 /* Build configuration list for PBXNativeTarget "avdecc-read-descriptor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3809DC199FBDE500D6C745 /* Debug */,
+				BF3809DD199FBDE500D6C745 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3809E6199FBE3900D6C745 /* Build configuration list for PBXNativeTarget "avdecc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3809E7199FBE3900D6C745 /* Debug */,
+				BF3809E8199FBE3900D6C745 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF3809F1199FBE6C00D6C745 /* Build configuration list for PBXNativeTarget "avdecc-set-control" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF3809F2199FBE6C00D6C745 /* Debug */,
+				BF3809F3199FBE6C00D6C745 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF380A0F199FBFE300D6C745 /* Build configuration list for PBXAggregateTarget "all" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF380A10199FBFE300D6C745 /* Debug */,
+				BF380A11199FBFE300D6C745 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF380914199FBCEC00D6C745 /* Project object */;
+}
