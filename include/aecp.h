@@ -56,7 +56,7 @@ int aecp_aem_form_msg( struct jdksavdecc_frame *frame,
                        struct jdksavdecc_eui48 destination_mac,
                        struct jdksavdecc_eui64 target_entity_id,
                        const uint8_t *command_payload,
-                       int command_payload_length );
+                       size_t command_payload_length );
 
 int aecp_aem_form_read_descriptor_command( struct jdksavdecc_frame *frame,
                                            struct jdksavdecc_aem_command_read_descriptor *pdu,
@@ -80,7 +80,7 @@ int aecp_aem_form_set_control_command( struct jdksavdecc_frame *frame,
                                        struct jdksavdecc_eui64 target_entity_id,
                                        uint16_t descriptor_index,
                                        const uint8_t *control_data_payload,
-                                       int control_data_payload_length );
+                                       size_t control_data_payload_length );
 
 /**
  * @brief aecp_aem_check

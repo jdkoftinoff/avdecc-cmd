@@ -69,7 +69,7 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
     struct jdksavdecc_eui48 destination_mac;
     struct jdksavdecc_eui64 target_entity_id;
     uint8_t command_payload[640];
-    int command_payload_len = 0;
+    size_t command_payload_len = 0;
     int arg = 3;
 
     bzero( &aemdu, sizeof( aemdu ) );
@@ -141,7 +141,7 @@ int aecp_aem( struct raw_context *net, struct jdksavdecc_frame *frame, uint16_t 
     if ( argc > ++arg )
     {
         /* Parse payload */
-        int len = strlen( argv[arg] );
+        size_t len = strlen( argv[arg] );
         const char *p = argv[arg];
         int i;
         command_payload_len = len / 2;
