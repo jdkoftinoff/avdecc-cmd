@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avdecc-cmd", "avdecc-cmd.vcxproj", "{42665228-3942-4FBB-941A-F9639B36D1D2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avdecc-discover", "..\avdecc-discover\avdecc-discover.vcxproj", "{64A09D5B-BE35-496A-A3C1-354807AF739A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avdecc", "avdecc\avdecc.vcxproj", "{4E527EB9-A428-4625-A206-B6F031D3D3BB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avdecc-read-descriptor", "avdecc-read-descriptor\avdecc-read-descriptor.vcxproj", "{2626ACA1-D0E2-4B08-AE55-568C678D11B5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avdecc-set-control", "avdecc-set-control\avdecc-set-control.vcxproj", "{242514F6-01A1-473F-8662-8217B667BD8A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "avdecc-get-control", "avdecc-get-control\avdecc-get-control.vcxproj", "{78CF56A5-AEDB-4096-8B17-893E792B5659}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{42665228-3942-4FBB-941A-F9639B36D1D2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{42665228-3942-4FBB-941A-F9639B36D1D2}.Debug|Win32.Build.0 = Debug|Win32
+		{42665228-3942-4FBB-941A-F9639B36D1D2}.Release|Win32.ActiveCfg = Release|Win32
+		{42665228-3942-4FBB-941A-F9639B36D1D2}.Release|Win32.Build.0 = Release|Win32
+		{64A09D5B-BE35-496A-A3C1-354807AF739A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{64A09D5B-BE35-496A-A3C1-354807AF739A}.Debug|Win32.Build.0 = Debug|Win32
+		{64A09D5B-BE35-496A-A3C1-354807AF739A}.Release|Win32.ActiveCfg = Release|Win32
+		{64A09D5B-BE35-496A-A3C1-354807AF739A}.Release|Win32.Build.0 = Release|Win32
+		{4E527EB9-A428-4625-A206-B6F031D3D3BB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4E527EB9-A428-4625-A206-B6F031D3D3BB}.Debug|Win32.Build.0 = Debug|Win32
+		{4E527EB9-A428-4625-A206-B6F031D3D3BB}.Release|Win32.ActiveCfg = Release|Win32
+		{4E527EB9-A428-4625-A206-B6F031D3D3BB}.Release|Win32.Build.0 = Release|Win32
+		{2626ACA1-D0E2-4B08-AE55-568C678D11B5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2626ACA1-D0E2-4B08-AE55-568C678D11B5}.Debug|Win32.Build.0 = Debug|Win32
+		{2626ACA1-D0E2-4B08-AE55-568C678D11B5}.Release|Win32.ActiveCfg = Release|Win32
+		{2626ACA1-D0E2-4B08-AE55-568C678D11B5}.Release|Win32.Build.0 = Release|Win32
+		{242514F6-01A1-473F-8662-8217B667BD8A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{242514F6-01A1-473F-8662-8217B667BD8A}.Debug|Win32.Build.0 = Debug|Win32
+		{242514F6-01A1-473F-8662-8217B667BD8A}.Release|Win32.ActiveCfg = Release|Win32
+		{242514F6-01A1-473F-8662-8217B667BD8A}.Release|Win32.Build.0 = Release|Win32
+		{78CF56A5-AEDB-4096-8B17-893E792B5659}.Debug|Win32.ActiveCfg = Debug|Win32
+		{78CF56A5-AEDB-4096-8B17-893E792B5659}.Debug|Win32.Build.0 = Debug|Win32
+		{78CF56A5-AEDB-4096-8B17-893E792B5659}.Release|Win32.ActiveCfg = Release|Win32
+		{78CF56A5-AEDB-4096-8B17-893E792B5659}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
