@@ -37,7 +37,7 @@ int main( int argc, char **argv )
     struct jdksavdecc_eui64 target_entity_id;
     uint16_t descriptor_index = 0;
     uint8_t payload[640];
-    int payload_length = 0;
+    size_t payload_length = 0;
     int arg = 0;
 
     if ( argc < 9 )
@@ -103,7 +103,7 @@ int main( int argc, char **argv )
 
     {
         /* Parse payload */
-        int len = strlen( arg_payload );
+        size_t len = strlen( arg_payload );
         const char *p = arg_payload;
         int i;
         payload_length = len / 2;
