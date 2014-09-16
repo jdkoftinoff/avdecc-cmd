@@ -91,7 +91,7 @@ int main( int argc, char **argv )
         bzero( &target_entity_id, sizeof( target_entity_id ) );
     }
 
-    descriptor_index = (uint16_t)strtol(arg_descriptor_index, 0, 0);
+    descriptor_index = (uint16_t)strtol( arg_descriptor_index, 0, 0 );
 
     {
         struct raw_context net;

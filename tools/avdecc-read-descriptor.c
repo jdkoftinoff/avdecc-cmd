@@ -96,7 +96,7 @@ int main( int argc, char **argv )
         bzero( &target_entity_id, sizeof( target_entity_id ) );
     }
 
-    descriptor_index = (uint16_t)strtol(arg_descriptor_index, 0, 0);
+    descriptor_index = (uint16_t)strtol( arg_descriptor_index, 0, 0 );
 
     if ( !jdksavdecc_get_uint16_value_for_name( jdksavdecc_aem_print_descriptor_type, arg_descriptor_type, &descriptor_type ) )
     {
@@ -104,7 +104,7 @@ int main( int argc, char **argv )
         char *end = (char *)arg_descriptor_type;
         if ( arg_descriptor_type )
         {
-            descriptor_type = (uint16_t)strtol(arg_descriptor_type, &end, 0);
+            descriptor_type = (uint16_t)strtol( arg_descriptor_type, &end, 0 );
         }
         if ( !arg_descriptor_type || errno == ERANGE || *end )
         {
