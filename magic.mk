@@ -129,7 +129,7 @@ ENABLE_STATICLIB?=1
 # magic-tools.mk
 
 # RSYNC is the name of our rsync program.
-RSYNC_SHELL:=$(shell which rsync)
+RSYNC_SHELL:=$(shell mywhich rsync)
 RSYNC?=$(RSYNC_SHELL)
 
 # RSYNC_OPTIONS are the rsync options we use to copy a tree of files/directories to another dir.
@@ -181,7 +181,7 @@ endif
 PYTHON?=python
 CHMOD?=chmod
 CHOWN?=chown
-SWIG:=$(shell which swig)
+SWIG:=$(shell mywhich swig)
 SWIG?=$(SWIG_SHELL)
 SWIG_OPTIONS?=-python
 OBJDUMP?=$(COMPILER_PREFIX)objdump
@@ -191,33 +191,33 @@ ZIP?=zip
 ZIP_FLAGS=-rp
 GZIP?=gzip
 BZIP2?=bzip2
-DPKG_SHELL:=$(shell which dpkg)
+DPKG_SHELL:=$(shell mywhich dpkg)
 DPKG?=$(DPKG_SHELL)
-FAKEROOT_SHELL:=$(shell which fakeroot)
+FAKEROOT_SHELL:=$(shell mywhich fakeroot)
 FAKEROOT?=$(FAKEROOT_SHELL)
 RUN_DPKG=$(FAKEROOT) $(DPKG)
-M4_SHELL:=$(shell which m4)
+M4_SHELL:=$(shell mywhich m4)
 M4?=$(M4_SHELL)
 M4_OPTIONS=-P
-RANLIB_SHELL:=$(shell which ranlib)
+RANLIB_SHELL:=$(shell mywhich ranlib)
 RANLIB?=$(RANLIB_SHELL)
-RPMBUILD_SHELL:=$(shell which rpmbuild)
+RPMBUILD_SHELL:=$(shell mywhich rpmbuild)
 RPMBUILD?=$(RPMBUILD_SHELL)
-EPM_SHELL:=$(shell which epm)
+EPM_SHELL:=$(shell mywhich epm)
 EPM?=$(EPM_SHELL)
-MKEPMLIST_SHELL:=$(shell which mkepmlist)
+MKEPMLIST_SHELL:=$(shell mywhich mkepmlist)
 MKEPMLIST?=$(MKEPMLIST_SHELL)
 TAR?=tar
-DOXYGEN_SHELL:=$(shell which doxygen)
+DOXYGEN_SHELL:=$(shell mywhich doxygen)
 DOXYGEN?=$(DOXYGEN_SHELL)
-VALGRIND_SHELL:=$(shell which valgrind)
+VALGRIND_SHELL:=$(shell mywhich valgrind)
 VALGRIND?=$(VALGRIND_SHELL)
 CP?=cp
 CP_FLAGS=-rpv
 SCP?=scp
 SCP_OPTIONS?=-rpqC
 SHIP_TO?=.
-QMAKE_SHELL:=$(shell which qmake)
+QMAKE_SHELL:=$(shell mywhich qmake)
 QMAKE?=$(QMAKE_SHELL)
 MKDIR?=mkdir
 MKDIRS?=mkdir -p
@@ -228,7 +228,7 @@ INSTALL_FLAGS?=-d
 SSH?=ssh
 SUDO?=sudo
 SUDO_OPTIONS?=
-CHECKINSTALL_SHELL:=$(shell which checkinstall)
+CHECKINSTALL_SHELL:=$(shell mywhich checkinstall)
 CHECKINSTALL?=$(CHEKCINSTALL_SHELL)
 SUDO_CHECKINSTALL?=$(SUDO) $(CHECKINSTALL)
 CHECKINSTALL_OPTIONS+=--install=no --fstrans -y 
@@ -639,7 +639,7 @@ ifeq ($(DISABLE_SSE),1)
 SSE_COMPILE_FLAGS=
 endif
 
-CONFIG_TOOLS_PATHS:=$(foreach pkg,$(CONFIG_TOOLS),$(shell which $(pkg)))
+CONFIG_TOOLS_PATHS:=$(foreach pkg,$(CONFIG_TOOLS),$(shell mywhich $(pkg)))
 
 INCLUDES_PACKAGES:=$(sort $(filter-out -Wstrict-prototypes,$(foreach pkg,$(PKGCONFIG_PACKAGES),$(shell pkg-config $(pkg) --cppflags)) $(foreach pkg,$(CONFIG_TOOLS),$(shell $(pkg) $(CONFIG_TOOLS_OPTIONS) --cppflags))))
 
