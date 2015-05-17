@@ -670,7 +670,7 @@
 		BF380914199FBCEC00D6C745 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Jeff Koftinoff";
 				TargetAttributes = {
 					BF38091B199FBCEC00D6C745 = {
@@ -933,6 +933,7 @@
 		BF380921199FBCEC00D6C745 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = "avdecc-cmd";
@@ -942,6 +943,7 @@
 		BF380922199FBCEC00D6C745 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = "avdecc-cmd";
