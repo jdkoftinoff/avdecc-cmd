@@ -111,6 +111,8 @@
 		BF380A0B199FBF6200D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
 		BF380A0C199FBF6700D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
 		BF380A0D199FBF6C00D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
+		BFF5FA341B08E7F200EF0470 /* descriptors.c in Sources */ = {isa = PBXBuildFile; fileRef = BFF5FA331B08E7F200EF0470 /* descriptors.c */; };
+		BFF5FA361B08E81000EF0470 /* descriptors.h in Headers */ = {isa = PBXBuildFile; fileRef = BFF5FA351B08E81000EF0470 /* descriptors.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +326,8 @@
 		BF3809E2199FBE3900D6C745 /* avdecc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = avdecc; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3809ED199FBE6C00D6C745 /* avdecc-set-control */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-set-control"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF380A08199FBF5500D6C745 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
+		BFF5FA331B08E7F200EF0470 /* descriptors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = descriptors.c; path = ../src/descriptors.c; sourceTree = "<group>"; };
+		BFF5FA351B08E81000EF0470 /* descriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = descriptors.h; path = ../include/descriptors.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -421,6 +425,14 @@
 		BF380923199FBD1700D6C745 /* include */ = {
 			isa = PBXGroup;
 			children = (
+				BF0B223A199FC38F007033F2 /* acmp-cmd.h */,
+				BF0B223B199FC38F007033F2 /* acmp.h */,
+				BF0B223C199FC38F007033F2 /* adp-cmd.h */,
+				BF0B223D199FC38F007033F2 /* adp.h */,
+				BF0B223E199FC38F007033F2 /* aecp-cmd.h */,
+				BF0B223F199FC38F007033F2 /* aecp.h */,
+				BF0B2240199FC38F007033F2 /* avdecc-cmd.h */,
+				BFF5FA351B08E81000EF0470 /* descriptors.h */,
 				BF0B224A199FC3A0007033F2 /* jdksavdecc_acmp_print.h */,
 				BF0B224B199FC3A0007033F2 /* jdksavdecc_acmp.h */,
 				BF0B224C199FC3A0007033F2 /* jdksavdecc_adp_print.h */,
@@ -455,13 +467,6 @@
 				BF0B2269199FC3A0007033F2 /* jdksavdecc_util.h */,
 				BF0B226A199FC3A0007033F2 /* jdksavdecc_world.h */,
 				BF0B226B199FC3A0007033F2 /* jdksavdecc.h */,
-				BF0B223A199FC38F007033F2 /* acmp-cmd.h */,
-				BF0B223B199FC38F007033F2 /* acmp.h */,
-				BF0B223C199FC38F007033F2 /* adp-cmd.h */,
-				BF0B223D199FC38F007033F2 /* adp.h */,
-				BF0B223E199FC38F007033F2 /* aecp-cmd.h */,
-				BF0B223F199FC38F007033F2 /* aecp.h */,
-				BF0B2240199FC38F007033F2 /* avdecc-cmd.h */,
 				BF0B2241199FC38F007033F2 /* raw.h */,
 			);
 			name = include;
@@ -470,6 +475,14 @@
 		BF380924199FBD1E00D6C745 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				BFF5FA331B08E7F200EF0470 /* descriptors.c */,
+				BF0B228E199FC3B3007033F2 /* acmp-cmd.c */,
+				BF0B228F199FC3B3007033F2 /* acmp.c */,
+				BF0B2290199FC3B3007033F2 /* adp-cmd.c */,
+				BF0B2291199FC3B3007033F2 /* adp.c */,
+				BF0B2292199FC3B3007033F2 /* aecp-cmd.c */,
+				BF0B2293199FC3B3007033F2 /* aecp.c */,
+				BF0B2294199FC3B3007033F2 /* avdecc-cmd.c */,
 				BF0B229E199FC3C1007033F2 /* jdksavdecc_acmp_print.c */,
 				BF0B229F199FC3C1007033F2 /* jdksavdecc_adp_print.c */,
 				BF0B22A0199FC3C1007033F2 /* jdksavdecc_aecp_print.c */,
@@ -490,13 +503,6 @@
 				BF0B22AF199FC3C1007033F2 /* jdksavdecc_print.c */,
 				BF0B22B0199FC3C1007033F2 /* jdksavdecc_util.c */,
 				BF0B22B1199FC3C1007033F2 /* jdksavdecc.c */,
-				BF0B228E199FC3B3007033F2 /* acmp-cmd.c */,
-				BF0B228F199FC3B3007033F2 /* acmp.c */,
-				BF0B2290199FC3B3007033F2 /* adp-cmd.c */,
-				BF0B2291199FC3B3007033F2 /* adp.c */,
-				BF0B2292199FC3B3007033F2 /* aecp-cmd.c */,
-				BF0B2293199FC3B3007033F2 /* aecp.c */,
-				BF0B2294199FC3B3007033F2 /* avdecc-cmd.c */,
 				BF0B2295199FC3B3007033F2 /* raw.c */,
 			);
 			name = src;
@@ -537,6 +543,7 @@
 				BF0B2278199FC3A0007033F2 /* jdksavdecc_aem_descriptor.h in Headers */,
 				BF0B226E199FC3A0007033F2 /* jdksavdecc_adp_print.h in Headers */,
 				BF0B227B199FC3A0007033F2 /* jdksavdecc_app.h in Headers */,
+				BFF5FA361B08E81000EF0470 /* descriptors.h in Headers */,
 				BF0B2274199FC3A0007033F2 /* jdksavdecc_aecp_print.h in Headers */,
 				BF0B2280199FC3A0007033F2 /* jdksavdecc_entity_model.h in Headers */,
 				BF0B228C199FC3A0007033F2 /* jdksavdecc_world.h in Headers */,
@@ -728,6 +735,7 @@
 				BF0B22CA199FC467007033F2 /* jdksavdecc_adp_print.c in Sources */,
 				BF0B22CB199FC467007033F2 /* jdksavdecc_aecp_print.c in Sources */,
 				BF0B22CC199FC467007033F2 /* jdksavdecc_aem_descriptor.c in Sources */,
+				BFF5FA341B08E7F200EF0470 /* descriptors.c in Sources */,
 				BF0B22CD199FC467007033F2 /* jdksavdecc_aem_print.c in Sources */,
 				BF0B22CE199FC467007033F2 /* jdksavdecc_app_print.c in Sources */,
 				BF0B22CF199FC467007033F2 /* jdksavdecc_app.c in Sources */,
