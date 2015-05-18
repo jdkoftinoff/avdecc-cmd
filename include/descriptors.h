@@ -105,6 +105,8 @@ int descriptor_key_compare_indirect( const void *lhs_, const void *rhs_ );
 struct descriptor_item
 {
     struct descriptor_key key;
+    jdksavdecc_timestamp_in_milliseconds last_update_time_in_milliseconds;
+    jdksavdecc_timestamp_in_milliseconds last_request_time_in_milliseconds;
     uint16_t payload_length;
     uint8_t payload_data[JDKSAVDECC_AECP_MAX_CONTROL_DATA_LENGTH];
     void *additional_data;
@@ -129,6 +131,7 @@ struct descriptor_item
  * @param additional_data
  */
 void descriptor_item_init( struct descriptor_item *self,
+                           jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
                            struct jdksavdecc_eui64 entity_model_id,
                            struct jdksavdecc_eui64 entity_id,
                            uint16_t configuration_number,
@@ -204,6 +207,19 @@ void descriptors_clear( struct descriptors *self );
 void descriptors_clear_entity_id( struct descriptors *self, struct jdksavdecc_eui64 entity_id );
 
 /**
+ * @brief descriptors_clear_expired
+ *
+ * Clear any descriptor data that is older than max_age_in_milliseconds
+ *
+ * @param self
+ * @param current_time_in_milliseconds
+ * @param max_age_in_milliseconds
+ */
+void descriptors_clear_expired( struct descriptors *self,
+                                jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
+                                jdksavdecc_timestamp_in_milliseconds max_age_in_milliseconds );
+
+/**
  * @brief descriptors_is_full
  *
  * Return true if the descriptors structure is full
@@ -230,6 +246,7 @@ bool descriptors_is_full( struct descriptors *self );
  * @return true on success, false on memory allocation failure
  */
 bool descriptors_insert( struct descriptors *self,
+                         jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
                          struct jdksavdecc_eui64 entity_model_id,
                          struct jdksavdecc_eui64 entity_id,
                          uint16_t configuration_number,
@@ -268,6 +285,29 @@ struct descriptor_item *descriptors_find( struct descriptors *self,
                                           uint16_t configuration_number,
                                           uint16_t descriptor_type,
                                           uint16_t descriptor_index );
+
+/**
+ * @brief descriptors_dispatch_requests
+ *
+ * iterate through all items and for each item where the
+ * last request time of the item is earlier
+ * than min_time_since_last_request_in_milliseconds
+ * and call the callback function with the item
+ *
+ * The callback shall return true if the request was sent, or false if
+ * the request was not sent.
+ *
+ * If the callback returns false, the iteration is cancelled at that point.
+ *
+ * @param self
+ * @param current_time_in_milliseconds
+ * @param min_time_since_last_request
+ */
+void descriptors_dispatch_requests( struct descriptors *self,
+                                    jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
+                                    jdksavdecc_timestamp_in_milliseconds min_time_since_last_request_in_milliseconds,
+                                    void *callback_data,
+                                    bool ( *callback )( void *, struct descriptor_item * ) );
 
 #ifdef __cplusplus
 }

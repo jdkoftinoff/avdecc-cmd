@@ -109,6 +109,7 @@ int descriptor_key_compare_indirect( const void *lhs_, const void *rhs_ )
 }
 
 void descriptor_item_init( struct descriptor_item *self,
+                           jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
                            struct jdksavdecc_eui64 entity_id,
                            struct jdksavdecc_eui64 entity_model_id,
                            uint16_t configuration_number,
@@ -119,6 +120,8 @@ void descriptor_item_init( struct descriptor_item *self,
                            void *additional_data )
 {
     descriptor_key_init( &self->key, entity_model_id, entity_id, configuration_number, descriptor_type, descriptor_index );
+    self->last_update_time_in_milliseconds = current_time_in_milliseconds;
+    self->last_request_time_in_milliseconds = current_time_in_milliseconds;
     self->payload_length = payload_length;
     bzero( self->payload_data, sizeof( self->payload_data ) );
     memcpy( self->payload_data, payload_data, payload_length );
@@ -251,6 +254,45 @@ void descriptors_clear_entity_id( struct descriptors *self, struct jdksavdecc_eu
 
     if ( new_item_count != self->num_entries )
     {
+        self->needs_sort = true;
+        descriptors_sort( self );
+        self->num_entries = new_item_count;
+    }
+}
+
+void descriptors_clear_expired( struct descriptors *self,
+                                jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
+                                jdksavdecc_timestamp_in_milliseconds max_age_in_milliseconds )
+{
+    size_t i;
+    size_t new_item_count = self->num_entries;
+    struct descriptor_item *item = 0;
+
+    for ( i = 0; i < self->num_entries; ++i )
+    {
+        item = self->storage[i];
+
+        if ( item )
+        {
+            if ( ( current_time_in_milliseconds - item->last_update_time_in_milliseconds ) > max_age_in_milliseconds )
+            {
+                // the descriptor information has expired, remove it
+                if ( item->additional_data )
+                {
+                    free( item->additional_data );
+                    item->additional_data = 0;
+                }
+                item->payload_length = 0;
+                free( item );
+                self->storage[i] = 0;
+                --new_item_count;
+            }
+        }
+    }
+
+    if ( new_item_count != self->num_entries )
+    {
+        self->needs_sort = true;
         descriptors_sort( self );
         self->num_entries = new_item_count;
     }
@@ -259,6 +301,7 @@ void descriptors_clear_entity_id( struct descriptors *self, struct jdksavdecc_eu
 bool descriptors_is_full( struct descriptors *self ) { return self->num_entries == self->max_entries; }
 
 bool descriptors_insert( struct descriptors *self,
+                         jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
                          struct jdksavdecc_eui64 entity_model_id,
                          struct jdksavdecc_eui64 entity_id,
                          uint16_t configuration_number,
@@ -271,15 +314,28 @@ bool descriptors_insert( struct descriptors *self,
     bool r = false;
     struct descriptor_item *item;
 
+    /* see if the descriptor is already known */
     item = descriptors_find( self, entity_model_id, entity_id, configuration_number, descriptor_type, descriptor_index );
+
+    if ( !item && descriptors_is_full( self ) )
+    {
+        // It is not already known, AND the storage is full
+        // Try grow the storage area by 50 %
+        descriptors_resize( self, self->max_entries * 3 / 2 );
+    }
 
     if ( !item && !descriptors_is_full( self ) )
     {
+        // It is not already known and the storage is available
+
+        // allocate space for the item
         item = (struct descriptor_item *)calloc( 1, sizeof( struct descriptor_item ) );
 
         if ( item )
         {
+            // Allocation succeeded, initialize the item
             descriptor_item_init( item,
+                                  current_time_in_milliseconds,
                                   entity_model_id,
                                   entity_id,
                                   configuration_number,
@@ -289,16 +345,36 @@ bool descriptors_insert( struct descriptors *self,
                                   payload_data,
                                   additional_data );
             self->storage[self->num_entries] = item;
+
             ++self->num_entries;
+
+            // The storage now needs sorting
             self->needs_sort = true;
             r = true;
         }
     }
+    else if ( item )
+    {
+        // the item already exists, so we can just update it in place
+        item->last_update_time_in_milliseconds = current_time_in_milliseconds;
+        item->last_request_time_in_milliseconds = current_time_in_milliseconds;
+        memcpy( item->payload_data, payload_data, payload_length );
+        item->payload_length = payload_length;
+        if ( item->additional_data )
+        {
+            // free any old additional_data
+            free( item->additional_data );
+        }
+        item->additional_data = additional_data;
+        r = true;
+    }
 
     if ( !r )
     {
+        // we were unable to insert
         if ( additional_data )
         {
+            // free the passed in additional_data before returning false
             free( additional_data );
         }
     }
@@ -307,7 +383,11 @@ bool descriptors_insert( struct descriptors *self,
 
 void descriptors_sort( struct descriptors *self )
 {
-    qsort( self->storage, self->num_entries, sizeof( struct descriptor_item * ), descriptor_key_compare_indirect );
+    if ( self->needs_sort )
+    {
+        qsort( self->storage, self->num_entries, sizeof( struct descriptor_item * ), descriptor_key_compare_indirect );
+        self->needs_sort = false;
+    }
 }
 
 struct descriptor_item *descriptors_find( struct descriptors *self,
@@ -320,13 +400,41 @@ struct descriptor_item *descriptors_find( struct descriptors *self,
     struct descriptor_item *item;
     struct descriptor_key key;
 
-    if ( self->needs_sort )
-    {
-        descriptors_sort( self );
-    }
+    descriptors_sort( self );
 
     descriptor_key_init( &key, entity_model_id, entity_id, configuration_number, descriptor_type, descriptor_index );
     item = bsearch(
         &key, self->storage, self->num_entries, sizeof( struct descriptor_item * ), descriptor_key_compare_indirect );
     return item;
+}
+
+void descriptors_dispatch_requests( struct descriptors *self,
+                                    jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
+                                    jdksavdecc_timestamp_in_milliseconds min_time_since_last_request_in_milliseconds,
+                                    void *callback_data,
+                                    bool ( *callback )( void *, struct descriptor_item * ) )
+{
+    size_t i;
+    struct descriptor_item *item = 0;
+
+    for ( i = 0; i < self->num_entries; ++i )
+    {
+        item = self->storage[i];
+
+        if ( item )
+        {
+            if ( ( current_time_in_milliseconds - item->last_request_time_in_milliseconds )
+                 > min_time_since_last_request_in_milliseconds )
+            {
+                if ( callback( callback_data, item ) )
+                {
+                    item->last_request_time_in_milliseconds = current_time_in_milliseconds;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
 }
