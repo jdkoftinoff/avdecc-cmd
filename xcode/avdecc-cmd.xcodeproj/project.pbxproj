@@ -26,6 +26,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		BF01B8221B0B7B4D004E55CE /* discover.h in Headers */ = {isa = PBXBuildFile; fileRef = BF01B8201B0B7B4D004E55CE /* discover.h */; };
+		BF01B8231B0B7B4D004E55CE /* scanner.h in Headers */ = {isa = PBXBuildFile; fileRef = BF01B8211B0B7B4D004E55CE /* scanner.h */; };
+		BF01B8261B0B7B68004E55CE /* discover.c in Sources */ = {isa = PBXBuildFile; fileRef = BF01B8241B0B7B68004E55CE /* discover.c */; };
+		BF01B8271B0B7B68004E55CE /* scanner.c in Sources */ = {isa = PBXBuildFile; fileRef = BF01B8251B0B7B68004E55CE /* scanner.c */; };
 		BF0B2242199FC38F007033F2 /* acmp-cmd.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223A199FC38F007033F2 /* acmp-cmd.h */; };
 		BF0B2243199FC38F007033F2 /* acmp.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223B199FC38F007033F2 /* acmp.h */; };
 		BF0B2244199FC38F007033F2 /* adp-cmd.h in Headers */ = {isa = PBXBuildFile; fileRef = BF0B223C199FC38F007033F2 /* adp-cmd.h */; };
@@ -244,6 +248,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BF01B81F1B0B7A28004E55CE /* avdecc-scan-values.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "avdecc-scan-values.c"; path = "../tools/avdecc-scan-values.c"; sourceTree = "<group>"; };
+		BF01B8201B0B7B4D004E55CE /* discover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = discover.h; path = ../include/discover.h; sourceTree = "<group>"; };
+		BF01B8211B0B7B4D004E55CE /* scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = scanner.h; path = ../include/scanner.h; sourceTree = "<group>"; };
+		BF01B8241B0B7B68004E55CE /* discover.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = discover.c; path = ../src/discover.c; sourceTree = "<group>"; };
+		BF01B8251B0B7B68004E55CE /* scanner.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = scanner.c; path = ../src/scanner.c; sourceTree = "<group>"; };
 		BF0B223A199FC38F007033F2 /* acmp-cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "acmp-cmd.h"; path = "../include/acmp-cmd.h"; sourceTree = "<group>"; };
 		BF0B223B199FC38F007033F2 /* acmp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = acmp.h; path = ../include/acmp.h; sourceTree = "<group>"; };
 		BF0B223C199FC38F007033F2 /* adp-cmd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "adp-cmd.h"; path = "../include/adp-cmd.h"; sourceTree = "<group>"; };
@@ -392,6 +401,7 @@
 				BF0B22E9199FC4F0007033F2 /* avdecc-discover.c */,
 				BF0B22EA199FC4F0007033F2 /* avdecc-get-control.c */,
 				BF0B22EB199FC4F0007033F2 /* avdecc-read-descriptor.c */,
+				BF01B81F1B0B7A28004E55CE /* avdecc-scan-values.c */,
 				BF0B22EC199FC4F0007033F2 /* avdecc-set-control.c */,
 				BF0B22ED199FC4F0007033F2 /* avdecc.c */,
 			);
@@ -433,6 +443,7 @@
 				BF0B223F199FC38F007033F2 /* aecp.h */,
 				BF0B2240199FC38F007033F2 /* avdecc-cmd.h */,
 				BFF5FA351B08E81000EF0470 /* descriptors.h */,
+				BF01B8201B0B7B4D004E55CE /* discover.h */,
 				BF0B224A199FC3A0007033F2 /* jdksavdecc_acmp_print.h */,
 				BF0B224B199FC3A0007033F2 /* jdksavdecc_acmp.h */,
 				BF0B224C199FC3A0007033F2 /* jdksavdecc_adp_print.h */,
@@ -468,6 +479,7 @@
 				BF0B226A199FC3A0007033F2 /* jdksavdecc_world.h */,
 				BF0B226B199FC3A0007033F2 /* jdksavdecc.h */,
 				BF0B2241199FC38F007033F2 /* raw.h */,
+				BF01B8211B0B7B4D004E55CE /* scanner.h */,
 			);
 			name = include;
 			sourceTree = "<group>";
@@ -475,7 +487,6 @@
 		BF380924199FBD1E00D6C745 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				BFF5FA331B08E7F200EF0470 /* descriptors.c */,
 				BF0B228E199FC3B3007033F2 /* acmp-cmd.c */,
 				BF0B228F199FC3B3007033F2 /* acmp.c */,
 				BF0B2290199FC3B3007033F2 /* adp-cmd.c */,
@@ -483,6 +494,8 @@
 				BF0B2292199FC3B3007033F2 /* aecp-cmd.c */,
 				BF0B2293199FC3B3007033F2 /* aecp.c */,
 				BF0B2294199FC3B3007033F2 /* avdecc-cmd.c */,
+				BFF5FA331B08E7F200EF0470 /* descriptors.c */,
+				BF01B8241B0B7B68004E55CE /* discover.c */,
 				BF0B229E199FC3C1007033F2 /* jdksavdecc_acmp_print.c */,
 				BF0B229F199FC3C1007033F2 /* jdksavdecc_adp_print.c */,
 				BF0B22A0199FC3C1007033F2 /* jdksavdecc_aecp_print.c */,
@@ -504,6 +517,7 @@
 				BF0B22B0199FC3C1007033F2 /* jdksavdecc_util.c */,
 				BF0B22B1199FC3C1007033F2 /* jdksavdecc.c */,
 				BF0B2295199FC3B3007033F2 /* raw.c */,
+				BF01B8251B0B7B68004E55CE /* scanner.c */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -542,6 +556,7 @@
 				BF0B2272199FC3A0007033F2 /* jdksavdecc_aecp_avc.h in Headers */,
 				BF0B2278199FC3A0007033F2 /* jdksavdecc_aem_descriptor.h in Headers */,
 				BF0B226E199FC3A0007033F2 /* jdksavdecc_adp_print.h in Headers */,
+				BF01B8221B0B7B4D004E55CE /* discover.h in Headers */,
 				BF0B227B199FC3A0007033F2 /* jdksavdecc_app.h in Headers */,
 				BFF5FA361B08E81000EF0470 /* descriptors.h in Headers */,
 				BF0B2274199FC3A0007033F2 /* jdksavdecc_aecp_print.h in Headers */,
@@ -551,6 +566,7 @@
 				BF0B228A199FC3A0007033F2 /* jdksavdecc_print.h in Headers */,
 				BF0B226D199FC3A0007033F2 /* jdksavdecc_acmp.h in Headers */,
 				BF0B227A199FC3A0007033F2 /* jdksavdecc_app_print.h in Headers */,
+				BF01B8231B0B7B4D004E55CE /* scanner.h in Headers */,
 				BF0B227C199FC3A0007033F2 /* jdksavdecc_avr.h in Headers */,
 				BF0B228D199FC3A0007033F2 /* jdksavdecc.h in Headers */,
 				BF0B2271199FC3A0007033F2 /* jdksavdecc_aecp_aem.h in Headers */,
@@ -744,6 +760,7 @@
 				BF0B22D2199FC467007033F2 /* jdksavdecc_descriptor_storage.c in Sources */,
 				BF0B22D3199FC467007033F2 /* jdksavdecc_entity_model.c in Sources */,
 				BF0B22D4199FC467007033F2 /* jdksavdecc_frame.c in Sources */,
+				BF01B8271B0B7B68004E55CE /* scanner.c in Sources */,
 				BF0B22D5199FC467007033F2 /* jdksavdecc_jdks.c in Sources */,
 				BF0B22D6199FC467007033F2 /* jdksavdecc_maap_print.c in Sources */,
 				BF0B22D7199FC467007033F2 /* jdksavdecc_maap.c in Sources */,
@@ -753,6 +770,7 @@
 				BF0B22DB199FC467007033F2 /* jdksavdecc_util.c in Sources */,
 				BF0B22DC199FC467007033F2 /* jdksavdecc.c in Sources */,
 				BF0B22DD199FC467007033F2 /* acmp-cmd.c in Sources */,
+				BF01B8261B0B7B68004E55CE /* discover.c in Sources */,
 				BF0B22DE199FC467007033F2 /* acmp.c in Sources */,
 				BF0B22DF199FC467007033F2 /* adp-cmd.c in Sources */,
 				BF0B22E0199FC467007033F2 /* adp.c in Sources */,
