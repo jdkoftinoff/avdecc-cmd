@@ -76,10 +76,10 @@ void avdecc_cmd_print_frame_payload( FILE *f, const struct jdksavdecc_frame *fra
     }
 }
 
-void avdecc_cmd_process_incoming_raw( const void *request_,
+void avdecc_cmd_process_incoming_raw( const void *context,
                                       struct raw_context *net,
                                       int max_time_in_ms,
-                                      int ( *process )( const void *request_,
+                                      int ( *process )( const void *context,
                                                         struct raw_context *net,
                                                         const struct jdksavdecc_frame *frame ) )
 {
@@ -87,6 +87,7 @@ void avdecc_cmd_process_incoming_raw( const void *request_,
     int nfds;
     int r;
     struct timeval timeout;
+    jdksavdecc_timestamp_in_milliseconds end_time = raw_get_time_of_day_in_milliseconds() + max_time_in_ms;
 
     raw_set_socket_nonblocking( net->m_fd );
     FD_ZERO( &rd_fds );
@@ -98,15 +99,13 @@ void avdecc_cmd_process_incoming_raw( const void *request_,
 
     do
     {
-        struct timeval time_portion = timeout;
-
         // refresh interest in readability of fd
         FD_SET( net->m_fd, &rd_fds );
 
         do
         {
             // wait for it to become readable
-            r = select( nfds, &rd_fds, 0, 0, &time_portion );
+            r = select( nfds, &rd_fds, 0, 0, &timeout );
         } while ( r < 0 && errno == EINTR );
 
         // any error aborts now
@@ -137,7 +136,7 @@ void avdecc_cmd_process_incoming_raw( const void *request_,
                     // And ethertype
                     frame.ethertype = net->m_ethertype;
                     // Process it.
-                    if ( process( request_, net, &frame ) != 0 )
+                    if ( process( context, net, &frame ) != 0 )
                     {
                         // Process function wants us to stop.
                         break;
@@ -148,6 +147,19 @@ void avdecc_cmd_process_incoming_raw( const void *request_,
                     perror( "unable to read ethernet" );
                     break;
                 }
+            }
+
+            {
+                // Calculate next timeout for select
+                jdksavdecc_timestamp_in_milliseconds cur_time = raw_get_time_of_day_in_milliseconds();
+                jdksavdecc_timestamp_in_milliseconds timeout_time;
+                if ( cur_time <= end_time )
+                {
+                    break;
+                }
+                timeout_time = end_time - cur_time;
+                timeout.tv_sec = timeout_time / 1000;
+                timeout.tv_usec = ( timeout_time % 1000 ) * 1000;
             }
         }
     } while ( r > 0 );

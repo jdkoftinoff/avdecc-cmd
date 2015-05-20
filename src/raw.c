@@ -482,3 +482,123 @@ void raw_set_socket_nonblocking( int fd )
     }
 #endif
 }
+
+jdksavdecc_timestamp_in_milliseconds raw_get_time_of_day_in_milliseconds()
+{
+    jdksavdecc_timestamp_in_milliseconds r;
+    struct timeval tv;
+    tv.tv_sec = 0;
+    tv.tv_usec = 0;
+    gettimeofday( &tv, 0 );
+    r = (jdksavdecc_timestamp_in_milliseconds)tv.tv_sec * 1000;
+    r += (jdksavdecc_timestamp_in_milliseconds)tv.tv_usec / 1000.0;
+    return r;
+}
+
+void raw_dispatch_one( const void *context,
+                       struct raw_context *net,
+                       int max_time_in_ms,
+                       int ( *process_incoming )( const void *context,
+                                                  struct raw_context *net,
+                                                  const struct jdksavdecc_frame *frame ),
+                       bool ( *wake_on_writable )( const void *context, struct raw_context *net ),
+                       int ( *writeable )( const void *context, struct raw_context *net ) )
+{
+    fd_set rd_fds;
+    fd_set wr_fds;
+    int nfds;
+    int r;
+    struct timeval timeout;
+    jdksavdecc_timestamp_in_milliseconds end_time = raw_get_time_of_day_in_milliseconds() + max_time_in_ms;
+
+    raw_set_socket_nonblocking( net->m_fd );
+    FD_ZERO( &rd_fds );
+    FD_ZERO( &wr_fds );
+
+    timeout.tv_sec = max_time_in_ms / 1000;
+    timeout.tv_usec = ( max_time_in_ms % 1000 ) * 1000;
+
+    do
+    {
+        // refresh interest in readability of fd
+        FD_SET( net->m_fd, &rd_fds );
+
+        if ( wake_on_writable && writeable && wake_on_writable( context, net ) )
+        {
+            FD_SET( net->m_fd, &wr_fds );
+        }
+        nfds = net->m_fd + 1;
+
+        do
+        {
+            // wait for it to become readable
+            r = select( nfds, &rd_fds, &wr_fds, 0, &timeout );
+        } while ( r < 0 && errno == EINTR );
+
+        // any error aborts now
+        if ( r < 0 )
+        {
+            perror( "Error on select" );
+            break;
+        }
+
+        // If the socket is readable, process the message
+        if ( r > 0 )
+        {
+            jdksavdecc_timestamp_in_milliseconds cur_time = raw_get_time_of_day_in_milliseconds();
+
+            if ( FD_ISSET( net->m_fd, &rd_fds ) )
+            {
+                ssize_t len;
+                struct jdksavdecc_frame frame;
+                bzero( &frame, sizeof( frame ) );
+
+                // Receive the ethernet frame
+                len = raw_recv(
+                    net, frame.src_address.value, frame.dest_address.value, frame.payload, sizeof( frame.payload ) );
+
+                // Did we get one?
+                if ( len > 0 )
+                {
+                    // Yes, fill in the length
+                    frame.length = (uint16_t)len;
+                    // And ethertype
+                    frame.ethertype = net->m_ethertype;
+                    // And timestamp in microseconds
+                    frame.time = cur_time * 1000;
+                    // Process it.
+                    if ( process_incoming( context, net, &frame ) < 0 )
+                    {
+                        // Process function wants us to stop.
+                        break;
+                    }
+                }
+                else
+                {
+                    perror( "unable to read readable ethernet" );
+                    break;
+                }
+            }
+
+            if ( FD_ISSET( net->m_fd, &wr_fds ) )
+            {
+                if ( writeable( context, net ) < 0 )
+                {
+                    perror( "unable to send writable ethernet" );
+                }
+            }
+
+            {
+                // Calculate next timeout for select
+                jdksavdecc_timestamp_in_milliseconds timeout_time;
+                if ( cur_time <= end_time )
+                {
+                    break;
+                }
+                timeout_time = end_time - cur_time;
+                timeout.tv_sec = timeout_time / 1000;
+                timeout.tv_usec = ( timeout_time % 1000 ) * 1000;
+            }
+        }
+    } while ( r > 0 );
+}

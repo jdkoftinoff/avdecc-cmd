@@ -86,6 +86,17 @@ int raw_join_multicast( struct raw_context *self, const uint8_t multicast_mac[6]
 
 void raw_set_socket_nonblocking( int fd );
 
+jdksavdecc_timestamp_in_milliseconds raw_get_time_of_day_in_milliseconds();
+
+void raw_dispatch_one( const void *context,
+                       struct raw_context *net,
+                       int max_time_in_ms,
+                       int ( *process_incoming )( const void *context,
+                                                  struct raw_context *net,
+                                                  const struct jdksavdecc_frame *frame ),
+                       bool ( *wake_on_writable )( const void *context, struct raw_context *net ),
+                       int ( *writeable )( const void *context, struct raw_context *net ) );
+
 #ifdef __cplusplus
 }
 #endif
