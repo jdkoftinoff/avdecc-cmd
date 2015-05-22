@@ -91,6 +91,8 @@ void discovered_entity_free( struct discovered_entity *self );
  */
 int discovered_entity_compare( const struct discovered_entity *lhs, const struct discovered_entity *rhs );
 
+int discovered_entity_compare_indirect( const void *lhs, const void *rhs );
+
 /**
  * @brief The discover struct
  *
@@ -103,6 +105,8 @@ struct discover
     size_t max_items;
     struct discovered_entity **items;
     struct raw_context *network;
+    jdksavdecc_timestamp_in_milliseconds last_tick_time;
+    bool request_do_discover;
     void *additional_data;
 
     void ( *discovered_entity_callback )( struct discover *self, const struct discovered_entity *entity );
@@ -110,6 +114,15 @@ struct discover
     ssize_t ( *raw_send )( struct raw_context *self, const struct jdksavdecc_frame *frame );
 };
 
+/**
+ * @brief discover_init
+ * @param self
+ * @param controller_entity_id
+ * @param max_items
+ * @param network
+ * @param additional_data
+ * @return
+ */
 bool discover_init( struct discover *self,
                     struct jdksavdecc_eui64 controller_entity_id,
                     size_t max_items,
@@ -119,23 +132,117 @@ bool discover_init( struct discover *self,
                     void ( *removed_entity_callback )( struct discover *self, const struct discovered_entity *entity ),
                     ssize_t ( *raw_send )( struct raw_context *self, const struct jdksavdecc_frame *frame ) );
 
-bool discover_realloc( struct discover *self, size_t new_max_items );
+/**
+ * @brief discover_realloc
+ * @param self
+ * @param new_max_items
+ * @return
+ */
+bool discover_resize( struct discover *self, size_t new_max_items );
 
+/**
+ * @brief discover_free
+ * @param self
+ */
 void discover_free( struct discover *self );
 
+/**
+ * @brief discover_clear
+ * @param self
+ */
+void discover_clear( struct discover *self );
+
+/**
+ * @brief discover_is_full
+ * @param self
+ * @return
+ */
 bool discover_is_full( struct discover *self );
 
-bool discover_insert( struct discover *self,
-                      const struct jdksavdecc_eui64 entity_id,
-                      const struct jdksavdecc_eui64 entity_model_id,
-                      const struct jdksavdecc_eui48 mac_address,
-                      const struct jdksavdecc_adpdu most_recent_adpdu );
+/**
+ * @brief discover_insert
+ * @param self
+ * @param mac_address
+ * @param most_recent_adpdu
+ * @param current_time_in_milliseconds
+ * @param data
+ * @return
+ */
+struct discovered_entity *discover_insert( struct discover *self,
+                                           struct jdksavdecc_eui48 mac_address,
+                                           const struct jdksavdecc_adpdu *most_recent_adpdu,
+                                           jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
+                                           void *data );
 
+/**
+ * @brief discover_remove_entity
+ * @param self
+ * @param entity_id
+ */
+void discover_remove_entity( struct discover *self, struct jdksavdecc_eui64 entity_id );
+
+/**
+ * @brief discover_remove_with_model_id
+ * @param self
+ * @param entity_id
+ * @param entity_model_id
+ */
+void discover_remove_with_model_id( struct discover *self,
+                                    struct jdksavdecc_eui64 entity_id,
+                                    struct jdksavdecc_eui64 entity_model_id );
+
+/**
+ * @brief discover_process_incoming
+ * @param self
+ * @param net
+ * @param frame
+ * @return
+ */
 int discover_process_incoming( const void *self, struct raw_context *net, const struct jdksavdecc_frame *frame );
 
+/**
+ * @brief discover_sort
+ * @param self
+ */
 void discover_sort( struct discover *self );
 
-void discover_clear_expired( struct discover *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
+/**
+ * @brief discover_removed_expired
+ * @param self
+ * @param current_time_in_milliseconds
+ */
+void discover_removed_expired( struct discover *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
+
+/**
+ * @brief discover_find
+ * @param self
+ * @param entity_id
+ */
+struct discovered_entity *discover_find( struct discover *self, struct jdksavdecc_eui64 entity_id );
+
+/**
+ * @brief discover_find_with_model
+ * @param self
+ * @param entity_id
+ * @param entity_model_id
+ * @return
+ */
+struct discovered_entity *discover_find_with_model( struct discover *self,
+                                                    struct jdksavdecc_eui64 entity_id,
+                                                    struct jdksavdecc_eui64 entity_model_id );
+
+/**
+ * @brief discover_tick
+ * @param self
+ * @param current_time
+ */
+void discover_tick( struct discover *self, jdksavdecc_timestamp_in_milliseconds current_time );
+
+/**
+ * @brief discover_send_discover
+ * @param self
+ */
+void discover_send_discover( struct discover *self );
 
 #ifdef __cplusplus
 }
