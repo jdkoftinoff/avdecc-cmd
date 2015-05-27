@@ -168,11 +168,11 @@ bool discover_is_full( struct discover *self );
  * @param data
  * @return
  */
-struct discovered_entity *discover_insert( struct discover *self,
-                                           struct jdksavdecc_eui48 mac_address,
-                                           const struct jdksavdecc_adpdu *most_recent_adpdu,
-                                           jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
-                                           void *data );
+struct discovered_entity **discover_insert( struct discover *self,
+                                            struct jdksavdecc_eui48 mac_address,
+                                            const struct jdksavdecc_adpdu *most_recent_adpdu,
+                                            jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
+                                            void *data );
 
 /**
  * @brief discover_remove_entity
@@ -218,7 +218,7 @@ void discover_removed_expired( struct discover *self, jdksavdecc_timestamp_in_mi
  * @param self
  * @param entity_id
  */
-struct discovered_entity *discover_find( struct discover *self, struct jdksavdecc_eui64 entity_id );
+struct discovered_entity **discover_find( struct discover *self, struct jdksavdecc_eui64 entity_id );
 
 /**
  * @brief discover_find_with_model
@@ -227,9 +227,9 @@ struct discovered_entity *discover_find( struct discover *self, struct jdksavdec
  * @param entity_model_id
  * @return
  */
-struct discovered_entity *discover_find_with_model( struct discover *self,
-                                                    struct jdksavdecc_eui64 entity_id,
-                                                    struct jdksavdecc_eui64 entity_model_id );
+struct discovered_entity **discover_find_with_model( struct discover *self,
+                                                     struct jdksavdecc_eui64 entity_id,
+                                                     struct jdksavdecc_eui64 entity_model_id );
 
 /**
  * @brief discover_tick
