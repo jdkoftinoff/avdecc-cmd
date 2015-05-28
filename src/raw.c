@@ -602,3 +602,19 @@ void raw_dispatch_one( const void *context,
         }
     } while ( r > 0 );
 }
+
+struct jdksavdecc_eui64 raw_generate_controller_entity_id( struct raw_context *context, uint16_t number )
+{
+    struct jdksavdecc_eui64 controller_entity_id;
+
+    controller_entity_id.value[0] = context->m_my_mac[0];
+    controller_entity_id.value[1] = context->m_my_mac[1];
+    controller_entity_id.value[2] = context->m_my_mac[2];
+    controller_entity_id.value[3] = ( uint8_t )( ( number >> 8 ) & 0xff );
+    controller_entity_id.value[4] = ( uint8_t )( number & 0xff );
+    controller_entity_id.value[5] = context->m_my_mac[3];
+    controller_entity_id.value[6] = context->m_my_mac[4];
+    controller_entity_id.value[7] = context->m_my_mac[5];
+
+    return controller_entity_id;
+}

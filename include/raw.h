@@ -97,6 +97,8 @@ void raw_dispatch_one( const void *context,
                        bool ( *wake_on_writable )( const void *context, struct raw_context *net ),
                        int ( *writeable )( const void *context, struct raw_context *net ) );
 
+struct jdksavdecc_eui64 raw_generate_controller_entity_id( struct raw_context *context, uint16_t number );
+
 #ifdef __cplusplus
 }
 #endif
