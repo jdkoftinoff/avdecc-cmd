@@ -117,6 +117,7 @@ bool discover_init( struct discover *self,
         self->last_tick_time = 0;
         self->request_do_discover = true;
         self->raw_send = raw_send;
+        r = true;
     }
     return r;
 }
