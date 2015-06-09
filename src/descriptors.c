@@ -85,7 +85,7 @@ int descriptor_key_compare( const struct descriptor_key *lhs, const struct descr
             }
         }
     }
-    return 0;
+    return r;
 }
 
 int descriptor_key_compare_indirect( const void *lhs_, const void *rhs_ )

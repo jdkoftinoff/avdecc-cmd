@@ -68,8 +68,8 @@ int main( int argc, char **argv )
     }
 
     arg_verbose = 2;
-    arg_time_in_ms_to_wait = 10000;
-    arg_network_port = "en0";
+    arg_time_in_ms_to_wait = 50000;
+    arg_network_port = "en4";
 
     if ( argc > 1 )
     {
