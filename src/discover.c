@@ -219,13 +219,11 @@ struct discovered_entity **discover_insert( struct discover *self,
 
             // and sort the whole set so that they remain in order
             discover_sort( self );
-            r = true;
         }
         else
         {
             // No, make sure we return 0
             entity_ptr = 0;
-            r = false;
         }
     }
 
