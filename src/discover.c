@@ -40,6 +40,7 @@ void discovered_entity_init( struct discovered_entity *self,
     self->mac_address = mac_address;
     self->most_recent_adpdu = *most_recent_adpdu;
     self->time_of_last_adpdu_in_milliseconds = time_of_last_adpdu_in_milliseconds;
+    self->current_sequence_id = 0;
     self->data = data;
 }
 
@@ -97,8 +98,8 @@ bool discover_init( struct discover *self,
                     size_t max_items,
                     struct raw_context *network,
                     void *additional_data,
-                    void ( *discovered_entity_callback )( struct discover *self, const struct discovered_entity *entity ),
-                    void ( *removed_entity_callback )( struct discover *self, const struct discovered_entity *entity ),
+                    void ( *discovered_entity_callback )( struct discover *self, struct discovered_entity *entity ),
+                    void ( *removed_entity_callback )( struct discover *self, struct discovered_entity *entity ),
                     ssize_t ( *raw_send )( struct raw_context *self, const struct jdksavdecc_frame *frame ) )
 {
     bool r = false;

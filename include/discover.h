@@ -47,6 +47,7 @@ struct discovered_entity
     struct jdksavdecc_eui48 mac_address;
     struct jdksavdecc_adpdu most_recent_adpdu;
     jdksavdecc_timestamp_in_milliseconds time_of_last_adpdu_in_milliseconds;
+    uint16_t current_sequence_id;
     void *data;
 };
 
@@ -128,8 +129,8 @@ bool discover_init( struct discover *self,
                     size_t max_items,
                     struct raw_context *network,
                     void *additional_data,
-                    void ( *discovered_entity_callback )( struct discover *self, const struct discovered_entity *entity ),
-                    void ( *removed_entity_callback )( struct discover *self, const struct discovered_entity *entity ),
+                    void ( *discovered_entity_callback )( struct discover *self, struct discovered_entity *entity ),
+                    void ( *removed_entity_callback )( struct discover *self, struct discovered_entity *entity ),
                     ssize_t ( *raw_send )( struct raw_context *self, const struct jdksavdecc_frame *frame ) );
 
 /**

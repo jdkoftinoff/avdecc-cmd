@@ -25,11 +25,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include "avdecc-cmd.h"
+#include "aecp.h"
 #include "discover.h"
+#include "descriptors.h"
 
 ssize_t send_frame( struct raw_context *self, const struct jdksavdecc_frame *frame );
 void discovered_callback( struct discover *self, struct discovered_entity *entity );
 void removed_callback( struct discover *self, struct discovered_entity *entity );
+
+struct raw_context net;
 
 ssize_t send_frame( struct raw_context *self, const struct jdksavdecc_frame *frame )
 {
@@ -44,6 +48,25 @@ void discovered_callback( struct discover *self, struct discovered_entity *entit
     jdksavdecc_printer_print_label( &printer, "Discovered " );
     jdksavdecc_printer_print_eui64( &printer, entity->entity_id );
     printf( "%s\n", buf );
+    entity->data = calloc( 1, sizeof( struct descriptors ) );
+    if ( entity->data )
+    {
+        struct jdksavdecc_frame frame;
+        struct jdksavdecc_aecpdu_aem aemdu;
+        jdksavdecc_frame_init( &frame );
+        if ( aecp_aem_form_msg( &frame,
+                                &aemdu,
+                                JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_COMMAND,
+                                JDKSAVDECC_AEM_COMMAND_REGISTER_UNSOLICITED_NOTIFICATION,
+                                ++entity->current_sequence_id,
+                                entity->mac_address,
+                                entity->entity_id,
+                                0,
+                                0 ) == 0 )
+        {
+            send_frame( &net, &frame );
+        }
+    }
 }
 
 void removed_callback( struct discover *self, struct discovered_entity *entity )
@@ -84,7 +107,6 @@ int main( int argc, char **argv )
         arg_network_port = argv[3];
     }
 
-    struct raw_context net;
     int fd = raw_socket( &net, JDKSAVDECC_AVTP_ETHERTYPE, arg_network_port, jdksavdecc_multicast_adp_acmp.value );
 
     if ( fd >= 0 )
