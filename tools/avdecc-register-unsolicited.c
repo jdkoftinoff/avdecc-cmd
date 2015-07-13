@@ -30,7 +30,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "descriptors.h"
 #include "entitycontext.h"
 
-int process_incoming( const void *self_, struct raw_context *net, const struct jdksavdecc_frame *frame );
+int process_incoming( const void *self_, struct raw_context *net, const struct jdksavdecc_frame *frame )
+{
+    /* TODO */
+    return 0;
+}
 
 ssize_t send_frame( struct raw_context *self, const struct jdksavdecc_frame *frame );
 void discovered_callback( struct discover *self, struct discovered_entity *entity );
