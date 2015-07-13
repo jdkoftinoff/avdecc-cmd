@@ -28,6 +28,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "aecp.h"
 #include "discover.h"
 #include "descriptors.h"
+#include "entitycontext.h"
+
+int process_incoming( const void *self_, struct raw_context *net, const struct jdksavdecc_frame *frame );
 
 ssize_t send_frame( struct raw_context *self, const struct jdksavdecc_frame *frame );
 void discovered_callback( struct discover *self, struct discovered_entity *entity );
@@ -48,9 +51,13 @@ void discovered_callback( struct discover *self, struct discovered_entity *entit
     jdksavdecc_printer_print_label( &printer, "Discovered " );
     jdksavdecc_printer_print_eui64( &printer, entity->entity_id );
     printf( "%s\n", buf );
+
     entity->data = calloc( 1, sizeof( struct descriptors ) );
     if ( entity->data )
     {
+#if 0
+        descriptors_init((struct descriptors*)entity->data, 4096 );
+
         struct jdksavdecc_frame frame;
         struct jdksavdecc_aecpdu_aem aemdu;
         jdksavdecc_frame_init( &frame );
@@ -66,6 +73,7 @@ void discovered_callback( struct discover *self, struct discovered_entity *entit
         {
             send_frame( &net, &frame );
         }
+#endif
     }
 }
 
@@ -85,7 +93,7 @@ int main( int argc, char **argv )
     if ( argc > 1 && argv[1][0] == '-' && argv[1][1] == 'h' )
     {
         fprintf( stderr,
-                 "avdecc-advanced-discover usage:\n"
+                 "avdecc-register-unsolicited usage:\n"
                  "\tavdecc-advanced-discover [verbosity] [timeout_in_ms] [network_port]\n\n" );
         return 1;
     }
@@ -124,7 +132,7 @@ int main( int argc, char **argv )
             do
             {
                 discover_tick( &discover_engine, current_time_in_milliseconds );
-                raw_dispatch_one( &discover_engine, &net, 1000, discover_process_incoming, 0, 0 );
+                raw_dispatch_one( &discover_engine, &net, 1000, process_incoming, 0, 0 );
                 current_time_in_milliseconds = raw_get_time_of_day_in_milliseconds();
             } while ( current_time_in_milliseconds < end_time_in_milliseconds );
 
