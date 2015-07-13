@@ -40,7 +40,6 @@ void discovered_entity_init( struct discovered_entity *self,
     self->mac_address = mac_address;
     self->most_recent_adpdu = *most_recent_adpdu;
     self->time_of_last_adpdu_in_milliseconds = time_of_last_adpdu_in_milliseconds;
-    self->current_sequence_id = 0;
     self->data = data;
 }
 

@@ -47,7 +47,6 @@ struct discovered_entity
     struct jdksavdecc_eui48 mac_address;
     struct jdksavdecc_adpdu most_recent_adpdu;
     jdksavdecc_timestamp_in_milliseconds time_of_last_adpdu_in_milliseconds;
-    uint16_t current_sequence_id;
     void *data;
 };
 
