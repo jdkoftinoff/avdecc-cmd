@@ -582,7 +582,7 @@ void raw_dispatch_one( const void *context,
 
             if ( FD_ISSET( net->m_fd, &wr_fds ) )
             {
-                if ( writeable( context, net ) < 0 )
+                if ( writeable && writeable( context, net ) < 0 )
                 {
                     perror( "unable to send writable ethernet" );
                 }

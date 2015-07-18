@@ -13,6 +13,7 @@
 			buildPhases = (
 			);
 			dependencies = (
+				BFD270201B59FC770039646E /* PBXTargetDependency */,
 				BF380A13199FBFEE00D6C745 /* PBXTargetDependency */,
 				BF380A15199FBFEE00D6C745 /* PBXTargetDependency */,
 				BF380A17199FBFEE00D6C745 /* PBXTargetDependency */,
@@ -115,6 +116,11 @@
 		BF3809FF199FBED100D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
 		BF380A03199FBEE900D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
 		BF380A07199FBF0D00D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
+		BFD2700D1B59FBB60039646E /* entitycontext.c in Sources */ = {isa = PBXBuildFile; fileRef = BFD2700C1B59FBB60039646E /* entitycontext.c */; };
+		BFD2700F1B59FBC40039646E /* entitycontext.h in Headers */ = {isa = PBXBuildFile; fileRef = BFD2700E1B59FBC40039646E /* entitycontext.h */; };
+		BFD2701C1B59FC600039646E /* avdecc-register-unsolicited.c in Sources */ = {isa = PBXBuildFile; fileRef = BFD270101B59FBED0039646E /* avdecc-register-unsolicited.c */; };
+		BFD2701D1B59FC680039646E /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
+		BFD2701E1B59FC6C0039646E /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2314E21B4488B1001B33B6 /* libpcap.dylib */; };
 		BFF5FA341B08E7F200EF0470 /* descriptors.c in Sources */ = {isa = PBXBuildFile; fileRef = BFF5FA331B08E7F200EF0470 /* descriptors.c */; };
 		BFF5FA361B08E81000EF0470 /* descriptors.h in Headers */ = {isa = PBXBuildFile; fileRef = BFF5FA351B08E81000EF0470 /* descriptors.h */; };
 /* End PBXBuildFile section */
@@ -197,6 +203,13 @@
 			remoteGlobalIDString = BF3809E1199FBE3900D6C745;
 			remoteInfo = avdecc;
 		};
+		BFD2701F1B59FC770039646E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF380914199FBCEC00D6C745 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFD270141B59FC330039646E;
+			remoteInfo = "avdecc-register-unsolicited";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -237,6 +250,15 @@
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 		BF3809EB199FBE6C00D6C745 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		BFD270131B59FC330039646E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -336,6 +358,11 @@
 		BF3809D7199FBDE500D6C745 /* avdecc-read-descriptor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-read-descriptor"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3809E2199FBE3900D6C745 /* avdecc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = avdecc; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3809ED199FBE6C00D6C745 /* avdecc-set-control */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-set-control"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD2700C1B59FBB60039646E /* entitycontext.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = entitycontext.c; path = ../src/entitycontext.c; sourceTree = "<group>"; };
+		BFD2700E1B59FBC40039646E /* entitycontext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = entitycontext.h; path = ../include/entitycontext.h; sourceTree = "<group>"; };
+		BFD270101B59FBED0039646E /* avdecc-register-unsolicited.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "avdecc-register-unsolicited.c"; path = "../tools/avdecc-register-unsolicited.c"; sourceTree = "<group>"; };
+		BFD270151B59FC330039646E /* avdecc-register-unsolicited */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-register-unsolicited"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFD270171B59FC330039646E /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		BFF5FA331B08E7F200EF0470 /* descriptors.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = descriptors.c; path = ../src/descriptors.c; sourceTree = "<group>"; };
 		BFF5FA351B08E81000EF0470 /* descriptors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = descriptors.h; path = ../include/descriptors.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -393,12 +420,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFD270121B59FC330039646E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD2701E1B59FC6C0039646E /* libpcap.dylib in Frameworks */,
+				BFD2701D1B59FC680039646E /* libavdecc-cmd.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		BF0B22E8199FC4DA007033F2 /* tools */ = {
 			isa = PBXGroup;
 			children = (
+				BFD270101B59FBED0039646E /* avdecc-register-unsolicited.c */,
 				BF160FF51B27B0F600458D2D /* avdecc-advanced-discover.c */,
 				BF0B22E9199FC4F0007033F2 /* avdecc-discover.c */,
 				BF0B22EA199FC4F0007033F2 /* avdecc-get-control.c */,
@@ -417,6 +454,7 @@
 				BF0B22E8199FC4DA007033F2 /* tools */,
 				BF380923199FBD1700D6C745 /* include */,
 				BF380924199FBD1E00D6C745 /* src */,
+				BFD270161B59FC330039646E /* avdecc-register-unsolicited */,
 				BF38091D199FBCEC00D6C745 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -430,6 +468,7 @@
 				BF3809D7199FBDE500D6C745 /* avdecc-read-descriptor */,
 				BF3809E2199FBE3900D6C745 /* avdecc */,
 				BF3809ED199FBE6C00D6C745 /* avdecc-set-control */,
+				BFD270151B59FC330039646E /* avdecc-register-unsolicited */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -446,6 +485,7 @@
 				BF0B2240199FC38F007033F2 /* avdecc-cmd.h */,
 				BFF5FA351B08E81000EF0470 /* descriptors.h */,
 				BF01B8201B0B7B4D004E55CE /* discover.h */,
+				BFD2700E1B59FBC40039646E /* entitycontext.h */,
 				BF0B224A199FC3A0007033F2 /* jdksavdecc_acmp_print.h */,
 				BF0B224B199FC3A0007033F2 /* jdksavdecc_acmp.h */,
 				BF0B224C199FC3A0007033F2 /* jdksavdecc_adp_print.h */,
@@ -498,6 +538,7 @@
 				BF0B2294199FC3B3007033F2 /* avdecc-cmd.c */,
 				BFF5FA331B08E7F200EF0470 /* descriptors.c */,
 				BF01B8241B0B7B68004E55CE /* discover.c */,
+				BFD2700C1B59FBB60039646E /* entitycontext.c */,
 				BF0B229E199FC3C1007033F2 /* jdksavdecc_acmp_print.c */,
 				BF0B229F199FC3C1007033F2 /* jdksavdecc_adp_print.c */,
 				BF0B22A0199FC3C1007033F2 /* jdksavdecc_aecp_print.c */,
@@ -522,6 +563,14 @@
 				BF01B8251B0B7B68004E55CE /* scanner.c */,
 			);
 			name = src;
+			sourceTree = "<group>";
+		};
+		BFD270161B59FC330039646E /* avdecc-register-unsolicited */ = {
+			isa = PBXGroup;
+			children = (
+				BFD270171B59FC330039646E /* main.c */,
+			);
+			path = "avdecc-register-unsolicited";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -574,6 +623,7 @@
 				BF0B2271199FC3A0007033F2 /* jdksavdecc_aecp_aem.h in Headers */,
 				BF0B2279199FC3A0007033F2 /* jdksavdecc_aem_print.h in Headers */,
 				BF0B2281199FC3A0007033F2 /* jdksavdecc_frame.h in Headers */,
+				BFD2700F1B59FBC40039646E /* entitycontext.h in Headers */,
 				BF0B2287199FC3A0007033F2 /* jdksavdecc_msstdint.h in Headers */,
 				BF0B2275199FC3A0007033F2 /* jdksavdecc_aecp_vendor.h in Headers */,
 			);
@@ -689,6 +739,23 @@
 			productReference = BF3809ED199FBE6C00D6C745 /* avdecc-set-control */;
 			productType = "com.apple.product-type.tool";
 		};
+		BFD270141B59FC330039646E /* avdecc-register-unsolicited */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFD270191B59FC330039646E /* Build configuration list for PBXNativeTarget "avdecc-register-unsolicited" */;
+			buildPhases = (
+				BFD270111B59FC330039646E /* Sources */,
+				BFD270121B59FC330039646E /* Frameworks */,
+				BFD270131B59FC330039646E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "avdecc-register-unsolicited";
+			productName = "avdecc-register-unsolicited";
+			productReference = BFD270151B59FC330039646E /* avdecc-register-unsolicited */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -719,6 +786,9 @@
 					BF380A0E199FBFE300D6C745 = {
 						CreatedOnToolsVersion = 6.0;
 					};
+					BFD270141B59FC330039646E = {
+						CreatedOnToolsVersion = 6.4;
+					};
 				};
 			};
 			buildConfigurationList = BF380917199FBCEC00D6C745 /* Build configuration list for PBXProject "avdecc-cmd" */;
@@ -740,6 +810,7 @@
 				BF3809EC199FBE6C00D6C745 /* avdecc-set-control */,
 				BF3809D6199FBDE500D6C745 /* avdecc-read-descriptor */,
 				BF3809E1199FBE3900D6C745 /* avdecc */,
+				BFD270141B59FC330039646E /* avdecc-register-unsolicited */,
 			);
 		};
 /* End PBXProject section */
@@ -751,6 +822,7 @@
 			files = (
 				BF0B22C9199FC467007033F2 /* jdksavdecc_acmp_print.c in Sources */,
 				BF0B22CA199FC467007033F2 /* jdksavdecc_adp_print.c in Sources */,
+				BFD2700D1B59FBB60039646E /* entitycontext.c in Sources */,
 				BF0B22CB199FC467007033F2 /* jdksavdecc_aecp_print.c in Sources */,
 				BF0B22CC199FC467007033F2 /* jdksavdecc_aem_descriptor.c in Sources */,
 				BFF5FA341B08E7F200EF0470 /* descriptors.c in Sources */,
@@ -823,6 +895,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFD270111B59FC330039646E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFD2701C1B59FC600039646E /* avdecc-register-unsolicited.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -880,6 +960,11 @@
 			isa = PBXTargetDependency;
 			target = BF3809E1199FBE3900D6C745 /* avdecc */;
 			targetProxy = BF380A1C199FBFEE00D6C745 /* PBXContainerItemProxy */;
+		};
+		BFD270201B59FC770039646E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BFD270141B59FC330039646E /* avdecc-register-unsolicited */;
+			targetProxy = BFD2701F1B59FC770039646E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1095,6 +1180,28 @@
 			};
 			name = Release;
 		};
+		BFD2701A1B59FC330039646E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BFD2701B1B59FC330039646E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1169,6 +1276,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		BFD270191B59FC330039646E /* Build configuration list for PBXNativeTarget "avdecc-register-unsolicited" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFD2701A1B59FC330039646E /* Debug */,
+				BFD2701B1B59FC330039646E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

@@ -109,8 +109,8 @@ struct discover
     bool request_do_discover;
     void *additional_data;
 
-    void ( *discovered_entity_callback )( struct discover *self, const struct discovered_entity *entity );
-    void ( *removed_entity_callback )( struct discover *self, const struct discovered_entity *entity );
+    void ( *discovered_entity_callback )( struct discover *self, struct discovered_entity *entity );
+    void ( *removed_entity_callback )( struct discover *self, struct discovered_entity *entity );
     ssize_t ( *raw_send )( struct raw_context *self, const struct jdksavdecc_frame *frame );
 };
 

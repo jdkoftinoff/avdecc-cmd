@@ -129,6 +129,7 @@ int entitycontext_process_incoming_controller_available( struct entitycontext *s
     uint8_t payload[256];
     ssize_t payload_len;
 
+    memset(&payload,0,sizeof(payload));
     response=*aem;
     response.aecpdu_header.header.message_type = JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_RESPONSE;
     payload_len = jdksavdecc_aecpdu_aem_write(&response,payload,0,sizeof(payload));
