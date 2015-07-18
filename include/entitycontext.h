@@ -34,18 +34,31 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 extern "C" {
 #endif
 
+#define ENITYCONTEXT_MAX_DESCRIPTORS (4096)
+
+/**
+ * @brief The entitycontext struct
+ *
+ * Contains the communications context and state
+ */
 struct entitycontext
 {
+    struct raw_context *net;
+    struct jdksavdecc_eui64 controller_entity_id;
     struct discovered_entity *entity;
     struct descriptors *descriptors;
     uint16_t current_sequence_id;
 
-    void ( *state )( struct entitycontext *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
+    void ( *current_state_tick )( struct entitycontext *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
+    int ( *current_state_process_incoming)( void *self,
+                                            struct raw_context *net,
+                                            const struct jdksavdecc_frame *frame,
+                                            const struct jdksavdecc_aecpdu_aem *aem );
     jdksavdecc_timestamp_in_milliseconds last_request_sent_time;
     void *data;
 };
 
-int entitycontext_init( struct entitycontext *self, struct discovered_entity *entity );
+bool entitycontext_init( struct entitycontext *self, struct raw_context *net, struct jdksavdecc_eui64 controller_entity_id, struct discovered_entity *entity );
 
 void entitycontext_free( struct entitycontext *self );
 
@@ -55,63 +68,70 @@ int entitycontext_process_incoming( void *self, struct raw_context *net, const s
 
 int entitycontext_process_incoming_controller_available( struct entitycontext *self,
                                                          struct raw_context *net,
-                                                         const struct jdksavdecc_frame *frame );
+                                                         const struct jdksavdecc_frame *frame,
+                                                         const struct jdksavdecc_aecpdu_aem *aem );
 
-int entitycontext_process_incoming_unsolicited_control_descriptor( struct entitycontext *self,
-                                                                   struct raw_context *net,
-                                                                   const struct jdksavdecc_frame *frame );
+int entitycontext_process_incoming_entity_available( struct entitycontext *self,
+                                                         struct raw_context *net,
+                                                         const struct jdksavdecc_frame *frame,
+                                                         const struct jdksavdecc_aecpdu_aem *aem );
 
-void entitycontextstate_wait( struct entitycontext *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
+int entitycontext_process_incoming_unsolicited( struct entitycontext *self,
+                                                struct raw_context *net,
+                                                const struct jdksavdecc_frame *frame,
+                                                const struct jdksavdecc_aecpdu_aem *aem  );
 
-void entitycontextstate_waiting( struct entitycontext *self,
+void entitycontext_do_wait( struct entitycontext *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
+
+void entitycontext_state_waiting( struct entitycontext *self,
                                  jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
-void entitycontextstate_send_register_unsolicited( struct entitycontext *self,
+void entitycontext_do_send_register_unsolicited( struct entitycontext *self,
                                                    jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
-void entitycontextstate_sent_register_unsolicited( struct entitycontext *self,
+void entitycontext_state_sent_register_unsolicited( struct entitycontext *self,
                                                    jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
 int entitycontext_process_incoming_register_unsolicited( struct entitycontext *self,
                                                          struct raw_context *net,
                                                          const struct jdksavdecc_frame *frame );
 
-void entitycontextstate_send_read_entity_descriptor( struct entitycontext *self,
+void entitycontext_do_send_read_entity_descriptor( struct entitycontext *self,
                                                      jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
-void entitycontextstate_sent_readentitydescriptor( struct entitycontext *self,
+void entitycontext_state_sent_readentitydescriptor( struct entitycontext *self,
                                                    jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
 int entitycontext_process_incoming_read_entity_descriptor( struct entitycontext *self,
                                                            struct raw_context *net,
                                                            const struct jdksavdecc_frame *frame );
 
-void entitycontextstate_send_read_configuration_descriptor( struct entitycontext *self,
+void entitycontext_do_send_read_configuration_descriptor( struct entitycontext *self,
                                                             jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
-void entitycontextstate_sent_read_configuration_descriptor( struct entitycontext *self,
+void entitycontext_state_sent_read_configuration_descriptor( struct entitycontext *self,
                                                             jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
 int entitycontext_process_incoming_read_configuration_descriptor( struct entitycontext *self,
                                                                   struct raw_context *net,
                                                                   const struct jdksavdecc_frame *frame );
 
-void entitycontextstate_send_lazy_read_control_descriptor( struct entitycontext *self,
+void entitycontext_do_send_lazy_read_control_descriptor( struct entitycontext *self,
                                                            jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds,
                                                            uint16_t descriptor_type,
                                                            uint16_t descriptor_index );
 
-void entitycontextstate_sent_lazy_read_control_descriptor( struct entitycontext *self,
+void entitycontext_state_sent_lazy_read_control_descriptor( struct entitycontext *self,
                                                            jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
 int entitycontext_process_incoming_read_control_descriptor( struct entitycontext *self,
                                                             struct raw_context *net,
                                                             const struct jdksavdecc_frame *frame );
 
-void entitycontextstate_send_lazy_read_strings_descriptor( struct entitycontext *self,
+void entitycontext_do_send_lazy_read_strings_descriptor( struct entitycontext *self,
                                                            jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
-void entitycontextstate_sent_lazy_read_strings_descriptor( struct entitycontext *self,
+void entitycontext_state_sent_lazy_read_strings_descriptor( struct entitycontext *self,
                                                            jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
 
 int entitycontext_process_incoming_read_strings_descriptor( struct entitycontext *self,
