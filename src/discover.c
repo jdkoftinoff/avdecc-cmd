@@ -35,20 +35,20 @@ void discovered_entity_init( struct discovered_entity *self,
                              jdksavdecc_timestamp_in_milliseconds time_of_last_adpdu_in_milliseconds,
                              void *data )
 {
-    self->entity_id = entity_id;
-    self->entity_model_id = entity_model_id;
-    self->mac_address = mac_address;
-    self->most_recent_adpdu = *most_recent_adpdu;
-    self->time_of_last_adpdu_in_milliseconds = time_of_last_adpdu_in_milliseconds;
-    self->data = data;
+    self->m_entity_id = entity_id;
+    self->m_entity_model_id = entity_model_id;
+    self->m_mac_address = mac_address;
+    self->m_most_recent_adpdu = *most_recent_adpdu;
+    self->m_time_of_last_adpdu_in_milliseconds = time_of_last_adpdu_in_milliseconds;
+    self->m_data = data;
 }
 
 void discovered_entity_free( struct discovered_entity *self )
 {
-    if ( self->data )
+    if ( self->m_data )
     {
-        free( self->data );
-        self->data = 0;
+        free( self->m_data );
+        self->m_data = 0;
     }
 }
 
@@ -56,16 +56,16 @@ int discovered_entity_compare( const struct discovered_entity *lhs, const struct
 {
     int r;
 
-    r = jdksavdecc_eui64_compare( &lhs->entity_id, &rhs->entity_id );
+    r = jdksavdecc_eui64_compare( &lhs->m_entity_id, &rhs->m_entity_id );
 
     if ( r == 0 )
     {
         // Only compare entity_model_id if both sides have entity_model_id non zero and non FF:FF:FF:FF:FF:FF:FF:FF
 
-        if ( jdksavdecc_eui64_is_not_zero( lhs->entity_model_id ) || jdksavdecc_eui64_is_unset( lhs->entity_model_id )
-             || jdksavdecc_eui64_is_not_zero( rhs->entity_model_id ) || jdksavdecc_eui64_is_unset( rhs->entity_model_id ) )
+        if ( jdksavdecc_eui64_is_not_zero( lhs->m_entity_model_id ) || jdksavdecc_eui64_is_unset( lhs->m_entity_model_id )
+             || jdksavdecc_eui64_is_not_zero( rhs->m_entity_model_id ) || jdksavdecc_eui64_is_unset( rhs->m_entity_model_id ) )
         {
-            r = jdksavdecc_eui64_compare( &lhs->entity_model_id, &rhs->entity_model_id );
+            r = jdksavdecc_eui64_compare( &lhs->m_entity_model_id, &rhs->m_entity_model_id );
         }
     }
     return r;
@@ -103,19 +103,19 @@ bool discover_init( struct discover *self,
 {
     bool r = false;
 
-    self->items = (struct discovered_entity **)calloc( max_items, sizeof( struct discovered_entity * ) );
+    self->m_items = (struct discovered_entity **)calloc( max_items, sizeof( struct discovered_entity * ) );
 
-    if ( self->items )
+    if ( self->m_items )
     {
-        self->controller_entity_id = controller_entity_id;
-        self->num_items = 0;
-        self->max_items = max_items;
-        self->network = network;
-        self->additional_data = additional_data;
+        self->m_controller_entity_id = controller_entity_id;
+        self->m_num_items = 0;
+        self->m_max_items = max_items;
+        self->m_network = network;
+        self->m_additional_data = additional_data;
         self->discovered_entity_callback = discovered_entity_callback;
         self->removed_entity_callback = removed_entity_callback;
-        self->last_tick_time = 0;
-        self->request_do_discover = true;
+        self->m_last_tick_time = 0;
+        self->m_request_do_discover = true;
         self->raw_send = raw_send;
         r = true;
     }
@@ -126,14 +126,14 @@ bool discover_resize( struct discover *self, size_t new_max_items )
 {
     bool r = false;
 
-    if ( self->num_items < new_max_items )
+    if ( self->m_num_items < new_max_items )
     {
         struct discovered_entity **new_items = 0;
-        new_items = (struct discovered_entity **)realloc( self->items, new_max_items * sizeof( struct discovered_entity * ) );
+        new_items = (struct discovered_entity **)realloc( self->m_items, new_max_items * sizeof( struct discovered_entity * ) );
         if ( new_items )
         {
-            self->items = new_items;
-            self->max_items = new_max_items;
+            self->m_items = new_items;
+            self->m_max_items = new_max_items;
             r = true;
         }
     }
@@ -144,24 +144,24 @@ void discover_free( struct discover *self )
 {
     discover_clear( self );
 
-    if ( self->items )
+    if ( self->m_items )
     {
-        free( self->items );
-        self->items = 0;
+        free( self->m_items );
+        self->m_items = 0;
     }
-    if ( self->additional_data )
+    if ( self->m_additional_data )
     {
-        free( self->additional_data );
-        self->additional_data = 0;
+        free( self->m_additional_data );
+        self->m_additional_data = 0;
     }
 }
 
 void discover_clear( struct discover *self )
 {
     size_t i;
-    for ( i = 0; i < self->num_items; ++i )
+    for ( i = 0; i < self->m_num_items; ++i )
     {
-        struct discovered_entity *entity = self->items[i];
+        struct discovered_entity *entity = self->m_items[i];
         if ( entity )
         {
             if ( self->removed_entity_callback )
@@ -170,13 +170,13 @@ void discover_clear( struct discover *self )
             }
             discovered_entity_free( entity );
             free( entity );
-            self->items[i] = 0;
+            self->m_items[i] = 0;
         }
     }
-    self->num_items = 0;
+    self->m_num_items = 0;
 }
 
-bool discover_is_full( struct discover *self ) { return self->num_items == self->max_items; }
+bool discover_is_full( struct discover *self ) { return self->m_num_items == self->m_max_items; }
 
 struct discovered_entity **discover_insert( struct discover *self,
                                             struct jdksavdecc_eui48 mac_address,
@@ -190,7 +190,7 @@ struct discovered_entity **discover_insert( struct discover *self,
     if ( !discover_is_full( self ) )
     {
         // We need to enlarge our area
-        size_t new_max_items = self->max_items;
+        size_t new_max_items = self->m_max_items;
         r = discover_resize( self, new_max_items * 3 / 2 );
     }
 
@@ -198,7 +198,7 @@ struct discovered_entity **discover_insert( struct discover *self,
     if ( r )
     {
         // Allocate one item
-        entity_ptr = &self->items[self->num_items];
+        entity_ptr = &self->m_items[self->m_num_items];
 
         *entity_ptr = calloc( 1, sizeof( struct discovered_entity ) );
 
@@ -206,7 +206,7 @@ struct discovered_entity **discover_insert( struct discover *self,
         if ( *entity_ptr )
         {
             // Yes, increase the number of items
-            ++self->num_items;
+            ++self->m_num_items;
 
             // Initialize the item
             discovered_entity_init( *entity_ptr,
@@ -257,7 +257,7 @@ int discover_process_incoming( const void *self_, struct raw_context *net, const
                     // Check to see if the available_index went backwards, indicating the
                     // entity rebooted
 
-                    if ( adpdu.available_index < ( *entity_ptr )->most_recent_adpdu.available_index )
+                    if ( adpdu.available_index < ( *entity_ptr )->m_most_recent_adpdu.available_index )
                     {
                         // it rebooted, so notify the upper layer that the original entity went away
                         if ( self->removed_entity_callback )
@@ -271,9 +271,9 @@ int discover_process_incoming( const void *self_, struct raw_context *net, const
 
                     // Check to see if something else interesting changed with this entity
 
-                    if ( ( adpdu.gptp_domain_number != ( *entity_ptr )->most_recent_adpdu.gptp_domain_number )
+                    if ( ( adpdu.gptp_domain_number != ( *entity_ptr )->m_most_recent_adpdu.gptp_domain_number )
                          || ( jdksavdecc_eui64_compare( &adpdu.gptp_grandmaster_id,
-                                                        &( *entity_ptr )->most_recent_adpdu.gptp_grandmaster_id ) != 0 ) )
+                                                        &( *entity_ptr )->m_most_recent_adpdu.gptp_grandmaster_id ) != 0 ) )
                     {
                         // The gptp grandmaster changed
                         notify_new_info = true;
@@ -318,21 +318,21 @@ int discover_process_incoming( const void *self_, struct raw_context *net, const
 
 void discover_sort( struct discover *self )
 {
-    qsort( self->items, self->num_items, sizeof( self->items[0] ), discovered_entity_compare_indirect );
+    qsort( self->m_items, self->m_num_items, sizeof( self->m_items[0] ), discovered_entity_compare_indirect );
 }
 
 void discover_removed_expired( struct discover *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds )
 {
     int num_removed = 0;
     size_t i;
-    for ( i = 0; i < self->num_items; ++i )
+    for ( i = 0; i < self->m_num_items; ++i )
     {
-        struct discovered_entity *entity = self->items[i];
+        struct discovered_entity *entity = self->m_items[i];
         if ( entity )
         {
             jdksavdecc_timestamp_in_milliseconds age = current_time_in_milliseconds
-                                                       - entity->time_of_last_adpdu_in_milliseconds;
-            jdksavdecc_timestamp_in_milliseconds max_age_in_milliseconds = entity->most_recent_adpdu.header.valid_time * 2000;
+                                                       - entity->m_time_of_last_adpdu_in_milliseconds;
+            jdksavdecc_timestamp_in_milliseconds max_age_in_milliseconds = entity->m_most_recent_adpdu.header.valid_time * 2000;
             if ( max_age_in_milliseconds == 0 )
             {
                 max_age_in_milliseconds = 62000;
@@ -345,7 +345,7 @@ void discover_removed_expired( struct discover *self, jdksavdecc_timestamp_in_mi
                 }
                 discovered_entity_free( entity );
                 free( entity );
-                self->items[i] = 0;
+                self->m_items[i] = 0;
                 ++num_removed;
             }
         }
@@ -364,11 +364,11 @@ struct discovered_entity **discover_find( struct discover *self, struct jdksavde
     struct discovered_entity *keyp = &key;
 
     bzero( &key, sizeof( key ) );
-    key.entity_id = entity_id;
-    jdksavdecc_eui64_init( &key.entity_model_id );
+    key.m_entity_id = entity_id;
+    jdksavdecc_eui64_init( &key.m_entity_model_id );
 
     rp = (struct discovered_entity **)bsearch(
-        &keyp, self->items, self->num_items, sizeof( self->items[0] ), discovered_entity_compare_indirect );
+        &keyp, self->m_items, self->m_num_items, sizeof( self->m_items[0] ), discovered_entity_compare_indirect );
     return rp;
 }
 
@@ -382,11 +382,11 @@ struct discovered_entity **discover_find_with_model( struct discover *self,
     struct discovered_entity *keyp = &key;
 
     bzero( &key, sizeof( key ) );
-    key.entity_id = entity_id;
-    key.entity_model_id = entity_model_id;
+    key.m_entity_id = entity_id;
+    key.m_entity_model_id = entity_model_id;
 
     rp = (struct discovered_entity **)bsearch(
-        &keyp, self->items, self->num_items, sizeof( self->items[0] ), discovered_entity_compare_indirect );
+        &keyp, self->m_items, self->m_num_items, sizeof( self->m_items[0] ), discovered_entity_compare_indirect );
     return rp;
 }
 
@@ -438,24 +438,24 @@ void discover_remove_with_model_id( struct discover *self,
 
 void discover_tick( struct discover *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds )
 {
-    jdksavdecc_timestamp_in_milliseconds time_since_last_tick = current_time_in_milliseconds - self->last_tick_time;
+    jdksavdecc_timestamp_in_milliseconds time_since_last_tick = current_time_in_milliseconds - self->m_last_tick_time;
 
     // Make sure work is only done at the most once per second
     if ( time_since_last_tick > 1000 )
     {
         // remember the current time
-        self->last_tick_time = current_time_in_milliseconds;
+        self->m_last_tick_time = current_time_in_milliseconds;
 
         // remove any expired entities
         discover_removed_expired( self, current_time_in_milliseconds );
 
         // And send a discover message if there was a request to do so
-        if ( self->request_do_discover )
+        if ( self->m_request_do_discover )
         {
             discover_send_discover( self );
 
             // and clear the request to send a discover
-            self->request_do_discover = false;
+            self->m_request_do_discover = false;
         }
     }
 }
@@ -473,6 +473,6 @@ void discover_send_discover( struct discover *self )
     if ( adp_form_msg( &frame, &adpdu, JDKSAVDECC_ADP_MESSAGE_TYPE_ENTITY_DISCOVER, target_entity_id ) == 0 )
     {
         // and send it to the raw network port
-        self->raw_send( self->network, &frame );
+        self->raw_send( self->m_network, &frame );
     }
 }

@@ -45,11 +45,11 @@ extern "C" {
  */
 struct descriptor_key
 {
-    struct jdksavdecc_eui64 entity_model_id;
-    struct jdksavdecc_eui64 entity_id;
-    uint16_t configuration_number;
-    uint16_t descriptor_type;
-    uint16_t descriptor_index;
+    struct jdksavdecc_eui64 m_entity_model_id;
+    struct jdksavdecc_eui64 m_entity_id;
+    uint16_t m_configuration_number;
+    uint16_t m_descriptor_type;
+    uint16_t m_descriptor_index;
 };
 
 /**
@@ -104,12 +104,12 @@ int descriptor_key_compare_indirect( const void *lhs_, const void *rhs_ );
  */
 struct descriptor_item
 {
-    struct descriptor_key key;
-    jdksavdecc_timestamp_in_milliseconds last_update_time_in_milliseconds;
-    jdksavdecc_timestamp_in_milliseconds last_request_time_in_milliseconds;
-    uint16_t payload_length;
-    uint8_t payload_data[JDKSAVDECC_AECP_MAX_CONTROL_DATA_LENGTH];
-    void *additional_data;
+    struct descriptor_key m_key;
+    jdksavdecc_timestamp_in_milliseconds m_last_update_time_in_milliseconds;
+    jdksavdecc_timestamp_in_milliseconds m_last_request_time_in_milliseconds;
+    uint16_t m_payload_length;
+    uint8_t m_payload_data[JDKSAVDECC_AECP_MAX_CONTROL_DATA_LENGTH];
+    void *m_additional_data;
 };
 
 /**
@@ -148,10 +148,10 @@ void descriptor_item_init( struct descriptor_item *self,
  */
 struct descriptors
 {
-    struct descriptor_item **storage;
-    size_t num_entries;
-    size_t max_entries;
-    bool needs_sort;
+    struct descriptor_item **m_storage;
+    size_t m_num_entries;
+    size_t m_max_entries;
+    bool m_needs_sort;
 };
 
 /**

@@ -43,19 +43,19 @@ extern "C" {
  */
 struct entitycontext
 {
-    struct raw_context *net;
-    struct jdksavdecc_eui64 controller_entity_id;
-    struct discovered_entity *entity;
-    struct descriptors *descriptors;
-    uint16_t current_sequence_id;
+    struct raw_context *m_net;
+    struct jdksavdecc_eui64 m_controller_entity_id;
+    struct discovered_entity *m_entity;
+    struct m_descriptors *m_descriptors;
+    uint16_t m_current_sequence_id;
 
     void ( *current_state_tick )( struct entitycontext *self, jdksavdecc_timestamp_in_milliseconds current_time_in_milliseconds );
     int ( *current_state_process_incoming)( void *self,
-                                            struct raw_context *net,
+                                            struct raw_context *m_net,
                                             const struct jdksavdecc_frame *frame,
                                             const struct jdksavdecc_aecpdu_aem *aem );
-    jdksavdecc_timestamp_in_milliseconds last_request_sent_time;
-    void *data;
+    jdksavdecc_timestamp_in_milliseconds m_last_request_sent_time;
+    void *m_data;
 };
 
 bool entitycontext_init( struct entitycontext *self, struct raw_context *net, struct jdksavdecc_eui64 controller_entity_id, struct discovered_entity *entity );

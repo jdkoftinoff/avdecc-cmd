@@ -53,11 +53,11 @@ void discovered_callback( struct discover *self, struct discovered_entity *entit
     struct jdksavdecc_printer printer;
     jdksavdecc_printer_init( &printer, buf, sizeof( buf ) );
     jdksavdecc_printer_print_label( &printer, "Discovered " );
-    jdksavdecc_printer_print_eui64( &printer, entity->entity_id );
+    jdksavdecc_printer_print_eui64( &printer, entity->m_entity_id );
     printf( "%s\n", buf );
 
-    entity->data = calloc( 1, sizeof( struct descriptors ) );
-    if ( entity->data )
+    entity->m_data = calloc( 1, sizeof( struct descriptors ) );
+    if ( entity->m_data )
     {
 #if 0
         descriptors_init((struct descriptors*)entity->data, 4096 );
@@ -87,7 +87,7 @@ void removed_callback( struct discover *self, struct discovered_entity *entity )
     struct jdksavdecc_printer printer;
     jdksavdecc_printer_init( &printer, buf, sizeof( buf ) );
     jdksavdecc_printer_print_label( &printer, "Removed: " );
-    jdksavdecc_printer_print_eui64( &printer, entity->entity_id );
+    jdksavdecc_printer_print_eui64( &printer, entity->m_entity_id );
     printf( "%s\n", buf );
 }
 

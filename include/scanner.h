@@ -28,6 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "adp.h"
 #include "aecp.h"
 #include "descriptors.h"
+#include "entitycontext.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -35,6 +36,7 @@ extern "C" {
 
 struct scanner
 {
+    struct entitycontexct *m_entitycontext;
 };
 
 #ifdef __cplusplus

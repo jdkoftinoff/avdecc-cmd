@@ -30,22 +30,22 @@
 bool entitycontext_init( struct entitycontext *self, struct raw_context *net, struct jdksavdecc_eui64 controller_entity_id, struct discovered_entity *entity )
 {
     bool r=false;
-    self->net = net;
-    self->entity = entity;
-    self->descriptors = (struct descriptors *)calloc(1,sizeof(struct descriptors));
-    if( descriptors_init(self->descriptors,ENITYCONTEXT_MAX_DESCRIPTORS) )
+    self->m_net = net;
+    self->m_entity = entity;
+    self->m_descriptors = (struct descriptors *)calloc(1,sizeof(struct descriptors));
+    if( descriptors_init(self->m_descriptors,ENITYCONTEXT_MAX_DESCRIPTORS) )
     {
-        self->current_sequence_id = 0;
+        self->m_current_sequence_id = 0;
         self->current_state_tick = 0;
         self->current_state_process_incoming = 0;
-        self->last_request_sent_time = 0;
-        self->controller_entity_id = controller_entity_id;
-        self->data = 0;
+        self->m_last_request_sent_time = 0;
+        self->m_controller_entity_id = controller_entity_id;
+        self->m_data = 0;
         r=true;
     }
     else
     {
-        free(self->descriptors);
+        free(self->m_descriptors);
         r=false;
     }
     return r;
@@ -53,14 +53,14 @@ bool entitycontext_init( struct entitycontext *self, struct raw_context *net, st
 
 void entitycontext_free( struct entitycontext *self )
 {
-    if( self->descriptors )
+    if( self->m_descriptors )
     {
-        descriptors_free(self->descriptors);
-        free(self->descriptors);
+        descriptors_free(self->m_descriptors);
+        free(self->m_descriptors);
     }
-    if( self->data )
+    if( self->m_data )
     {
-        free( self->data );
+        free( self->m_data );
     }
 }
 
@@ -85,9 +85,9 @@ int entitycontext_process_incoming( void *self_, struct raw_context *net, const 
             ssize_t pos = jdksavdecc_aecpdu_aem_read( &aem, frame->payload, 0, frame->length );
             if( pos>0 )
             {
-                if( jdksavdecc_eui64_compare( &aem.aecpdu_header.controller_entity_id, &self->controller_entity_id )==0 )
+                if( jdksavdecc_eui64_compare( &aem.aecpdu_header.controller_entity_id, &self->m_controller_entity_id )==0 )
                 {
-                    if( jdksavdecc_eui64_compare( &aem.aecpdu_header.header.target_entity_id, &self->entity->entity_id )==0 )
+                    if( jdksavdecc_eui64_compare( &aem.aecpdu_header.header.target_entity_id, &self->m_entity->m_entity_id )==0 )
                     {
                         if( aem.aecpdu_header.header.message_type == JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_COMMAND ||
                                 aem.aecpdu_header.header.message_type == JDKSAVDECC_AECP_MESSAGE_TYPE_AEM_RESPONSE )

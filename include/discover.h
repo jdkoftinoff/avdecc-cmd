@@ -42,12 +42,12 @@ extern "C" {
  */
 struct discovered_entity
 {
-    struct jdksavdecc_eui64 entity_id;
-    struct jdksavdecc_eui64 entity_model_id;
-    struct jdksavdecc_eui48 mac_address;
-    struct jdksavdecc_adpdu most_recent_adpdu;
-    jdksavdecc_timestamp_in_milliseconds time_of_last_adpdu_in_milliseconds;
-    void *data;
+    struct jdksavdecc_eui64 m_entity_id;
+    struct jdksavdecc_eui64 m_entity_model_id;
+    struct jdksavdecc_eui48 m_mac_address;
+    struct jdksavdecc_adpdu m_most_recent_adpdu;
+    jdksavdecc_timestamp_in_milliseconds m_time_of_last_adpdu_in_milliseconds;
+    void *m_data;
 };
 
 /**
@@ -100,14 +100,14 @@ int discovered_entity_compare_indirect( const void *lhs, const void *rhs );
  */
 struct discover
 {
-    struct jdksavdecc_eui64 controller_entity_id;
-    size_t num_items;
-    size_t max_items;
-    struct discovered_entity **items;
-    struct raw_context *network;
-    jdksavdecc_timestamp_in_milliseconds last_tick_time;
-    bool request_do_discover;
-    void *additional_data;
+    struct jdksavdecc_eui64 m_controller_entity_id;
+    size_t m_num_items;
+    size_t m_max_items;
+    struct discovered_entity **m_items;
+    struct raw_context *m_network;
+    jdksavdecc_timestamp_in_milliseconds m_last_tick_time;
+    bool m_request_do_discover;
+    void *m_additional_data;
 
     void ( *discovered_entity_callback )( struct discover *self, struct discovered_entity *entity );
     void ( *removed_entity_callback )( struct discover *self, struct discovered_entity *entity );

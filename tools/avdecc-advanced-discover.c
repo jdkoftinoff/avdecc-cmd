@@ -42,7 +42,7 @@ void discovered_callback( struct discover *self, struct discovered_entity *entit
     struct jdksavdecc_printer printer;
     jdksavdecc_printer_init( &printer, buf, sizeof( buf ) );
     jdksavdecc_printer_print_label( &printer, "Discovered " );
-    jdksavdecc_printer_print_eui64( &printer, entity->entity_id );
+    jdksavdecc_printer_print_eui64( &printer, entity->m_entity_id );
     printf( "%s\n", buf );
 }
 
@@ -52,7 +52,7 @@ void removed_callback( struct discover *self, struct discovered_entity *entity )
     struct jdksavdecc_printer printer;
     jdksavdecc_printer_init( &printer, buf, sizeof( buf ) );
     jdksavdecc_printer_print_label( &printer, "Removed: " );
-    jdksavdecc_printer_print_eui64( &printer, entity->entity_id );
+    jdksavdecc_printer_print_eui64( &printer, entity->m_entity_id );
     printf( "%s\n", buf );
 }
 
