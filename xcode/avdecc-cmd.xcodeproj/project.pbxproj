@@ -101,16 +101,16 @@
 		BF0B22F0199FC4FC007033F2 /* avdecc-set-control.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22EC199FC4F0007033F2 /* avdecc-set-control.c */; };
 		BF0B22F1199FC50A007033F2 /* avdecc-read-descriptor.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22EB199FC4F0007033F2 /* avdecc-read-descriptor.c */; };
 		BF0B22F2199FC515007033F2 /* avdecc.c in Sources */ = {isa = PBXBuildFile; fileRef = BF0B22ED199FC4F0007033F2 /* avdecc.c */; };
+		BF34C1081B87C10800BBBB24 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF34C1071B87C10800BBBB24 /* libpcap.dylib */; };
+		BF34C1091B87C11100BBBB24 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF34C1071B87C10800BBBB24 /* libpcap.dylib */; };
+		BF34C10A1B87C11600BBBB24 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF34C1071B87C10800BBBB24 /* libpcap.dylib */; };
+		BF34C10B1B87C11B00BBBB24 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF34C1071B87C10800BBBB24 /* libpcap.dylib */; };
+		BF34C10C1B87C12100BBBB24 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF34C1071B87C10800BBBB24 /* libpcap.dylib */; };
 		BF3809F7199FBEA700D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
 		BF3809FB199FBEC000D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
 		BF3809FF199FBED100D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
 		BF380A03199FBEE900D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
 		BF380A07199FBF0D00D6C745 /* libavdecc-cmd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */; };
-		BF380A09199FBF5500D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
-		BF380A0A199FBF5B00D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
-		BF380A0B199FBF6200D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
-		BF380A0C199FBF6700D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
-		BF380A0D199FBF6C00D6C745 /* libpcap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF380A08199FBF5500D6C745 /* libpcap.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -317,13 +317,13 @@
 		BF0B22EB199FC4F0007033F2 /* avdecc-read-descriptor.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "avdecc-read-descriptor.c"; path = "../tools/avdecc-read-descriptor.c"; sourceTree = "<group>"; };
 		BF0B22EC199FC4F0007033F2 /* avdecc-set-control.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = "avdecc-set-control.c"; path = "../tools/avdecc-set-control.c"; sourceTree = "<group>"; };
 		BF0B22ED199FC4F0007033F2 /* avdecc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = avdecc.c; path = ../tools/avdecc.c; sourceTree = "<group>"; };
+		BF34C1071B87C10800BBBB24 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
 		BF38091C199FBCEC00D6C745 /* libavdecc-cmd.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libavdecc-cmd.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3809C1199FBDCB00D6C745 /* avdecc-discover */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-discover"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3809CC199FBDD700D6C745 /* avdecc-get-control */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-get-control"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3809D7199FBDE500D6C745 /* avdecc-read-descriptor */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-read-descriptor"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3809E2199FBE3900D6C745 /* avdecc */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = avdecc; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF3809ED199FBE6C00D6C745 /* avdecc-set-control */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "avdecc-set-control"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BF380A08199FBF5500D6C745 /* libpcap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpcap.dylib; path = usr/lib/libpcap.dylib; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,7 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF380A0D199FBF6C00D6C745 /* libpcap.dylib in Frameworks */,
+				BF34C1081B87C10800BBBB24 /* libpcap.dylib in Frameworks */,
 				BF3809F7199FBEA700D6C745 /* libavdecc-cmd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -347,7 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF380A0C199FBF6700D6C745 /* libpcap.dylib in Frameworks */,
+				BF34C1091B87C11100BBBB24 /* libpcap.dylib in Frameworks */,
 				BF3809FB199FBEC000D6C745 /* libavdecc-cmd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,7 +356,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF380A0A199FBF5B00D6C745 /* libpcap.dylib in Frameworks */,
+				BF34C10B1B87C11B00BBBB24 /* libpcap.dylib in Frameworks */,
 				BF3809FF199FBED100D6C745 /* libavdecc-cmd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,7 +365,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF380A09199FBF5500D6C745 /* libpcap.dylib in Frameworks */,
+				BF34C10C1B87C12100BBBB24 /* libpcap.dylib in Frameworks */,
 				BF380A07199FBF0D00D6C745 /* libavdecc-cmd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,7 +374,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF380A0B199FBF6200D6C745 /* libpcap.dylib in Frameworks */,
+				BF34C10A1B87C11600BBBB24 /* libpcap.dylib in Frameworks */,
 				BF380A03199FBEE900D6C745 /* libavdecc-cmd.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -397,8 +397,8 @@
 		BF380913199FBCEC00D6C745 = {
 			isa = PBXGroup;
 			children = (
+				BF34C1071B87C10800BBBB24 /* libpcap.dylib */,
 				BF0B22E8199FC4DA007033F2 /* tools */,
-				BF380A08199FBF5500D6C745 /* libpcap.dylib */,
 				BF380923199FBD1700D6C745 /* include */,
 				BF380924199FBD1E00D6C745 /* src */,
 				BF38091D199FBCEC00D6C745 /* Products */,
